@@ -1,0 +1,54 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<h1>Listing for SharepointList</h1>
+
+<f:flashMessages />
+
+<table  class="tx_sharepointconnector" >
+	<tr>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.default_view_url" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.id" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.title" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.description" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.name" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.feature_id" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.base_type" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.web_id" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.scope_id" /></th>
+		<th><f:translate key="tx_sharepointconnector_domain_model_sharepointlist.allow_deletion" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{sharepointLists}" as="sharepointList">
+		<tr>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.defaultViewUrl}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.id}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.description}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.name}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.featureId}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.baseType}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.webId}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.scopeId}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{sharepointList : sharepointList}"> {sharepointList.allowDeletion}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{sharepointList : sharepointList}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{sharepointList : sharepointList}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New SharepointList</f:link.action>
+</f:section>

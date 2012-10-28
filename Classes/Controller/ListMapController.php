@@ -38,10 +38,18 @@ class ListMapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * listMapRepository
 	 *
-	 * @var aijko\SharepointConnector\Domain\Repository\ListMapRepository
+	 * @var \aijko\SharepointConnector\Domain\Repository\ListMapRepository
 	 * @inject
 	 */
 	protected $listMapRepository;
+
+	/**
+	 * sharepointListRepository
+	 *
+	 * @var \aijko\SharepointConnector\Domain\Repository\SharepointListRepository
+	 * @inject
+	 */
+	protected $sharepointListRepository;
 
 	/**
 	 * action list
@@ -49,8 +57,10 @@ class ListMapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function listAction() {
-		$listMaps = $this->listMapRepository->findAll();
-		$this->view->assign('listMaps', $listMaps);
+		$lists = $this->sharepointListRepository->findAll();
+//		$listMaps = $this->listMapRepository->findAll();
+//		$this->view->assign('listMaps', $listMaps);
+		$this->view->assign('lists', $lists);
 	}
 
 	/**

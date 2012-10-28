@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-41T09:40:41Z" product-name="sharepoint_connector">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-32T12:18:32Z" product-name="sharepoint_connector">
 		<header/>
 		<body>
 
@@ -9,6 +9,40 @@
 			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_listmap.title">
 				<source>Title</source>
+			</trans-unit>
+
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist">
+				<source>Sharepoint List</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.default_view_url">
+				<source>Default View Url</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.id">
+				<source>Id</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.description">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.feature_id">
+				<source>Feature Id</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.base_type">
+				<source>Base Type</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.web_id">
+				<source>Web Id</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.scope_id">
+				<source>Scope Id</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.allow_deletion">
+				<source>Allow Deletion</source>
 			</trans-unit>
 
 		</body>

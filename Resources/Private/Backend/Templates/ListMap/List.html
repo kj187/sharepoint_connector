@@ -33,4 +33,30 @@ Otherwise your changes will be overwritten the next time you save the extension 
 </table>
 
 <f:link.action action="new">New ListMap</f:link.action>
+
+<h1>Listing for Sharepoint Lists</h1>
+
+<f:if condition="{lists}">
+	<table  class="tx_sharepointconnector">
+		<thead>
+			<tr>
+				<th>List ID</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>Default View URL</th>
+			</tr>
+		</thead>
+		<tbody>
+			<f:for each="{lists}" as="list">
+				<tr>
+					<td>{list.id}</td>
+					<td>{list.title}</td>
+					<td>{list.description}</td>
+					<td>{list.defaultViewUrl}</td>
+				</tr>
+			</f:for>
+		</tbody>
+	</table>
+</f:if>
+
 </f:section>

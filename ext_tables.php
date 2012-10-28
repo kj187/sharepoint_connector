@@ -5,9 +5,6 @@ if (!defined('TYPO3_MODE')) {
 
 if (TYPO3_MODE === 'BE') {
 
-	/**
-	 * Registers a Backend Module
-	 */
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'aijko.' . $_EXTKEY,
 		'sharepoint',	 // Make module a master module
@@ -21,6 +18,7 @@ if (TYPO3_MODE === 'BE') {
 		)
 	);
 
+
 	/**
 	 * Registers a Backend Module
 	 */
@@ -30,7 +28,7 @@ if (TYPO3_MODE === 'BE') {
 		'mapping',	// Submodule key
 		'',						// Position
 		array(
-			'ListMap' => 'list, new, create',
+			'ListMap' => 'list, create',
 			
 		),
 		array(
@@ -70,6 +68,35 @@ $TCA['tx_sharepointconnector_domain_model_listmap'] = array(
 		'searchFields' => 'title,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Extension\ExtensionManager::extPath($_EXTKEY) . 'Configuration/TCA/ListMap.php',
 		'iconfile' => \TYPO3\CMS\Core\Extension\ExtensionManager::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_listmap.gif'
+	),
+);
+
+\TYPO3\CMS\Core\Extension\ExtensionManager::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_sharepointlist', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_sharepointlist.xlf');
+\TYPO3\CMS\Core\Extension\ExtensionManager::allowTableOnStandardPages('tx_sharepointconnector_domain_model_sharepointlist');
+$TCA['tx_sharepointconnector_domain_model_sharepointlist'] = array(
+	'ctrl' => array(
+		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_sharepointlist',
+		'label' => 'default_view_url',
+		'tstamp' => 'tstamp',
+		'crdate' => 'crdate',
+		'cruser_id' => 'cruser_id',
+		'dividers2tabs' => TRUE,
+
+		'versioningWS' => 2,
+		'versioning_followPages' => TRUE,
+		'origUid' => 't3_origuid',
+		'languageField' => 'sys_language_uid',
+		'transOrigPointerField' => 'l10n_parent',
+		'transOrigDiffSourceField' => 'l10n_diffsource',
+		'delete' => 'deleted',
+		'enablecolumns' => array(
+			'disabled' => 'hidden',
+			'starttime' => 'starttime',
+			'endtime' => 'endtime',
+		),
+		'searchFields' => 'default_view_url,id,title,description,name,feature_id,base_type,web_id,scope_id,allow_deletion,',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Extension\ExtensionManager::extPath($_EXTKEY) . 'Configuration/TCA/SharepointList.php',
+		'iconfile' => \TYPO3\CMS\Core\Extension\ExtensionManager::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_sharepointlist.gif'
 	),
 );
 

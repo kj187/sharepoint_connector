@@ -2,10 +2,41 @@
 module.tx_sharepointconnector {
 	persistence {
 		storagePid = {$module.tx_sharepointconnector.persistence.storagePid}
+
+		classes {
+			aijko\SharepointConnector\Domain\Model\SharepointList {
+				mapping {
+					columns {
+						uid.mapOnProperty = uid
+						defaultviewurl.mapOnProperty = defaultViewUrl
+						id.mapOnProperty = id
+						title.mapOnProperty = title
+						description.mapOnProperty = description
+						name.mapOnProperty = name
+						featureid.mapOnProperty = featureId
+						basetype.mapOnProperty = baseType
+						webid.mapOnProperty = webId
+						scopeid.mapOnProperty = scopeId
+						allowdeletion.mapOnProperty = allowDeletion
+					}
+				}
+			}
+		}
 	}
 	view {
 		templateRootPath = {$module.tx_sharepointconnector.view.templateRootPath}
 		partialRootPath = {$module.tx_sharepointconnector.view.partialRootPath}
 		layoutRootPath = {$module.tx_sharepointconnector.view.layoutRootPath}
 	}
+	settings {
+		sharepointServer {
+			username = trial2010
+			password = winter12
+			wsdl = http://trial.bpa-solutions.net/bparecruiting/_vti_bin/Lists.asmx?WSDL
+		}
+	}
+}
+
+config.tx_extbase {
+	objects.TYPO3\CMS\Extbase\Persistence\Generic\Storage\BackendInterface.className = aijko\SharepointConnector\Persistence\Storage\SharepointBackend
 }
