@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-41T09:40:41Z" product-name="sharepoint_connector">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_sharepointconnector_domain_model_listmap">
+				<source>List Map</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmap.title">
+				<source>Title (internal)</source>
+			</trans-unit>
+			
+		</body>
+	</file>
+</xliff>

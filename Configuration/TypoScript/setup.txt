@@ -1,0 +1,11 @@
+# Module configuration
+module.tx_sharepointconnector {
+	persistence {
+		storagePid = {$module.tx_sharepointconnector.persistence.storagePid}
+	}
+	view {
+		templateRootPath = {$module.tx_sharepointconnector.view.templateRootPath}
+		partialRootPath = {$module.tx_sharepointconnector.view.partialRootPath}
+		layoutRootPath = {$module.tx_sharepointconnector.view.layoutRootPath}
+	}
+}

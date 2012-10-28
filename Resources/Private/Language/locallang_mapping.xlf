@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-41T09:40:41Z" product-name="sharepoint_connector">
+		<header/>
+		<body>
+			
+            <trans-unit id="mlang_tabs_tab">
+				<source>Mapping</source>
+			</trans-unit>
+			<trans-unit id="mlang_labels_tabdescr">
+				<source>Allows mapping between lists and map records.</source>
+			</trans-unit>
+			<trans-unit id="mlang_labels_tablabel">
+				<source>Mapping</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>
