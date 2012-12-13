@@ -30,9 +30,14 @@ module.tx_sharepointconnector {
 	}
 	settings {
 		sharepointServer {
+			/*
 			username = trial2010
 			password = winter12
 			wsdl = http://trial.bpa-solutions.net/bparecruiting/_vti_bin/Lists.asmx?WSDL
+			*/
+			username = demo3
+			password = Start123
+			wsdl = http://demo.efexcon.com/rec/aijko/_vti_bin/Lists.asmx?WSDL
 		}
 	}
 }
