@@ -1,4 +1,5 @@
 # Module configuration
+# TODO: config.tx_extbase {
 module.tx_sharepointconnector {
 	persistence {
 		storagePid = {$module.tx_sharepointconnector.persistence.storagePid}
@@ -30,18 +31,21 @@ module.tx_sharepointconnector {
 	}
 	settings {
 		sharepointServer {
-			/*
+
+				# Public Demo
+
 			username = trial2010
 			password = winter12
 			wsdl = http://trial.bpa-solutions.net/bparecruiting/_vti_bin/Lists.asmx?WSDL
-			*/
+
+
+				# aijko-specific demo
+				# Users: demo1, demo2, demo3
+				/*
 			username = demo3
 			password = Start123
 			wsdl = http://demo.efexcon.com/rec/aijko/_vti_bin/Lists.asmx?WSDL
+			*/
 		}
 	}
-}
-
-config.tx_extbase {
-	objects.TYPO3\CMS\Extbase\Persistence\Generic\Storage\BackendInterface.className = aijko\SharepointConnector\Persistence\Storage\SharepointBackend
 }

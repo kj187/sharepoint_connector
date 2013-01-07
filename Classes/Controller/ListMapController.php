@@ -52,6 +52,21 @@ class ListMapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	protected $sharepointListRepository;
 
 	/**
+	 * Initializes Sharepoint Storage Backend
+	 *
+	 * @return void
+	 */
+	protected function initializeAction() {
+
+			// Overwrite storage backend
+		$sharepointStorage = $this->objectManager->get('aijko\SharepointConnector\Persistence\Storage\SharepointBackend');
+
+			/** @var $backend TYPO3\CMS\Extbase\Persistence\Generic\Backend */
+		$backend = $this->objectManager->get('TYPO3\CMS\Extbase\Persistence\Generic\Backend');
+		$backend->injectStorageBackend($sharepointStorage);
+	}
+
+	/**
 	 * action list
 	 *
 	 * @return void
@@ -84,15 +99,6 @@ class ListMapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->listMapRepository->add($newListMap);
 		$this->flashMessageContainer->add('Your new ListMap was created.');
 		$this->redirect('list');
-	}
-
-	/**
-	 * action
-	 *
-	 * @return void
-	 */
-	public function Action() {
-
 	}
 
 }

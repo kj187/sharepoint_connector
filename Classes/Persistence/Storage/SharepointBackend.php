@@ -169,8 +169,9 @@ class SharepointBackend implements \TYPO3\CMS\Extbase\Persistence\Generic\Storag
 			$username = $sharepointSettings['username']; // TODO: make sure we handle the situation when the credentials are not set via TypoScript
 			$password = $sharepointSettings['password'];
 			$wsdl = $sharepointSettings['wsdl'];
+			$useNtlm = FALSE; // TODO: make configurable / auto-detectable
 
-			$api = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('aijko\\SharepointConnector\\Service\\SharepointApi', $username, $password, $wsdl);
+			$api = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('aijko\\SharepointConnector\\Service\\SharepointApi', $username, $password, $wsdl, $useNtlm);
 
 			$this->sharepointApi = $api;
 		}
