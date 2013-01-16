@@ -637,7 +637,7 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 	 */
 	private function getArrayFromElementsByTagName ($rawXml, $tag, $namespace = NULL) {
 		// Get DOM instance and load XML
-		$dom = new DOMDocument();
+		$dom = new \DOMDocument();
 		$dom->loadXML($rawXml);
 
 		// Is namespace set?
