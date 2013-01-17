@@ -235,7 +235,7 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 		 * developments it might help to trace bugs better and it avoids calls
 		 * on wrong classes if $soapClient got set to something not SoapClient.
 		 */
-		if (!$this->soapClient instanceof SoapClient) {
+		if (!$this->soapClient instanceof \SoapClient) {
 				// Is not set
 			throw new \Exception('Variable soapClient is not a SoapClient class, have: ' . gettype($this->soapClient), constant('EXCEPTION_SOAPCLIENT_INVALID'));
 		}
@@ -312,7 +312,7 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 		$rawXml = '';
 		try {
 			$rawXml = $this->soapClient->GetListCollection()->GetListCollectionResult->any;
-		} catch (SoapFault $fault) {
+		} catch (\SoapFault $fault) {
 			$this->onError($fault);
 		}
 
@@ -360,8 +360,8 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 		// Attempt to query Sharepoint
 		$rawXml = '';
 		try {
-			$rawXml = $this->soapClient->GetList(new SoapVar($CAML, XSD_ANYXML))->GetListResult->any;
-		} catch (SoapFault $fault) {
+			$rawXml = $this->soapClient->GetList(new \SoapVar($CAML, XSD_ANYXML))->GetListResult->any;
+		} catch (\SoapFault $fault) {
 			$this->onError($fault);
 		}
 
@@ -468,13 +468,13 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 			</GetListItems>';
 
 		// Ready XML
-		$xmlvar = new SoapVar($CAML, XSD_ANYXML);
+		$xmlvar = new \SoapVar($CAML, XSD_ANYXML);
 		$result = NULL;
 
 		// Attempt to query Sharepoint
 		try {
 			$result = $this->xmlHandler($this->soapClient->GetListItems($xmlvar)->GetListItemsResult->any);
-		} catch (SoapFault $fault) {
+		} catch (\SoapFault $fault) {
 			$this->onError($fault);
 		}
 
@@ -791,13 +791,13 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 			</updates>
 		</UpdateListItems>';
 
-		$xmlvar = new SoapVar($CAML, XSD_ANYXML);
+		$xmlvar = new \SoapVar($CAML, XSD_ANYXML);
 		$result = NULL;
 
 		// Attempt to run operation
 		try {
 			$result = $this->xmlHandler($this->soapClient->UpdateListItems($xmlvar)->UpdateListItemsResult->any);
-		} catch (SoapFault $fault) {
+		} catch (\SoapFault $fault) {
 			$this->onError($fault);
 		}
 
@@ -850,7 +850,7 @@ class SharePointAPI { // TODO: to lowercase API (= Api)
 	 * @param	$fault		Error Information
 	 * @throws	Exception	Puts data from $fault into an other exception
 	 */
-	private function onError (SoapFault $fault) {
+	private function onError (\SoapFault $fault) {
 		$more = '';
 		if (isset($fault->detail->errorstring)) {
 			$more = 'Detailed: ' . $fault->detail->errorstring;
