@@ -1,11 +1,11 @@
 <?php
-namespace aijko\SharepointConnector\Domain\Model;
+namespace Aijko\SharepointConnector\Domain\Repository;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Erik Frister <erik.frister@aijko.de>, aijko GmbH
- *  Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  Erik Frister <ef@aijko.de>, aijko GmbH
  *  
  *  All rights reserved
  *
@@ -33,34 +33,7 @@ namespace aijko\SharepointConnector\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class ListMap extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
-
-	/**
-	 * Title (internal)
-	 *
-	 * @var \string
-	 * @validate NotEmpty
-	 */
-	protected $title;
-
-	/**
-	 * Returns the title
-	 *
-	 * @return \string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
-	/**
-	 * Sets the title
-	 *
-	 * @param \string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+class ListMappingRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
 ?>

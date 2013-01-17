@@ -1,18 +1,17 @@
 <?php
-namespace aijko\SharepointConnector\Domain\Repository;
-
+namespace Aijko\SharepointConnector\Tests;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Erik Frister <erik.frister@aijko.de>, aijko GmbH
- *  Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  
+ *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  			Erik Frister <ef@aijko.de>, aijko GmbH
+ *  			
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -27,13 +26,38 @@ namespace aijko\SharepointConnector\Domain\Repository;
  ***************************************************************/
 
 /**
+ * Test case for class Tx_Sharepoint_connector_Controller_ListMappingController.
  *
- *
- * @package sharepoint_connector
+ * @version $Id$
+ * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
+ * @package TYPO3
+ * @subpackage Sharepoint Connector
+ *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @author Erik Frister <ef@aijko.de>
  */
-class SharepointListRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class ListMappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+	/**
+	 * @var 
+	 */
+	protected $fixture;
+
+	public function setUp() {
+		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\ListMapping();
+	}
+
+	public function tearDown() {
+		unset($this->fixture);
+	}
+
+	/**
+	 * @test
+	 */
+	public function dummyMethod() {
+		$this->markTestIncomplete();
+	}
 
 }
 ?>

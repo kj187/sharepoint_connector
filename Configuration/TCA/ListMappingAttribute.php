@@ -3,13 +3,13 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_sharepointconnector_domain_model_listmap'] = array(
-	'ctrl' => $TCA['tx_sharepointconnector_domain_model_listmap']['ctrl'],
+$TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
+	'ctrl' => $TCA['tx_sharepointconnector_domain_model_listmappingattribute']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sharepoint_field_name, typo3_field_name, attribute_type',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sharepoint_field_name, typo3_field_name, attribute_type,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -37,8 +37,8 @@ $TCA['tx_sharepointconnector_domain_model_listmap'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sharepointconnector_domain_model_listmap',
-				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_listmap.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_listmap.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_sharepointconnector_domain_model_listmappingattribute',
+				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_listmappingattribute.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_listmappingattribute.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -93,13 +93,36 @@ $TCA['tx_sharepointconnector_domain_model_listmap'] = array(
 				),
 			),
 		),
-		'title' => array(
+		'sharepoint_field_name' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmap.title',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.sharepoint_field_name',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim,required'
+			),
+		),
+		'typo3_field_name' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.typo3_field_name',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'attribute_type' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.attribute_type',
+			'config' => array(
+				'type' => 'input',
+				'size' => 30,
+				'eval' => 'trim,required'
+			),
+		),
+		'listmapping' => array(
+			'config' => array(
+				'type' => 'passthrough',
 			),
 		),
 	),

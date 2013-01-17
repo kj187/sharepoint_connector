@@ -1,12 +1,42 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
+if (!defined('TYPO3_MODE')) die ('Access denied.');
+
 
 if (TYPO3_MODE === 'BE') {
 
+
+	//
+	// Main Module
+	//
+
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-		'aijko.' . $_EXTKEY,
+		'Aijko.' . $_EXTKEY,
 		'sharepoint',	 // Make module a master module
 		'',	// Submodule key
 		'',						// Position
@@ -19,40 +49,50 @@ if (TYPO3_MODE === 'BE') {
 	);
 
 
-	/**
-	 * Registers a Backend Module
-	 */
+	//
+	// Mapping Module
+	//
+
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
-		'aijko.' . $_EXTKEY,
-		'sharepoint',	 // Make module a submodule of 'sharepoint'
+		'Aijko.' . $_EXTKEY,
+		'sharepoint',	 // Make module a submodule of 'web'
 		'mapping',	// Submodule key
 		'',						// Position
 		array(
-			'ListMap' => 'list, create',
-
+			'ListMapping' => 'list, edit, update',
+			
 		),
 		array(
 			'access' => 'user,group',
-			'icon'   => 'EXT:' . $_EXTKEY . '/Resources/Public/Icons/sharepoint.png',
+			'icon'   => 'EXT:' . $_EXTKEY . '/ext_icon.gif',
 			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mapping.xlf',
 		)
 	);
 
 }
 
+//
+// Add static typoscript file
+//
+
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Sharepoint Connector');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_listmap', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_listmap.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_listmap');
-$TCA['tx_sharepointconnector_domain_model_listmap'] = array(
+
+//
+//
+//
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_listmapping', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_listmapping.xlf');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_listmapping');
+$TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmap',
-		'label' => 'title',
+		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping',
+		'label' => 'sharepoint_list_identifier',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
 		'dividers2tabs' => TRUE,
-		'sortby' => 'sorting',
+
 		'versioningWS' => 2,
 		'versioning_followPages' => TRUE,
 		'origUid' => 't3_origuid',
@@ -65,18 +105,18 @@ $TCA['tx_sharepointconnector_domain_model_listmap'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'title,',
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/ListMap.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_listmap.gif'
+		'searchFields' => 'sharepoint_list_identifier,sharepoint_list_title,typo3_list_title,attributes,',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/ListMapping.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_listmapping.gif'
 	),
 );
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_sharepointlist', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_sharepointlist.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_sharepointlist');
-$TCA['tx_sharepointconnector_domain_model_sharepointlist'] = array(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_listmappingattribute', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_listmappingattribute.xlf');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_listmappingattribute');
+$TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_sharepointlist',
-		'label' => 'default_view_url',
+		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute',
+		'label' => 'sharepoint_field_name',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -94,9 +134,9 @@ $TCA['tx_sharepointconnector_domain_model_sharepointlist'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'default_view_url,id,title,description,name,feature_id,base_type,web_id,scope_id,allow_deletion,',
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/SharepointList.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_sharepointlist.gif'
+		'searchFields' => 'sharepoint_field_name,typo3_field_name,attribute_type,',
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/ListMappingAttribute.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_listmappingattribute.gif'
 	),
 );
 
