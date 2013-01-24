@@ -137,8 +137,9 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 			if ($listTitle . 'Item' == $node->getAttribute('Name')) {
 				$propertyIterator = 0;
 				foreach ($node->getElementsByTagName('Property') as $propertyNode) {
-					$propertyData[$listTitle][$propertyIterator]['name'] = $propertyNode->getAttribute('Name');
-					$propertyData[$listTitle][$propertyIterator]['type'] = $propertyNode->getAttribute('Type');
+					$propertyData[$listTitle][$propertyIterator]['sharepointFieldName'] = $propertyNode->getAttribute('Name');
+					$propertyData[$listTitle][$propertyIterator]['attributeType'] = $propertyNode->getAttribute('Type');
+					$propertyData[$listTitle][$propertyIterator]['typo3FieldName'] = '';
 					$propertyIterator++;
 				}
 			}

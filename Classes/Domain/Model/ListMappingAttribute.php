@@ -39,7 +39,6 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * Internal Sharepoint field name
 	 *
 	 * @var \string
-	 * @validate NotEmpty
 	 */
 	protected $sharepointFieldName;
 
@@ -47,7 +46,6 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * TYPO3 field name
 	 *
 	 * @var \string
-	 * @validate NotEmpty
 	 */
 	protected $typo3FieldName;
 
@@ -55,7 +53,6 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * Attribute type
 	 *
 	 * @var \string
-	 * @validate NotEmpty
 	 */
 	protected $attributeType;
 
