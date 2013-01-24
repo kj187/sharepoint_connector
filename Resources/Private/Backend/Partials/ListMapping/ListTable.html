@@ -1,0 +1,24 @@
+<f:section name="content">
+	<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+		<tr class="t3-row-header">
+			<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title" /></td>
+			<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier" /></td>
+			<td> </td>
+			<td> </td>
+		</tr>
+
+		<f:for each="{listMappings}" as="listMapping">
+			<tr class="db_list_normal">
+				<td>{listMapping.typo3ListTitle}</td>
+				<td>{listMapping.sharepointListIdentifier}</td>
+				<td><f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:'{listMapping : listMapping}')}" icon="actions-document-open" title="Edit ListMapping" /></td>
+				<td><f:be.buttons.icon uri="{f:uri.action(action:'delete', arguments:'{listMapping : listMapping}')}" icon="actions-edit-delete" title="Delete ListMapping" /></td>
+			</tr>
+		</f:for>
+		<tr>
+			<td colspan="4">
+				<f:count subject="{listMappings}" /> Mappings
+			</td>
+		</tr>
+	</table>
+</f:section>

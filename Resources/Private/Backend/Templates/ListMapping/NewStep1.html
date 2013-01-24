@@ -1,27 +1,24 @@
 <f:layout name="Default" />
 
 <f:section name="content">
-	<h1>Add new ListMapping</h1>
-
 	<f:flashMessages />
-
 	<f:render partial="FormErrors" />
 
 	<f:form action="newStep2" name="listMapping" object="{listMapping}" >
 
-		<label for="sharepointListIdentifier">
-			<f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list"/>
-		</label><br/>
-		<f:form.select property="sharepointListIdentifier" name="sharepointListIdentifier" options="{allLists}" />
-
-		<br/>
-		<label for="typo3ListTitle">
-			<f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title"/>
-			<span class="required">(required)</span>
-		</label><br/>
-		<f:form.textfield property="typo3ListTitle"/><br/>
-
-		<br/>
+		<h3>Add new ListMapping - Step 1</h3>
+		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+			<tr class="t3-row-header">
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list"/></td>
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title"/></td>
+			</tr>
+			<tr class="db_list_normal">
+				<td>
+					<f:form.select property="sharepointListIdentifier" name="sharepointListIdentifier" options="{allLists}" />
+				</td>
+				<td><f:form.textfield property="typo3ListTitle"/></td>
+			</tr>
+		</table>
 
 		<f:form.submit value="Next" />
 	</f:form>
