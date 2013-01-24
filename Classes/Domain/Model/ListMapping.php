@@ -47,7 +47,6 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * Internal Sharepoint list title
 	 *
 	 * @var \string
-	 * @validate NotEmpty
 	 */
 	protected $sharepointListTitle;
 

@@ -1,0 +1,34 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<h1>Add new ListMapping</h1>
+
+	<f:flashMessages />
+
+	<f:render partial="FormErrors" />
+
+	<f:form action="create" name="listMapping" object="{listMapping}" >
+
+		<strong>Sharepoint list title:</strong> {listMapping.sharepointListIdentifier}  <br/>
+		<strong>TYPO3 list title:</strong> {listMapping.typo3ListTitle}  <br/>
+		<br/>
+
+		<table border="1">
+			<tr>
+				<td><strong>Sharepoint field name</strong></td>
+				<td><strong>Sharepoint field type</strong></td>
+				<td><strong>TYPO3 field name</strong></td>
+			</tr>
+			<f:for each="{listMapping.attributes}" as="attribute">
+				<tr>
+					<td>{attribute.sharepointFieldName}<f:form.hidden property="attributes.sharepointFieldName" value="{attribute.sharepointFieldName}" /></td>
+					<td>{attribute.attributeType}<f:form.hidden property="attributes.attributeType" value="{attribute.attributeType}" /></td>
+					<td><f:form.textfield property="attributes.typo3FieldName" value="{attribute.sharepointFieldName}" /></td>
+				</tr>
+			</f:for>
+		</table>
+
+		<br/>
+		<f:form.submit value="Save" />
+	</f:form>
+</f:section>

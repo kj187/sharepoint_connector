@@ -59,7 +59,7 @@ if (TYPO3_MODE === 'BE') {
 		'mapping',	// Submodule key
 		'',						// Position
 		array(
-			'ListMapping' => 'list, edit, update',
+			'ListMapping' => 'list, newStep1, newStep2, create, edit, update',
 			
 		),
 		array(

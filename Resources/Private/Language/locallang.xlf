@@ -7,6 +7,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_listmapping">
 				<source>ListMapping</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list">
+				<source>Sharepoint list</source>
+			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>

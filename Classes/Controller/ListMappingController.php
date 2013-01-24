@@ -36,21 +36,81 @@ namespace Aijko\SharepointConnector\Controller;
 class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * listMappingRepository
-	 *
 	 * @var \Aijko\SharepointConnector\Domain\Repository\ListMappingRepository
 	 * @inject
 	 */
 	protected $listMappingRepository;
 
 	/**
-	 * action list
+	 * @var \Aijko\SharepointConnector\Sharepoint\SharepointInterface
+	 */
+	protected $sharepointApi;
+
+	/**
+	 * Initialize action method
+	 */
+	public function initializeAction() {
+		$sharepointRESTApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\Rest\\Sharepoint', $this->settings['sharepointServer']);
+		$this->sharepointApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\SharepointFacade', $sharepointRESTApi);
+	}
+
+	/**
+	 * List all available list mappings
 	 *
 	 * @return void
 	 */
 	public function listAction() {
 		$listMappings = $this->listMappingRepository->findAll();
 		$this->view->assign('listMappings', $listMappings);
+	}
+
+	/**
+	 * Add new list mapping - Step 1, choose a list
+	 *
+	 * @var \Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping
+	 * @dontvalidate $listMapping
+	 * @return void
+	 */
+	public function newStep1Action(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping = NULL) {
+		$this->view->assign('allLists', $this->sharepointApi->getAllLists());
+		$this->view->assign('listMapping', $listMapping);
+	}
+
+	/**
+	 * Add new list mapping - Step 2, mapping
+	 *
+	 * @var \Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping
+	 * @dontvalidate $listMapping
+	 * @return void
+	 */
+	public function newStep2Action(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping) {
+
+		// Add sharepoint attributes
+		$sharepointAttributes = $this->sharepointApi->getListAttributes($listMapping->getSharepointListIdentifier());
+		if (count($sharepointAttributes) > 0) {
+			foreach ($sharepointAttributes[$listMapping->getSharepointListIdentifier()] as $attributes) {
+				$listMappingAttribute = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Domain\\Model\\ListMappingAttribute');
+				$listMappingAttribute->setSharepointFieldName($attributes['name']);
+				$listMappingAttribute->setAttributeType($attributes['type']);
+				$listMappingAttribute->setTypo3FieldName('');
+				$listMapping->addAttribute($listMappingAttribute);
+			}
+		}
+
+		$this->view->assign('listMapping', $listMapping);
+	}
+
+	/**
+	 * Create new list mapping
+	 *
+	 * @dontvalidate $listMapping
+	 * @var \Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping
+	 * @return void
+	 */
+	public function createAction(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping) {
+		$this->listMappingRepository->add($listMapping);
+		$this->flashMessageContainer->add('Your ListMapping was added.');
+		$this->redirect('list');
 	}
 
 	/**

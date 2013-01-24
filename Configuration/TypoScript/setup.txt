@@ -8,4 +8,53 @@ module.tx_sharepointconnector {
 		partialRootPath = {$module.tx_sharepointconnector.view.partialRootPath}
 		layoutRootPath = {$module.tx_sharepointconnector.view.layoutRootPath}
 	}
+
+	settings {
+
+		sharepointServer {
+
+			#
+			# REST Service settings
+			#
+
+			rest {
+				serviceUrl = /_vti_bin/ListData.svc
+				httpHeader = content-type:application/json
+
+				oData {
+					metadata = /$metadata
+				}
+			}
+
+
+			#
+			# Security settings
+			#
+
+			security {
+				ntlm = 1
+			}
+
+			#
+			# Public Demo
+			#
+
+			#username = trial2010
+			#password = winter12
+			#url = http://trial.bpa-solutions.net/bparecruiting
+
+
+			#
+			# aijko-specific demo
+			# Users: demo1, demo2, demo3
+			#
+
+			username = demo3
+			password = Start123
+			url = http://demo.efexcon.com/rec/aijko
+
+		}
+
+	}
+
 }
