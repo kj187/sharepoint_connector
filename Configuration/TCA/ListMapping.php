@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 	'ctrl' => $TCA['tx_sharepointconnector_domain_model_listmapping']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sharepoint_list_identifier, sharepoint_list_title, typo3_list_title, attributes',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sharepoint_list_identifier, typo3_list_title, attributes',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sharepoint_list_identifier, sharepoint_list_title, typo3_list_title, attributes,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, sharepoint_list_identifier, typo3_list_title, attributes,--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -99,16 +99,8 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
-			),
-		),
-		'sharepoint_list_title' => array(
-			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping.sharepoint_list_title',
-			'config' => array(
-				'type' => 'input',
-				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim,required',
+				'readOnly' => 1
 			),
 		),
 		'typo3_list_title' => array(
@@ -129,7 +121,7 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 				'foreign_field' => 'listmapping',
 				'maxitems'      => 9999,
 				'appearance' => array(
-					'collapseAll' => 0,
+					'collapseAll' => 1,
 					'levelLinksPosition' => 'top',
 					'showSynchronizationLink' => 1,
 					'showPossibleLocalizationRecords' => 1,

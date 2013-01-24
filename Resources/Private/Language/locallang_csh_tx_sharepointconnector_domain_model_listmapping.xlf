@@ -7,9 +7,6 @@
 			<trans-unit id="sharepoint_list_identifier.description">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>
-			<trans-unit id="sharepoint_list_title.description">
-				<source>Internal Sharepoint list title</source>
-			</trans-unit>
 			<trans-unit id="typo3_list_title.description">
 				<source>TYPO3 list title</source>
 			</trans-unit>

@@ -99,7 +99,8 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim,required',
+				'readOnly' => 1
 			),
 		),
 		'typo3_field_name' => array(
@@ -117,7 +118,8 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim,required',
+				'readOnly' => 1
 			),
 		),
 		'listmapping' => array(

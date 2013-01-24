@@ -78,6 +78,15 @@ if (TYPO3_MODE === 'BE') {
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Sharepoint Connector');
 
 
+
+//
+// Add pageTSConfig
+//
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('mod.web_list.hideTables := addToList(tx_sharepointconnector_domain_model_listmappingattribute)');
+
+
+
 //
 //
 //
@@ -87,7 +96,9 @@ if (TYPO3_MODE === 'BE') {
 $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping',
-		'label' => 'sharepoint_list_identifier',
+		'label' => 'typo3_list_title',
+		'label_alt' => 'sharepoint_list_identifier',
+		'label_alt_force' => TRUE,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',
@@ -105,7 +116,7 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'sharepoint_list_identifier,sharepoint_list_title,typo3_list_title,attributes,',
+		'searchFields' => 'sharepoint_list_identifier,typo3_list_title,attributes,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/ListMapping.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_listmapping.gif'
 	),
@@ -116,7 +127,9 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 	'ctrl' => array(
 		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute',
-		'label' => 'sharepoint_field_name',
+		'label' => 'typo3_field_name',
+		'label_alt' => 'sharepoint_field_name',
+		'label_alt_force' => TRUE,
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
 		'cruser_id' => 'cruser_id',

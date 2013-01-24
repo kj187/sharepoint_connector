@@ -13,9 +13,6 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_title">
-				<source>Internal Sharepoint list title</source>
-			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.typo3_list_title">
 				<source>TYPO3 list title</source>
 			</trans-unit>

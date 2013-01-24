@@ -44,13 +44,6 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sharepointListIdentifier;
 
 	/**
-	 * Internal Sharepoint list title
-	 *
-	 * @var \string
-	 */
-	protected $sharepointListTitle;
-
-	/**
 	 * TYPO3 list title
 	 *
 	 * @var \string
@@ -106,25 +99,6 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSharepointListIdentifier($sharepointListIdentifier) {
 		$this->sharepointListIdentifier = $sharepointListIdentifier;
-	}
-
-	/**
-	 * Returns the sharepointListTitle
-	 *
-	 * @return \string $sharepointListTitle
-	 */
-	public function getSharepointListTitle() {
-		return $this->sharepointListTitle;
-	}
-
-	/**
-	 * Sets the sharepointListTitle
-	 *
-	 * @param \string $sharepointListTitle
-	 * @return void
-	 */
-	public function setSharepointListTitle($sharepointListTitle) {
-		$this->sharepointListTitle = $sharepointListTitle;
 	}
 
 	/**

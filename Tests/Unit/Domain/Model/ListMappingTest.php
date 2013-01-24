@@ -73,23 +73,6 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getSharepointListTitleReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setSharepointListTitleForStringSetsSharepointListTitle() { 
-		$this->fixture->setSharepointListTitle('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getSharepointListTitle()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
 	public function getTypo3ListTitleReturnsInitialValueForString() { }
 
 	/**

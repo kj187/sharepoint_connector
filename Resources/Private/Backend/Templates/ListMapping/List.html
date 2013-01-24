@@ -11,18 +11,16 @@
 
 	<table border="1" class="tx_sharepointconnector" >
 		<tr>
-			<th><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier" /></th>
-			<th><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_title" /></th>
 			<th><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title" /></th>
+			<th><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier" /></th>
 			<th> </th>
 			<th> </th>
 		</tr>
 
 		<f:for each="{listMappings}" as="listMapping">
 			<tr>
-				<td><f:link.action action="show" arguments="{listMapping : listMapping}"> {listMapping.sharepointListIdentifier}</f:link.action></td>
-				<td><f:link.action action="show" arguments="{listMapping : listMapping}"> {listMapping.sharepointListTitle}</f:link.action></td>
 				<td><f:link.action action="show" arguments="{listMapping : listMapping}"> {listMapping.typo3ListTitle}</f:link.action></td>
+				<td><f:link.action action="show" arguments="{listMapping : listMapping}"> {listMapping.sharepointListIdentifier}</f:link.action></td>
 				<td><f:link.action action="edit" arguments="{listMapping : listMapping}">Edit</f:link.action></td>
 				<td><f:link.action action="delete" arguments="{listMapping : listMapping}">Delete</f:link.action></td>
 			</tr>
