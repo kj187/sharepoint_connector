@@ -19,7 +19,9 @@ module.tx_sharepointconnector {
 
 			rest {
 				serviceUrl = /_vti_bin/ListData.svc
-				httpHeader = content-type:application/json
+				httpHeader {
+					0 = content-type:application/json
+				}
 
 				oData {
 					metadata = /$metadata
