@@ -1,25 +1,42 @@
 <f:layout name="Default" />
 
-This template displays a EDIT form for the current domain object.
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Edit.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="content">
-<h1>Edit ListMapping</h1>
+	<h1>Edit ListMapping</h1>
 
-<f:flashMessages />
+	<f:flashMessages />
 
-<f:render partial="FormErrors" />
+	<f:render partial="FormErrors" />
 
-<f:form action="update" name="listMapping" object="{listMapping}" >
-<f:render partial="ListMapping/FormFields" arguments="{listMapping:listMapping}" />
-	<f:form.submit value="Save" />
-</f:form>
+	<f:form action="update" name="listMapping" object="{listMapping}" >
+
+		<strong>Sharepoint list title:</strong> {listMapping.sharepointListIdentifier}  <br/>
+		<f:form.hidden property="sharepointListIdentifier" value="{listMapping.sharepointListIdentifier}" />
+
+		<strong>TYPO3 list title:</strong>
+		<f:form.textfield property="typo3ListTitle" value="{listMapping.typo3ListTitle}" />
+		<br/>
+
+		<br/>
+		<table border="1">
+			<tr>
+				<td><strong>Sharepoint field name</strong></td>
+				<td><strong>Sharepoint field type</strong></td>
+				<td><strong>TYPO3 field name</strong></td>
+			</tr>
+			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
+				<tr>
+					<td>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td>{attribute.attributeType}<f:form.hidden name="attributeData[{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>
+					<td>
+						<f:form.textfield name="attributeData[{attribute.uid}][typo3FieldName]" value="{attribute.typo3FieldName}" />
+						<f:form.hidden name="attributeData[{attribute.uid}][__identity]" value="{attribute.uid}"/>
+					</td>
+				</tr>
+			</f:for>
+		</table>
+
+		<br/>
+
+		<f:form.submit value="Save" />
+	</f:form>
 </f:section>
