@@ -66,10 +66,10 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 
 		$this->curlObject = curl_init();
 
-		curl_setopt($this->curlObject, CURLOPT_HEADER, false);
-		curl_setopt($this->curlObject, CURLOPT_AUTOREFERER, true);
-		curl_setopt($this->curlObject, CURLOPT_FRESH_CONNECT, true);
-		curl_setopt($this->curlObject, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($this->curlObject, CURLOPT_HEADER, FALSE);
+		curl_setopt($this->curlObject, CURLOPT_AUTOREFERER, TRUE);
+		curl_setopt($this->curlObject, CURLOPT_FRESH_CONNECT, TRUE);
+		curl_setopt($this->curlObject, CURLOPT_RETURNTRANSFER, TRUE);
 
 		if ($this->settings['security']['ntlm']) {
 			//Use NTLM for HTTP authentication
@@ -93,12 +93,21 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	}
 
 	/**
-	 * TODO list caching
-	 *
+	 * @param $listTitle
+	 * @param array $data
+	 */
+	public function addToList($listTitle, array $data) {
+		$this->prependUrl = '/' . $listTitle;
+		curl_setopt($this->curlObject, CURLOPT_POST, TRUE);
+		curl_setopt($this->curlObject, CURLOPT_POSTFIELDS, json_encode($data));
+		return $this->execute();
+	}
+
+	/**
 	 * @return array
 	 */
 	public function getAllLists() {
-		curl_setopt($this->curlObject, CURLOPT_HTTPGET, true);
+		curl_setopt($this->curlObject, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute();
 
 		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');
@@ -114,14 +123,12 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	}
 
 	/**
-	 * TODO attributes caching
-	 *
 	 * @param $listTitle
 	 * @return array
 	 */
 	public function getListAttributes($listTitle) {
 		$this->prependUrl = $this->settings['rest']['oData']['metadata'];
-		curl_setopt($this->curlObject, CURLOPT_HTTPGET, true);
+		curl_setopt($this->curlObject, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute();
 
 		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');

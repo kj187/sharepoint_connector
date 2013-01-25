@@ -1,11 +1,10 @@
 <?php
-namespace Aijko\SharepointConnector\Sharepoint;
+namespace Aijko\SharepointConnector\Utility;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
  *
  *  All rights reserved
  *
@@ -27,32 +26,30 @@ namespace Aijko\SharepointConnector\Sharepoint;
  ***************************************************************/
 
 /**
- * Sharepoint interface
+ * Mapping class
  *
  * @package sharepoint_connector
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-interface SharepointInterface {
+class Mapping {
 
 	/**
-	 * @return array
-	 * @api
-	 */
-	public function getAllLists();
-
-	/**
-	* @param $listTitle
-	* @return array
-	* @api
-	*/
-	public function getListAttributes($listTitle);
-
-	/**
-	 * @param $listTitle
+	 * Convert data from array to correct sharepoint data array
+	 *
+	 * @param \Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping
 	 * @param array $data
-	 * @api
+	 * @return array
 	 */
-	public function addToList($listTitle, array $data);
+	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping, array $data) {
+		$returnData = array();
+		foreach ($listMapping->getAttributes() as $key => $attribute) {
+			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
+				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
+			}
+		}
+
+		return $returnData;
+	}
 
 }
 

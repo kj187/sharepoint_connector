@@ -47,37 +47,43 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	protected $sharepointApi = NULL;
 
 	/**
-	 * @var \Aijko\SharepointConnector\Sharepoint\SharepointInterface $sharepointApi
+	 * @var \Aijko\SharepointConnector\Domain\Repository\ListMappingRepository
+	 * @inject
 	 */
-	public function __construct(\Aijko\SharepointConnector\Sharepoint\SharepointInterface $sharepointApi) {
+	protected $listMappingRepository;
+
+	/**
+	 * @var \Aijko\SharepointConnector\Sharepoint\SharepointInterface $sharepointApi
+	 * @var array $typoscriptConfiguration
+	 */
+	public function __construct(\Aijko\SharepointConnector\Sharepoint\SharepointInterface $sharepointApi, array $typoscriptConfiguration = array()) {
 		$this->sharepointApi = $sharepointApi;
 
-		$settings = $this->initializeSettings();
+		$settings = $this->initializeSettings($typoscriptConfiguration);
 		$this->sharepointApi->initialize($settings);
 	}
 
 	/**
 	 * Initialize all necessary settings
-	 * You dont need to inject the settings from outside, you can completely ignore this
 	 *
 	 * @return array
 	 */
-	protected function initializeSettings() {
-		// get typoscript settings
-		$configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
-		$typoscriptConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-		$typoscriptConfiguration = $typoscriptConfiguration['module.']['tx_sharepointconnector.']['settings.']['sharepointServer.'];
+	protected function initializeSettings(array $typoscriptConfiguration) {
+
+		// get typoscript settings if you dont inject this
+		if (!count($typoscriptConfiguration)) {
+			$configurationManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+			$typoscriptConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+			$typoscriptConfiguration = $typoscriptConfiguration['module.']['tx_sharepointconnector.']['settings.']['sharepointServer.'];
+		}
+		$typoscriptConfiguration = \t3lib_div::removeDotsFromTS($typoscriptConfiguration);
 
 		// get extension configuration
 		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sharepoint_connector']);
+		$extensionConfiguration = \t3lib_div::removeDotsFromTS($extensionConfiguration);
 
 		// merge typoscript configuration and extension configuration
-		$mergedSettings = array_merge($typoscriptConfiguration, $extensionConfiguration['sharepointServer.']);
-
-		// removes dots "." from end of a key identifier of TypoScript styled array.
-		$settings = \t3lib_div::removeDotsFromTS($mergedSettings);
-
-		return $settings;
+		return array_merge($typoscriptConfiguration, $extensionConfiguration['sharepointServer']);
 	}
 
 	/**
@@ -93,6 +99,19 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	 */
 	public function getListAttributes($listTitle) {
 		return $this->sharepointApi->getListAttributes($listTitle);
+	}
+
+	/**
+	 * Add a new entry to a specific list
+	 *
+	 * @param string $listMappingUid
+	 * @param array $data
+	 */
+	public function addToList($listMappingUid, array $data) {
+		$listMapping = $this->listMappingRepository->findByUid($listMappingUid);
+		$mapping = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Utility\\Mapping');
+		$data = $mapping->convertToSharepointData($listMapping, $data);
+		return $this->sharepointApi->addToList($listMapping->getSharepointListIdentifier(), $data);
 	}
 
 }
