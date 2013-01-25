@@ -6,7 +6,7 @@ namespace Aijko\SharepointConnector\Controller;
  *
  *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
  *  Erik Frister <ef@aijko.de>, aijko GmbH
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -71,7 +71,7 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	 * Initialize action method
 	 */
 	public function initializeAction() {
-		$sharepointRESTApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\Rest\\Sharepoint', $this->settings['sharepointServer']);
+		$sharepointRESTApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\Rest\\Sharepoint');
 		$this->sharepointApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\SharepointFacade', $sharepointRESTApi);
 	}
 

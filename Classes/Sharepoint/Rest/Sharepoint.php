@@ -60,7 +60,7 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	/**
 	 * @param array $settings
 	 */
-	public function __construct(array $settings) {
+	public function initialize(array $settings) {
 		$this->settings = $settings;
 		#\t3lib_utility_Debug::debug($settings);
 

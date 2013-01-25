@@ -28,33 +28,6 @@ module.tx_sharepointconnector {
 				}
 			}
 
-
-			#
-			# Security settings
-			#
-
-			security {
-				ntlm = 1
-			}
-
-			#
-			# Public Demo
-			#
-
-			#username = trial2010
-			#password = winter12
-			#url = http://trial.bpa-solutions.net/bparecruiting
-
-
-			#
-			# aijko-specific demo
-			# Users: demo1, demo2, demo3
-			#
-
-			username = demo3
-			password = Start123
-			url = http://demo.efexcon.com/rec/aijko
-
 		}
 
 	}
