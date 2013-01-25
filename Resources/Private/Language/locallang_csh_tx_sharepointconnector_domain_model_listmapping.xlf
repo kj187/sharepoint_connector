@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-17T20:27:05Z" product-name="sharepoint_connector">
+		<header/>
+		<body>
+
+			<trans-unit id="sharepoint_list_identifier.description">
+				<source>Internal Sharepoint list identifier</source>
+			</trans-unit>
+			<trans-unit id="typo3_list_title.description">
+				<source>TYPO3 list title</source>
+			</trans-unit>
+			<trans-unit id="attributes.description">
+				<source>Attributes</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

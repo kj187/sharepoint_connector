@@ -1,48 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-32T12:18:32Z" product-name="sharepoint_connector">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-17T20:27:04Z" product-name="sharepoint_connector">
 		<header/>
 		<body>
 
-			<trans-unit id="tx_sharepointconnector_domain_model_listmap">
-				<source>List Map</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmapping">
+				<source>List Mapping</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmap.title">
-				<source>Title</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier">
+				<source>Sharepoint List Identifier</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.typo3_list_title">
+				<source>Typo3 List Title</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.attributes">
+				<source>Attributes</source>
 			</trans-unit>
 
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist">
-				<source>Sharepoint List</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute">
+				<source>List Mapping Attribute</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.default_view_url">
-				<source>Default View Url</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.sharepoint_field_name">
+				<source>Sharepoint Field Name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.id">
-				<source>Id</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.typo3_field_name">
+				<source>Typo3 Field Name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.feature_id">
-				<source>Feature Id</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.base_type">
-				<source>Base Type</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.web_id">
-				<source>Web Id</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.scope_id">
-				<source>Scope Id</source>
-			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_sharepointlist.allow_deletion">
-				<source>Allow Deletion</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.attribute_type">
+				<source>Attribute Type</source>
 			</trans-unit>
 
 		</body>

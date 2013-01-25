@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2012-10-32T12:18:32Z" product-name="sharepoint_connector">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-17T20:27:04Z" product-name="sharepoint_connector">
 		<header/>
 		<body>
 			
@@ -8,10 +8,10 @@
 				<source>Mapping</source>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tabdescr">
-				<source>Allows mapping between lists and map records.</source>
+				<source>MappingDesc</source>
 			</trans-unit>
 			<trans-unit id="mlang_labels_tablabel">
-				<source>Mapping</source>
+				<source>MappingTabLabel</source>
 			</trans-unit>
 		</body>
 	</file>

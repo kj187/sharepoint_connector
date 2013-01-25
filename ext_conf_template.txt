@@ -1,0 +1,11 @@
+  # cat=basic; type=string; label=Sharepoint Server url: The URL to the Sharepoint Server without ending slash /
+sharepointServer.url = http://demo.efexcon.com/rec/aijko
+
+  # cat=basic; type=string; label=Sharepoint Server username: The username for authentication
+sharepointServer.username = demo
+
+  # cat=basic; type=string; label=Sharepoint Server password: The password for authentication
+sharepointServer.password = demo
+
+  # cat=basic; type=boolean; label=NT LAN Manager (NTLM): Use NTLM Authentication Protocol Specification
+sharepointServer.security.ntlm = 0

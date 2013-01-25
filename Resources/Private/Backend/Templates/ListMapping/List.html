@@ -1,0 +1,25 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<f:flashMessages />
+
+	<h3>Listing for ListMapping</h3>
+
+	<f:if condition="<f:count subject='{listMappings}' /> > 20">
+		<f:then>
+			<f:be.widget.paginate objects="{listMappings}" as="paginatedListMappings" configuration="{itemsPerPage: 20, insertAbove: 1, insertBelow: 1}">
+				<f:render partial="ListMapping/ListTable" section="content" arguments="{listMappings: paginatedListMappings}" />
+			</f:be.widget.paginate>
+		</f:then>
+		<f:else>
+			<f:render partial="ListMapping/ListTable" section="content" arguments="{listMappings: listMappings}" />
+		</f:else>
+	</f:if>
+
+	<br/>
+
+	<f:be.buttons.icon uri="{f:uri.action(action:'newStep1')}" icon="actions-document-new" title="New ListMapping" />
+	<f:link.action action="newStep1">New ListMapping</f:link.action> <br/>
+
+
+</f:section>

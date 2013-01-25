@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2013-01-17T20:27:05Z" product-name="sharepoint_connector">
+		<header/>
+		<body>
+
+			<trans-unit id="sharepoint_field_name.description">
+				<source>Internal Sharepoint field name</source>
+			</trans-unit>
+			<trans-unit id="typo3_field_name.description">
+				<source>TYPO3 field name</source>
+			</trans-unit>
+			<trans-unit id="attribute_type.description">
+				<source>Attribute type</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

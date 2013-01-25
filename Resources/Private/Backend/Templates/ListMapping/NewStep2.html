@@ -1,0 +1,49 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<f:flashMessages />
+	<f:render partial="FormErrors" />
+
+	<f:form action="create" name="listMapping" object="{listMapping}" >
+
+		<h3>Add new ListMapping - Step 2</h3>
+		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+			<tr class="t3-row-header">
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list"/></td>
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title"/></td>
+			</tr>
+			<tr class="db_list_normal">
+				<td>
+					{listMapping.sharepointListIdentifier}
+					<f:form.hidden property="sharepointListIdentifier" value="{listMapping.sharepointListIdentifier}" />
+				</td>
+				<td>
+					{listMapping.typo3ListTitle}
+					<f:form.hidden property="typo3ListTitle" value="{listMapping.typo3ListTitle}" />
+				</td>
+			</tr>
+		</table>
+
+		<br/>
+
+		<h3>Attributes</h3>
+		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+			<tr class="t3-row-header">
+				<td>Sharepoint field name</td>
+				<td>Sharepoint field type</td>
+				<td>TYPO3 field name</td>
+			</tr>
+			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
+				<tr class="db_list_normal">
+					<td>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td>{attribute.attributeType}<f:form.hidden name="attributeData[{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
+					<td><f:form.textfield name="attributeData[{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointFieldName}" /></td>
+				</tr>
+			</f:for>
+		</table>
+
+		<br/>
+
+		<f:form.submit value="Save" />
+	</f:form>
+</f:section>
