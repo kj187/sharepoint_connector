@@ -1,5 +1,8 @@
 <f:layout name="Default" />
 
+<f:section name="docHeaderRow1">
+</f:section>
+
 <f:section name="content">
 	<f:flashMessages />
 	<f:render partial="FormErrors" />
@@ -29,12 +32,14 @@
 		<h3>Attributes</h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
+				<td><f:form.checkbox id="activateAll" name="" value="0" /></td>
 				<td>Sharepoint field name</td>
 				<td>Sharepoint field type</td>
 				<td>TYPO3 field name</td>
 			</tr>
 			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
+					<td><f:form.checkbox value="1" name="attributeData[{attributeIterator.index}][activated]" />  </td>
 					<td>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
 					<td>{attribute.attributeType}<f:form.hidden name="attributeData[{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
 					<td><f:form.textfield name="attributeData[{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointFieldName}" /></td>

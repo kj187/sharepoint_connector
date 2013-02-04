@@ -35,6 +35,8 @@ namespace Aijko\SharepointConnector\Domain\Model;
  */
 class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
+	const STATUS_DEPRECATED 	= 2;
+
 	/**
 	 * Internal Sharepoint field name
 	 *
@@ -55,6 +57,11 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * @var \string
 	 */
 	protected $attributeType;
+
+	/**
+	 * @var string
+	 */
+	protected $status;
 
 	/**
 	 * Returns the sharepointFieldName
@@ -113,5 +120,18 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 		$this->attributeType = $attributeType;
 	}
 
+	/**
+	 * @param string $status
+	 */
+	public function setStatus($status) {
+		$this->status = $status;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getStatus() {
+		return $this->status;
+	}
 }
 ?>

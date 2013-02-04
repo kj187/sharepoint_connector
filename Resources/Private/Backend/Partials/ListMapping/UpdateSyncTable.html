@@ -1,0 +1,72 @@
+<f:section name="content">
+	<f:flashMessages />
+
+	<f:render partial="FormErrors" />
+
+	<f:form action="update" name="listMapping" object="{listMapping}" >
+
+		<h3>List</h3>
+		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+			<tr class="t3-row-header">
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list"/></td>
+				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title"/></td>
+			</tr>
+			<tr class="db_list_normal">
+				<td>
+					{listMapping.sharepointListIdentifier}
+					<f:form.hidden property="sharepointListIdentifier" value="{listMapping.sharepointListIdentifier}" />
+				</td>
+				<td><f:form.textfield property="typo3ListTitle" value="{listMapping.typo3ListTitle}" /></td>
+			</tr>
+		</table>
+
+		<br/>
+
+		<h3>Attributes</h3>
+
+		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+			<tr class="t3-row-header">
+				<td>
+					<f:if condition="{newAttributes}">
+						<f:form.checkbox id="activateAll" name="" value="0" />
+					</f:if>
+				</td>
+				<td>Sharepoint field name</td>
+				<td>Sharepoint field type</td>
+				<td>TYPO3 field name</td>
+			</tr>
+			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
+				<tr class="db_list_normal">
+					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
+					    <f:if condition="{0: attribute.status} == {0: 2}">
+							<f:be.buttons.icon uri="" icon="status-dialog-error" title="Error: this attribute is no longer available on sharepoint site" />
+						</f:if>
+						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{listMapping : listMapping, listMappingAttribute: attribute}')}" icon="actions-edit-delete" title="Delete attribute" />
+					</td>
+					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>
+					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
+						<f:form.textfield name="attributeData[available][{attribute.uid}][typo3FieldName]" value="{attribute.typo3FieldName}" />
+						<f:form.hidden name="attributeData[available][{attribute.uid}][__identity]" value="{attribute.uid}"/>
+					</td>
+				</tr>
+			</f:for>
+
+			<f:if condition="{newAttributes}">
+				<f:for each="{newAttributes}" as="attribute" iteration="attributeIterator">
+					<tr class="db_list_normal">
+						<td style="background-color:#b6e6b6!important;"><f:form.checkbox value="1" name="attributeData[new][{attributeIterator.index}][activated]" /></td>
+						<td style="background-color:#b6e6b6!important;">{attribute.sharepointFieldName}<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+						<td style="background-color:#b6e6b6!important;">{attribute.attributeType}<f:form.hidden name="attributeData[new][{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
+						<td style="background-color:#b6e6b6!important;"><f:form.textfield name="attributeData[new][{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointFieldName}" /></td>
+					</tr>
+				</f:for>
+			</f:if>
+
+		</table>
+
+		<br/>
+
+		<f:form.submit value="Save" />
+	</f:form>
+</f:section>
