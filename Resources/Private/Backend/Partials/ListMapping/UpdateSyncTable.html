@@ -5,11 +5,11 @@
 
 	<f:form action="update" name="listMapping" object="{listMapping}" >
 
-		<h3>List</h3>
+		<h3><f:translate id="header.list" /></h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
-				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list"/></td>
-				<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title"/></td>
+				<td><f:translate id="header.typo3ListTitle" /></td>
+				<td><f:translate id="header.sharepointListIdentifier" /></td>
 			</tr>
 			<tr class="db_list_normal">
 				<td>
@@ -22,8 +22,7 @@
 
 		<br/>
 
-		<h3>Attributes</h3>
-
+		<h3><f:translate id="attributes.header" /></h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
 				<td>
@@ -31,17 +30,17 @@
 						<f:form.checkbox id="activateAll" name="" value="0" />
 					</f:if>
 				</td>
-				<td>Sharepoint field name</td>
-				<td>Sharepoint field type</td>
-				<td>TYPO3 field name</td>
+				<td><f:translate id="column.header.sharepointFieldName" /></td>
+				<td><f:translate id="column.header.sharepointFieldType" /></td>
+				<td><f:translate id="column.header.typo3FieldName" /></td>
 			</tr>
 			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
 					    <f:if condition="{0: attribute.status} == {0: 2}">
-							<f:be.buttons.icon uri="" icon="status-dialog-error" title="Error: this attribute is no longer available on sharepoint site" />
+							<f:be.buttons.icon uri="" icon="status-dialog-error" title="{f:translate(key:'description.deprecatedAttribute')}" />
 						</f:if>
-						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{listMapping : listMapping, listMappingAttribute: attribute}')}" icon="actions-edit-delete" title="Delete attribute" />
+						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{listMapping : listMapping, listMappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
 					</td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>
@@ -67,6 +66,6 @@
 
 		<br/>
 
-		<f:form.submit value="Save" />
+		<f:form.submit value="{f:translate(key:'button.save')}" />
 	</f:form>
 </f:section>

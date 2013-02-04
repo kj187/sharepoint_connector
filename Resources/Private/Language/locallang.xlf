@@ -4,6 +4,12 @@
 		<header/>
 		<body>
 
+
+			<!-- TCA -->
+			<!--___________________________________________________________________________________________________-->
+
+
+			<!-- ListMapping -->
 			<trans-unit id="tx_sharepointconnector_domain_model_listmapping">
 				<source>ListMapping</source>
 			</trans-unit>
@@ -20,6 +26,7 @@
 				<source>Attributes</source>
 			</trans-unit>
 			
+			<!-- ListMappingAttribute -->
 			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute">
 				<source>ListMappingAttribute</source>
 			</trans-unit>
@@ -32,7 +39,79 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.attribute_type">
 				<source>Attribute type</source>
 			</trans-unit>
-			
+
+
+			<!-- Sharepoint Mapping Module -->
+			<!--___________________________________________________________________________________________________-->
+
+			<trans-unit id="mappings">
+				<source>Mappings</source>
+			</trans-unit>
+			<trans-unit id="header.typo3ListTitle">
+				<source>TYPO3 list title</source>
+			</trans-unit>
+			<trans-unit id="header.list">
+				<source>List</source>
+			</trans-unit>
+			<trans-unit id="header.sharepointListIdentifier">
+				<source>Internal Sharepoint list identifier</source>
+			</trans-unit>
+			<trans-unit id="description.edit.mapping">
+				<source>Edit this mapping</source>
+			</trans-unit>
+			<trans-unit id="description.delete.mapping">
+				<source>Delete this mapping</source>
+			</trans-unit>
+			<trans-unit id="description.delete.attribute">
+				<source>Delete this attribute</source>
+			</trans-unit>
+			<trans-unit id="list.header">
+				<source>Available Mappings</source>
+			</trans-unit>
+			<trans-unit id="edit.header">
+				<source>Edit Mapping</source>
+			</trans-unit>
+			<trans-unit id="sync.header">
+				<source>Sync Mapping</source>
+			</trans-unit>
+			<trans-unit id="new.listMapping">
+				<source>Add new ListMapping</source>
+			</trans-unit>
+			<trans-unit id="new.step1.header">
+				<source>Add new ListMapping - Step 1</source>
+			</trans-unit>
+			<trans-unit id="new.step2.header">
+				<source>Add new ListMapping - Step 2</source>
+			</trans-unit>
+			<trans-unit id="button.next">
+				<source>Next</source>
+			</trans-unit>
+			<trans-unit id="button.save">
+				<source>Save</source>
+			</trans-unit>
+			<trans-unit id="attributes.header">
+				<source>Attributes</source>
+			</trans-unit>
+			<trans-unit id="column.header.sharepointFieldName">
+				<source>Sharepoint field name</source>
+			</trans-unit>
+			<trans-unit id="column.header.typo3FieldName">
+				<source>TYPO3 field name</source>
+			</trans-unit>
+			<trans-unit id="column.header.sharepointFieldType">
+				<source>Sharepoint field type</source>
+			</trans-unit>
+			<trans-unit id="description.sync">
+				<source>Syncronize this mapping with current Sharepoint list</source>
+			</trans-unit>
+
+			<trans-unit id="description.deprecatedAttribute">
+				<source>Error: this attribute is no longer available on sharepoint site</source>
+			</trans-unit>
+
+
+
+
 		</body>
 	</file>
 </xliff>

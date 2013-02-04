@@ -1,8 +1,8 @@
 <f:section name="content">
 	<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 		<tr class="t3-row-header">
-			<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.typo3_list_title" /></td>
-			<td><f:translate key="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier" /></td>
+			<td><f:translate id="header.typo3ListTitle" /></td>
+			<td><f:translate id="header.sharepointListIdentifier" /></td>
 			<td> </td>
 		</tr>
 
@@ -11,15 +11,15 @@
 				<td>{listMapping.typo3ListTitle}</td>
 				<td>{listMapping.sharepointListIdentifier}</td>
 				<td>
-					<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:'{listMapping : listMapping}')}" icon="actions-document-open" title="Edit ListMapping" />
-					<f:be.buttons.icon uri="{f:uri.action(action:'deleteList', arguments:'{listMapping : listMapping}')}" icon="actions-edit-delete" title="Delete ListMapping" />
-					<f:be.buttons.icon uri="{f:uri.action(action:'sync', arguments:{listMapping:listMapping})}" icon="actions-document-synchronize" title="Sync list" />
+					<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:'{listMapping : listMapping}')}" icon="actions-document-open" title="{f:translate(key:'description.edit.mapping')}" />
+					<f:be.buttons.icon uri="{f:uri.action(action:'deleteList', arguments:'{listMapping : listMapping}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.mapping')}" />
+					<f:render partial="DocHeader" section="sync" arguments="{listMapping: listMapping}" />
 				</td>
 			</tr>
 		</f:for>
 		<tr>
 			<td colspan="3">
-				<f:count subject="{listMappings}" /> Mappings
+				<f:count subject="{listMappings}" /> <f:translate id="mappings" />
 			</td>
 		</tr>
 	</table>

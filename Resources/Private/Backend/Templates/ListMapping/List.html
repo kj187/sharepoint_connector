@@ -7,7 +7,7 @@
 <f:section name="content">
 	<f:flashMessages />
 
-	<h3>Listing for ListMapping</h3>
+	<h3><f:translate id="list.header" /></h3>
 
 	<f:if condition="<f:count subject='{listMappings}' /> > 20">
 		<f:then>
@@ -23,7 +23,7 @@
 	<br/>
 
 	<f:be.buttons.icon uri="{f:uri.action(action:'newStep1')}" icon="actions-document-new" title="New ListMapping" />
-	<f:link.action action="newStep1">New ListMapping</f:link.action> <br/>
+	<f:link.action action="newStep1"><f:translate id="new.listMapping" /></f:link.action><br/>
 
 
 </f:section>
