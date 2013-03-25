@@ -25,6 +25,8 @@ namespace Aijko\SharepointConnector\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Aijko\SharepointConnector\Utility\Logger;
+
 /**
  * Mapping class
  *
@@ -46,6 +48,10 @@ class Mapping {
 			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
 				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
 			}
+		}
+
+		if (!count($returnData)) {
+			Logger::error('Could not map user data with mapping (list: ' . $listMapping->getTypo3ListTitle() . ':Uid:' . $listMapping->getUid() . '). Cant find matched attributes.', $data);
 		}
 
 		return $returnData;

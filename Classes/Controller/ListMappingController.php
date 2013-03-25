@@ -26,6 +26,8 @@ namespace Aijko\SharepointConnector\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Aijko\SharepointConnector\Utility\Logger;
+
 /**
  * Sharepoint Mapping Controller
  *
