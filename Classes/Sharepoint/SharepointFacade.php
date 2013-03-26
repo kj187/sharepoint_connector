@@ -108,7 +108,7 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	 * @param array $postData
 	 */
 	public function addToList($listMappingUid, array $postData) {
-		$listMapping = $this->listMappingRepository->findByIdentifier($listMappingUid);
+		$listMapping = $this->listMappingRepository->findByUid($listMappingUid);
 		$mapping = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Utility\\Mapping');
 		$data = $mapping->convertToSharepointData($listMapping, $postData);
 		if (!count($data)) {
