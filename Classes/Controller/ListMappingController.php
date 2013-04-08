@@ -73,8 +73,8 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	 * Initialize action method
 	 */
 	public function initializeAction() {
-		$sharepointRESTApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\Rest\\Sharepoint');
-		$this->sharepointApi = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Sharepoint\\SharepointFacade', $sharepointRESTApi);
+		$sharepointRESTApi = $this->objectManager->get('Aijko\\SharepointConnector\\Sharepoint\\Rest\\Sharepoint');
+		$this->sharepointApi = $this->objectManager->get('Aijko\\SharepointConnector\\Sharepoint\\SharepointFacade', $sharepointRESTApi);
 	}
 
 	/**
