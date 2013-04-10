@@ -92,8 +92,9 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	}
 
 	/**
-	 * @param $listTitle
+	 * @param string $listTitle
 	 * @param array $data
+	 * @return mixed
 	 */
 	public function addToList($listTitle, array $data) {
 		$this->prependUrl = '/' . $listTitle;
