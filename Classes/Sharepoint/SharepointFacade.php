@@ -37,7 +37,6 @@ namespace Aijko\SharepointConnector\Sharepoint;
  *
  *
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\SharepointInterface {
 
@@ -51,6 +50,12 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	 * @inject
 	 */
 	protected $listMappingRepository;
+
+	/**
+	 * @var \Aijko\SharepointConnector\Domain\Repository\ListMappingAttributeRepository
+	 * @inject
+	 */
+	protected $listMappingAttributeRepository;
 
 	/**
 	 * @var \Aijko\SharepointConnector\Sharepoint\SharepointInterface $sharepointApi
@@ -102,10 +107,31 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	}
 
 	/**
+	 * Add to multiple lists
+	 *
+	 * 		$data[LIST_NAME][ATTRIBUTE_NAME]
+	 *
+	 * @param array $data
+	 *
+	 * @return array
+	 */
+	public function addToMultipleLists(array $data) {
+		if (is_array($data) && count($data)>0) {
+			foreach ($data as $listMappingUid => $postData) {
+				$void[$listMappingUid] = $this->addToList($listMappingUid, $postData);
+			}
+		}
+
+		return $void;
+	}
+
+	/**
 	 * Add a new entry to a specific list
 	 *
-	 * @param string $listMappingUid
+	 * @param integer $listMappingUid
 	 * @param array $postData
+	 *
+	 * @return FALSE|xml
 	 */
 	public function addToList($listMappingUid, array $postData) {
 		$listMapping = $this->listMappingRepository->findByUid($listMappingUid);
@@ -120,6 +146,24 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 		}
 
 		return $this->sharepointApi->addToList($listMapping->getSharepointListIdentifier(), $data);
+	}
+
+	/**
+	 * @param integer $uid
+	 *
+	 * @return object
+	 */
+	public function getListMappingByUid($uid) {
+		return $this->listMappingRepository->findByUid($uid);
+	}
+
+	/**
+	 * @param integer $uid
+	 *
+	 * @return object
+	 */
+	public function getListMappingAttributeByUid($uid) {
+		return $this->listMappingAttributeRepository->findByUid($uid);
 	}
 
 }
