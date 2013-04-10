@@ -47,17 +47,6 @@ interface SharepointInterface {
 	public function getListAttributes($listTitle);
 
 	/**
-	 * Add to multiple lists
-	 *
-	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
-	 *
-	 * @param array $data
-	 * @return array
-	 * @api
-	 */
-	public function addToMultipleLists(array $data);
-
-	/**
 	 * @param $listTitle
 	 * @param array $data
 	 * @return FALSE|xml
@@ -65,19 +54,6 @@ interface SharepointInterface {
 	 */
 	public function addToList($listTitle, array $data);
 
-	/**
-	 * @param integer $uid
-	 * @return object
-	 * @api
-	 */
-	public function getListMappingByUid($uid);
-
-	/**
-	 * @param integer $uid
-	 * @return object
-	 * @api
-	 */
-	public function getListMappingAttributeByUid($uid);
 }
 
 ?>
