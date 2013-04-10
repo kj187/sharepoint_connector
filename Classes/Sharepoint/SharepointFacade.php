@@ -71,6 +71,7 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	/**
 	 * Initialize all necessary settings
 	 *
+	 * @param array $typoscriptConfiguration
 	 * @return array
 	 */
 	protected function initializeSettings(array $typoscriptConfiguration) {
@@ -109,10 +110,9 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	/**
 	 * Add to multiple lists
 	 *
-	 * 		$data[LIST_NAME][ATTRIBUTE_NAME]
+	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
 	 *
 	 * @param array $data
-	 *
 	 * @return array
 	 */
 	public function addToMultipleLists(array $data) {
@@ -130,7 +130,6 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 	 *
 	 * @param integer $listMappingUid
 	 * @param array $postData
-	 *
 	 * @return FALSE|xml
 	 */
 	public function addToList($listMappingUid, array $postData) {
@@ -150,7 +149,6 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 
 	/**
 	 * @param integer $uid
-	 *
 	 * @return object
 	 */
 	public function getListMappingByUid($uid) {
@@ -159,7 +157,6 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 
 	/**
 	 * @param integer $uid
-	 *
 	 * @return object
 	 */
 	public function getListMappingAttributeByUid($uid) {

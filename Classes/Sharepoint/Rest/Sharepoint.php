@@ -33,7 +33,6 @@ namespace Aijko\SharepointConnector\Sharepoint\Rest;
  * TODO - XML caching
  *
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInterface {
 

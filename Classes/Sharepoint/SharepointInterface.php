@@ -30,7 +30,6 @@ namespace Aijko\SharepointConnector\Sharepoint;
  * Sharepoint interface
  *
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 interface SharepointInterface {
 
@@ -48,12 +47,37 @@ interface SharepointInterface {
 	public function getListAttributes($listTitle);
 
 	/**
+	 * Add to multiple lists
+	 *
+	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
+	 *
+	 * @param array $data
+	 * @return array
+	 * @api
+	 */
+	public function addToMultipleLists(array $data);
+
+	/**
 	 * @param $listTitle
 	 * @param array $data
+	 * @return FALSE|xml
 	 * @api
 	 */
 	public function addToList($listTitle, array $data);
 
+	/**
+	 * @param integer $uid
+	 * @return object
+	 * @api
+	 */
+	public function getListMappingByUid($uid);
+
+	/**
+	 * @param integer $uid
+	 * @return object
+	 * @api
+	 */
+	public function getListMappingAttributeByUid($uid);
 }
 
 ?>
