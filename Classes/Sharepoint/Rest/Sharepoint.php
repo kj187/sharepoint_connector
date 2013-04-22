@@ -26,6 +26,8 @@ namespace Aijko\SharepointConnector\Sharepoint\Rest;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Aijko\SharepointConnector\Utility\Logger;
+
 /**
  * Sharepoint API Service
  *
@@ -90,7 +92,6 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 
 		if ($json) {
 			curl_setopt($this->curlObject, CURLOPT_HTTPHEADER, array(
-				#'Content-type: application/json',
 				'Accept: application/json'
 			));
 			$returnValue = json_decode(curl_exec($this->curlObject));
@@ -99,8 +100,9 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 		}
 
 		if (isset($returnValue->error)) {
-			// TODO error handling
-			die($returnValue->error->message->value);
+			Logger::error('cURL execution: execute', array(
+				'value' => $returnValue->error->message->value,
+			));
 		}
 
 		return $returnValue;
@@ -115,7 +117,14 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 		$this->prependUrl = '/' . $listTitle;
 		curl_setopt($this->curlObject, CURLOPT_POST, TRUE);
 		curl_setopt($this->curlObject, CURLOPT_POSTFIELDS, json_encode($data));
-		return $this->execute();
+		$result = $this->execute();
+
+		Logger::info('cURL execution: addToList', array(
+			'curlInfo' => curl_getinfo($this->curlObject),
+			'data' => $data
+		));
+
+		return $result;
 	}
 
 	/**
@@ -140,6 +149,11 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 		$this->prependUrl = $this->settings['rest']['oData']['metadata'];
 		curl_setopt($this->curlObject, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute(FALSE);
+
+		Logger::info('cURL execution: getListAttributes', array(
+			'listTitle' => $listTitle,
+			'curlInfo' => curl_getinfo($this->curlObject),
+		));
 
 		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');
 		$domDocument->loadXML($returnValue);

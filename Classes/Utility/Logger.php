@@ -45,9 +45,9 @@ class Logger {
 						'logFile' => 'typo3temp/logs/sharepoint_connector/error.log',
 					),
 				),
-				\TYPO3\CMS\Core\Log\LogLevel::DEBUG => array(
+				\TYPO3\CMS\Core\Log\LogLevel::INFO => array(
 					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
-						'logFile' => 'typo3temp/logs/sharepoint_connector/debug.log',
+						'logFile' => 'typo3temp/logs/sharepoint_connector/info.log',
 					),
 				),
 				\TYPO3\CMS\Core\Log\LogLevel::EMERGENCY => array(
@@ -68,27 +68,31 @@ class Logger {
 	}
 
 	/**
-	 * Error
+	 * @param $methodName
+	 * @param $arguments
 	 *
-	 * @param string $message
-	 * @param array $data
-	 * @return string A speaking message
+	 * @return \TYPO3\CMS\Core\Log\Logger
 	 */
-	static public function error($message, $data = array()) {
+	public static function __callStatic($methodName, $arguments) {
 		self::initializeConfiguration();
-		return self::getLogger()->error($message, $data);
-	}
-
-	/**
-	 * Debug
-	 *
-	 * @param string $message
-	 * @param array $data
-	 * @return string A speaking message
-	 */
-	static public function debug($message, $data = array()) {
-		self::initializeConfiguration();
-		return self::getLogger()->debug($message, $data);
+		switch ($methodName) {
+			case 'emergency':
+				return self::getLogger()->emergency($arguments[0], $arguments[1]);
+			case 'alert':
+				return self::getLogger()->alert($arguments[0], $arguments[1]);
+			case 'critical':
+				return self::getLogger()->critical($arguments[0], $arguments[1]);
+			case 'error':
+				return self::getLogger()->error($arguments[0], $arguments[1]);
+			case 'warning':
+				return self::getLogger()->warning($arguments[0], $arguments[1]);
+			case 'notice':
+				return self::getLogger()->notice($arguments[0], $arguments[1]);
+			case 'info':
+				return self::getLogger()->info($arguments[0], $arguments[1]);
+			case 'debug':
+				return self::getLogger()->debug($arguments[0], $arguments[1]);
+		}
 	}
 
 }

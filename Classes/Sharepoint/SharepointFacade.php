@@ -26,6 +26,8 @@ namespace Aijko\SharepointConnector\Sharepoint;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use \Aijko\SharepointConnector\Utility\Logger;
+
 /**
  * Sharepoint facade
  *
@@ -137,10 +139,6 @@ class SharepointFacade implements \Aijko\SharepointConnector\Sharepoint\Sharepoi
 		$mapping = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('Aijko\\SharepointConnector\\Utility\\Mapping');
 		$data = $mapping->convertToSharepointData($listMapping, $postData);
 		if (!count($data)) {
-			// TODO error handling/dev log
-			#\t3lib_utility_Debug::debug($postData, '$postData');
-			#\t3lib_utility_Debug::debug($data, '$data');
-
 			return FALSE;
 		}
 

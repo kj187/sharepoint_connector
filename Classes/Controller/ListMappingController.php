@@ -128,10 +128,12 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	 * @return void
 	 */
 	public function createAction(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping, array $attributeData) {
+		$attributesArray = array();
 		if (count($attributeData) > 0) {
 			foreach ($attributeData as $attributes) {
 				if ($attributes['activated']) {
 					unset($attributes['activated']);
+					$attributesArray[] = $attributes;
 					$listMappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\ListMappingAttribute');
 					$listMapping->addAttribute($listMappingAttribute);
 				}
@@ -140,6 +142,14 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
 		$this->listMappingRepository->add($listMapping);
 		$this->flashMessageContainer->add('Your ListMapping "' . $listMapping->getSharepointListIdentifier() . '" was added.');
+
+		Logger::info('ListMapping: createAction', array(
+			'listMappingUid' => $listMapping->getUid(),
+			'sharepointListIdentifier' => $listMapping->getSharepointListIdentifier(),
+			'typo3ListTitle' => $listMapping->getTypo3ListTitle(),
+			'attributes' => json_encode($attributesArray),
+		));
+
 		$this->redirect('list');
 	}
 
@@ -163,8 +173,10 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	 * @return void
 	 */
 	public function updateAction(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping, array $attributeData) {
+		$attributesArray = array();
 		if (count($attributeData['available']) > 0) {
 			foreach ($attributeData['available'] as $key => $attributes) {
+				$attributesArray[] = $attributes;
 				$listMappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\ListMappingAttribute');
 				$this->listMappingAttributeRepository->update($listMappingAttribute);
 			}
@@ -173,6 +185,7 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 			foreach ($attributeData['new'] as $key => $attributes) {
 				if ($attributes['activated']) {
 					unset($attributes['activated']);
+					$attributesArray[] = $attributes;
 					$listMappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\ListMappingAttribute');
 					$listMapping->addAttribute($listMappingAttribute);
 				}
@@ -181,6 +194,14 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 
 		$this->listMappingRepository->update($listMapping);
 		$this->flashMessageContainer->add('Your ListMapping "' . $listMapping->getSharepointListIdentifier() . '" was updated.');
+
+		Logger::info('ListMapping: updateAction', array(
+			'listMappingUid' => $listMapping->getUid(),
+			'sharepointListIdentifier' => $listMapping->getSharepointListIdentifier(),
+			'typo3ListTitle' => $listMapping->getTypo3ListTitle(),
+			'attributes' => json_encode($attributesArray),
+		));
+
 		$this->redirect('edit', NULL, NULL, array('listMapping' => $listMapping));
 	}
 
@@ -193,6 +214,13 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	public function deleteListAction(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping) {
 		$this->listMappingRepository->remove($listMapping);
 		$this->flashMessageContainer->add('Your ListMapping "' . $listMapping->getSharepointListIdentifier() . '" was deleted.');
+
+		Logger::info('ListMapping: deleteAction', array(
+			'listMappingUid' => $listMapping->getUid(),
+			'sharepointListIdentifier' => $listMapping->getSharepointListIdentifier(),
+			'typo3ListTitle' => $listMapping->getTypo3ListTitle(),
+		));
+
 		$this->redirect('list');
 	}
 
@@ -206,6 +234,15 @@ class ListMappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCont
 	public function deleteAttributeAction(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping, \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute $listMappingAttribute) {
 		$this->listMappingAttributeRepository->remove($listMappingAttribute);
 		$this->flashMessageContainer->add('Your attribute "' . $listMappingAttribute->getTypo3FieldName() . '" was deleted.');
+
+		Logger::info('ListMapping: deleteAttributeAction', array(
+			'listMappingUid' => $listMapping->getUid(),
+			'sharepointListIdentifier' => $listMapping->getSharepointListIdentifier(),
+			'typo3ListTitle' => $listMapping->getTypo3ListTitle(),
+			'attributeUid' => $listMappingAttribute->getUid(),
+			'attribute' => $listMappingAttribute->getTypo3FieldName()
+		));
+
 		$this->redirect('edit', NULL, NULL, array('listMapping' => $listMapping));
 	}
 
