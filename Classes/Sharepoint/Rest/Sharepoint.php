@@ -61,10 +61,8 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	 */
 	public function initialize(array $settings) {
 		$this->settings = $settings;
-		#\t3lib_utility_Debug::debug($settings);
 
 		$this->curlObject = curl_init();
-
 		curl_setopt($this->curlObject, CURLOPT_HEADER, FALSE);
 		curl_setopt($this->curlObject, CURLOPT_AUTOREFERER, TRUE);
 		curl_setopt($this->curlObject, CURLOPT_FRESH_CONNECT, TRUE);
@@ -82,13 +80,30 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	}
 
 	/**
+	 * @param bool $json
 	 * @return mixed
 	 */
-	protected function execute() {
+	protected function execute($json = TRUE) {
 		$url = $this->settings['url'] . $this->settings['rest']['serviceUrl'] . $this->prependUrl;
 		curl_setopt($this->curlObject, CURLOPT_HTTPHEADER, $this->settings['rest']['httpHeader']);
 		curl_setopt($this->curlObject, CURLOPT_URL, $url);
-		return curl_exec($this->curlObject);
+
+		if ($json) {
+			curl_setopt($this->curlObject, CURLOPT_HTTPHEADER, array(
+				#'Content-type: application/json',
+				'Accept: application/json'
+			));
+			$returnValue = json_decode(curl_exec($this->curlObject));
+		} else {
+			$returnValue = curl_exec($this->curlObject);
+		}
+
+		if (isset($returnValue->error)) {
+			// TODO error handling
+			die($returnValue->error->message->value);
+		}
+
+		return $returnValue;
 	}
 
 	/**
@@ -109,14 +124,9 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	public function getAllLists() {
 		curl_setopt($this->curlObject, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute();
-
-		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');
-		$domDocument->loadXML($returnValue);
-
-		$collections = $domDocument->getElementsByTagName('collection');
 		$lists = array();
-		foreach ($collections as $collection) {
-			$lists[$collection->getAttribute('href')] = $collection->nodeValue;
+		foreach ($returnValue->d->EntitySets as $list) {
+			$lists[$list] = $list;
 		}
 
 		return $lists;
@@ -129,7 +139,7 @@ class Sharepoint implements \Aijko\SharepointConnector\Sharepoint\SharepointInte
 	public function getListAttributes($listTitle) {
 		$this->prependUrl = $this->settings['rest']['oData']['metadata'];
 		curl_setopt($this->curlObject, CURLOPT_HTTPGET, TRUE);
-		$returnValue = $this->execute();
+		$returnValue = $this->execute(FALSE);
 
 		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');
 		$domDocument->loadXML($returnValue);
