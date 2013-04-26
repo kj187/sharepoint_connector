@@ -59,20 +59,20 @@ class ListItemRepository {
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::getAllLists
-	 * @return array
+	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAllListItems
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function getAllLists() {
-		return $this->sharepointHandle->getAllLists();
+	public function findAllListItems() {
+		return $this->sharepointHandle->findAllListItems();
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::getListAttributes
-	 * @param string $listTitle
-	 * @return array
+	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAttributesByIdentifier
+	 * @param string $identifier
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function findAttributesByIdentifier($listTitle) {
-		return $this->sharepointHandle->getListAttributes($listTitle);
+	public function findAttributesByIdentifier($identifier) {
+		return $this->sharepointHandle->findAttributesByIdentifier($identifier);
 	}
 
 	/**

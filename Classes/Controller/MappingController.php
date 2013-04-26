@@ -87,19 +87,21 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function newStep1Action(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem = NULL) {
-		$allLists = $this->sharepointListItemRepository->getAllLists();
+		$listItems = $this->sharepointListItemRepository->findAllListItems();
 
 		// remove lists that are still available
 		$availableMappingListItems = $this->mappingListItemRepository->findAll();
 		if (count($availableMappingListItems) > 0) {
 			foreach ($availableMappingListItems as $key => $item) {
-				if (array_key_exists($item->getSharepointListIdentifier(), $allLists)) {
-					unset($allLists[$item->getSharepointListIdentifier()]);
+				foreach ($listItems as $listItem) {
+					if ($listItem->getSharepointListIdentifier() == $item->getSharepointListIdentifier()) {
+						$listItems->detach($listItem);
+					}
 				}
 			}
 		}
 
-		$this->view->assign('allLists', $allLists);
+		$this->view->assign('listItems', $listItems);
 		$this->view->assign('mappingListItem', $mappingListItem);
 	}
 
@@ -117,10 +119,9 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$sharepointAttributes = $this->sharepointListItemRepository->findAttributesByIdentifier($mappingListItem->getSharepointListIdentifier());
-		if (count($sharepointAttributes) > 0) {
-			foreach ($sharepointAttributes[$mappingListItem->getSharepointListIdentifier()] as $sharepointListAttributes) {
-				$listMappingAttribute = $this->propertyMapper->convert($sharepointListAttributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-				$mappingListItem->addAttribute($listMappingAttribute);
+		if ($sharepointAttributes) {
+			foreach ($sharepointAttributes as $sharepointAttribute) {
+				$mappingListItem->addAttribute($sharepointAttribute);
 			}
 		}
 
@@ -265,13 +266,13 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$sharepointAttributes = $this->sharepointListItemRepository->findAttributesByIdentifier($mappingListItem->getSharepointListIdentifier());
 		$typo3ListAttributes = $mappingListItem->getAttributes();
 
-		if (count($sharepointAttributes) > 0) {
+		if ($sharepointAttributes) {
 			// Sync sharepoint attributes with TYPO3 attributes
-			$newAttributes = $this->getNewAttributes($sharepointAttributes[$mappingListItem->getSharepointListIdentifier()], $typo3ListAttributes);
+			$newAttributes = $this->getNewAttributes($sharepointAttributes, $typo3ListAttributes);
 			$this->view->assign('newAttributes', $newAttributes);
 
 			// Sync TYPO3 attributes with sharepoint attributes to find out all deprecated attributes
-			$this->syncAttributesToFindDeprecatedAttributes($sharepointAttributes[$mappingListItem->getSharepointListIdentifier()], $typo3ListAttributes);
+			$this->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
 		}
 
 		$this->view->assign('mappingListItem', $mappingListItem);
@@ -280,23 +281,22 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * Sync attributes to find new attributes
 	 *
-	 * @param array $sharepointListAttributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
 	 * @return array
 	 */
-	protected function getNewAttributes(array $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
+	protected function getNewAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
 		$newAttributes = array();
 		foreach ($sharepointListAttributes as $sharepointListAttribute) {
-			$mappingAttribute = $this->propertyMapper->convert($sharepointListAttribute, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
 
 			// check if sharepoint attribute exist in typo3 list mapping
 			foreach ($typo3ListAttributes as $typo3Attribute) {
-				if ($typo3Attribute->getSharepointFieldName() == $mappingAttribute->getSharepointFieldName()) {
+				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
 					continue 2; // if attribute exist, continue with next sharepoint attribute
 				}
 			}
 
-			$newAttributes[] = $mappingAttribute;
+			$newAttributes[] = $sharepointListAttribute;
 		}
 
 		return $newAttributes;
@@ -305,15 +305,14 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * Sync attributes to find deprecated attributes
 	 *
-	 * @param array $sharepointListAttributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
 	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
 	 * @return void
 	 */
-	protected function syncAttributesToFindDeprecatedAttributes(array $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
+	protected function syncAttributesToFindDeprecatedAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
 		foreach ($typo3ListAttributes as $typo3Attribute) {
 			foreach ($sharepointListAttributes as $sharepointListAttribute) {
-				$mappingAttribute = $this->propertyMapper->convert($sharepointListAttribute, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-				if ($typo3Attribute->getSharepointFieldName() == $mappingAttribute->getSharepointFieldName()) {
+				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
 					continue 2; // if attribute exist, continue with next typo3 attribute
 				}
 			}

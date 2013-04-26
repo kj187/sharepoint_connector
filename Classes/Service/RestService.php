@@ -28,7 +28,7 @@ namespace Aijko\SharepointConnector\Service;
 use \Aijko\SharepointConnector\Utility\Logger;
 
 /**
- * Sharepoint API - REST Service
+ * Sharepoint API REST Service
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
@@ -67,11 +67,27 @@ class RestService implements \Aijko\SharepointConnector\Service\SharepointInterf
 	protected $configuration;
 
 	/**
+	 * The new, completely rewritten property mapper since Extbase 1.4.
+	 *
+	 * @var \TYPO3\CMS\Extbase\Property\PropertyMapper
+	 */
+	protected $propertyMapper;
+
+	/**
+	 * @param \TYPO3\CMS\Extbase\Property\PropertyMapper $propertyMapper
+	 * @return void
+	 */
+	public function injectPropertyMapper(\TYPO3\CMS\Extbase\Property\PropertyMapper $propertyMapper) {
+		$this->propertyMapper = $propertyMapper;
+	}
+
+	/**
 	 *
 	 */
 	public function __construct() {
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->configuration = $this->objectManager->get('Aijko\\SharepointConnector\\Configuration\\ConfigurationManager')->getConfiguration();
+		$configuration = $this->objectManager->get('Aijko\\SharepointConnector\\Configuration\\ConfigurationManager')->getConfiguration();
+		$this->configuration = $configuration['settings']['sharepointServer'];
 
 		$this->curlHandler = curl_init();
 		curl_setopt($this->curlHandler, CURLOPT_HEADER, FALSE);
@@ -119,78 +135,61 @@ class RestService implements \Aijko\SharepointConnector\Service\SharepointInterf
 	/**
 	 * Get all available sharepoint lists
 	 *
-	 * TODO use a own Model instead
-	 *
-	 * return array(
-	 * 		'listTitle' => 'listTitle',
-	 * 		[...],
-	 * )
-	 *
-	 * @return array
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function getAllLists() {
+	public function findAllListItems() {
 		curl_setopt($this->curlHandler, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute();
-		$lists = array();
+
+		$listItems = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		foreach ($returnValue->d->EntitySets as $list) {
-			$lists[$list] = $list;
+			$listItem = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\ListItem');
+			$listItem->setSharepointListIdentifier($list);
+			$listItems->attach($listItem);
 		}
 
-		return $lists;
+		return $listItems;
 	}
 
 	/**
 	 * Get all available attributes from a specific sharepoint list
 	 *
-	 * TODO use a own Model instead
-	 *
-	 * return array(
-	 * 		'listTitle' => array(
-	 *			'0' => array(
-	 * 				'sharepointFieldName' => 'xxx',
-	 * 				'attributeType' => 'xxx',
-	 * 				'typo3FieldName' => '',
-	 * 			),
-	 * 			[...]
-	 * 		),
-	 * 		[...]
-	 * )
-	 *
-	 * @param string $listTitle
-	 * @return array
+	 * @param string $identifier
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function getListAttributes($listTitle) {
+	public function findAttributesByIdentifier($identifier) {
 		$this->prependUrl = $this->configuration['rest']['oData']['metadata'];
 		curl_setopt($this->curlHandler, CURLOPT_HTTPGET, TRUE);
 		$returnValue = $this->execute(FALSE);
 
 		Logger::info('cURL execution: getListAttributes', array(
-			'listTitle' => $listTitle,
+			'listTitle' => $identifier,
 			'curlInfo' => curl_getinfo($this->curlHandler),
 		));
 
 		$domDocument = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('DOMDocument');
 		$domDocument->loadXML($returnValue);
 
-		$propertyData = array();
+		$attributes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		foreach ($domDocument->getElementsByTagName('EntityType') as $node) {
 
 			// TODO create dynamic listname
 			// <EntitySet Name="TestList" EntityType="Microsoft.SharePoint.DataService.TestListItem"/>
 			// <EntityType Name="TestListItem">
 
-			if ($listTitle . 'Item' == $node->getAttribute('Name')) {
-				$propertyIterator = 0;
+			if ($identifier . 'Item' == $node->getAttribute('Name')) {
 				foreach ($node->getElementsByTagName('Property') as $propertyNode) {
-					$propertyData[$listTitle][$propertyIterator]['sharepointFieldName'] = $propertyNode->getAttribute('Name');
-					$propertyData[$listTitle][$propertyIterator]['attributeType'] = $propertyNode->getAttribute('Type');
-					$propertyData[$listTitle][$propertyIterator]['typo3FieldName'] = '';
-					$propertyIterator++;
+					$attribute = array();
+					$attribute['sharepointFieldName'] = $propertyNode->getAttribute('Name');
+					$attribute['attributeType'] = $propertyNode->getAttribute('Type');
+					$attribute['typo3FieldName'] = '';
+
+					$attributes->attach($this->propertyMapper->convert($attribute, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute'));
 				}
 			}
 		}
 
-		return $propertyData;
+		return $attributes;
 	}
 
 	/**

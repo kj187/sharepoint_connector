@@ -43,34 +43,17 @@ interface SharepointInterface {
 	/**
 	 * Get all available sharepoint lists
 	 *
-	 * return array(
-	 * 		'listTitle' => 'listTitle',
-	 * 		[...],
-	 * )
-	 *
-	 * @return array
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function getAllLists();
+	public function findAllListItems();
 
 	/**
 	 * Get all available attributes from a specific sharepoint list
 	 *
-	 * return array(
-	 * 		'listTitle' => array(
-	 *			'0' => array(
-	 * 				'sharepointFieldName' => 'xxx',
-	 * 				'attributeType' => 'xxx',
-	 * 				'typo3FieldName' => '',
-	 * 			),
-	 * 			[...]
-	 * 		),
-	 * 		[...]
-	 * )
-	 *
-	 * @param string $listTitle
-	 * @return array
+	 * @param string $identifier
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function getListAttributes($listTitle);
+	public function findAttributesByIdentifier($identifier);
 
 	/**
 	 * @param string $listTitle
@@ -78,7 +61,6 @@ interface SharepointInterface {
 	 * @return mixed
 	 */
 	public function addRecordToList($listTitle, array $data);
-
 
 }
 
