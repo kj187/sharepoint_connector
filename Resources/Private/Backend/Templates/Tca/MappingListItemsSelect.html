@@ -1,0 +1,11 @@
+<f:if condition="{items}">
+	<f:then>
+		<select name="{data.itemFormElName}" onchange="{fieldChangeFunc}" {data.onFocus}>
+		<option value=""></option>
+		<f:for each="{items}" as="item">
+			<option value="{item.uid}" {f:if(condition: '{data.itemFormElValue} == {item.uid}', then: 'selected="selected"')}>{item.typo3ListTitle}</option>
+		</f:for>
+		</select>
+	</f:then>
+	<f:else>No lists available</f:else>
+</f:if>

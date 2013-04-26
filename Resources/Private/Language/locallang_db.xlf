@@ -4,29 +4,29 @@
 		<header/>
 		<body>
 
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem">
 				<source>List Mapping</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
 				<source>Sharepoint List Identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.typo3_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
 				<source>Typo3 List Title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.attributes">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.attributes">
 				<source>Attributes</source>
 			</trans-unit>
 
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute">
 				<source>List Mapping Attribute</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.sharepoint_field_name">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_field_name">
 				<source>Sharepoint Field Name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.typo3_field_name">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name">
 				<source>Typo3 Field Name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.attribute_type">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.attribute_type">
 				<source>Attribute Type</source>
 			</trans-unit>
 

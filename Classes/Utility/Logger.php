@@ -4,8 +4,7 @@ namespace Aijko\SharepointConnector\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *
  *  All rights reserved
  *
@@ -27,7 +26,11 @@ namespace Aijko\SharepointConnector\Utility;
  ***************************************************************/
 
 /**
+ * Logger
  *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
+ * @package sharepoint_connector
  */
 class Logger {
 
@@ -49,12 +52,6 @@ class Logger {
 					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
 						'logFile' => 'typo3temp/logs/sharepoint_connector/info.log',
 					),
-				),
-				\TYPO3\CMS\Core\Log\LogLevel::EMERGENCY => array(
-					'\\Aijko\\SharepointConnector\\Log\\Writer\\Email' => array(
-						'recipient' => 'julian.kleinhans@aijko.de',
-						'sender' => 'julian.kleinhans@aijko.de',
-					)
 				)
 			)
 		);

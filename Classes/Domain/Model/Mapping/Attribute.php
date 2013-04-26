@@ -1,11 +1,10 @@
 <?php
-namespace Aijko\SharepointConnector\Domain\Model;
+namespace Aijko\SharepointConnector\Domain\Model\Mapping;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de>
  *  
  *  All rights reserved
  *
@@ -27,13 +26,13 @@ namespace Aijko\SharepointConnector\Domain\Model;
  ***************************************************************/
 
 /**
+ * Attribute model
  *
- *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	const STATUS_DEPRECATED 	= 2;
 
@@ -62,6 +61,11 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	 * @var string
 	 */
 	protected $status;
+
+	/**
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
+	 */
+	protected $listItem;
 
 	/**
 	 * Returns the sharepointFieldName
@@ -133,5 +137,20 @@ class ListMappingAttribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntit
 	public function getStatus() {
 		return $this->status;
 	}
+
+	/**
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem
+	 */
+	public function setListItem($listItem) {
+		$this->listItem = $listItem;
+	}
+
+	/**
+	 * @return \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
+	 */
+	public function getListItem() {
+		return $this->listItem;
+	}
+
 }
 ?>

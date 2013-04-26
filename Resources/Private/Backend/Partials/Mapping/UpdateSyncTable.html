@@ -3,7 +3,7 @@
 
 	<f:render partial="FormErrors" />
 
-	<f:form action="update" name="listMapping" object="{listMapping}" >
+	<f:form action="update" name="mappingListItem" object="{mappingListItem}" >
 
 		<h3><f:translate id="header.list" /></h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
@@ -13,10 +13,10 @@
 			</tr>
 			<tr class="db_list_normal">
 				<td>
-					{listMapping.sharepointListIdentifier}
-					<f:form.hidden property="sharepointListIdentifier" value="{listMapping.sharepointListIdentifier}" />
+					{mappingListItem.sharepointListIdentifier}
+					<f:form.hidden property="sharepointListIdentifier" value="{mappingListItem.sharepointListIdentifier}" />
 				</td>
-				<td><f:form.textfield property="typo3ListTitle" value="{listMapping.typo3ListTitle}" /></td>
+				<td><f:form.textfield property="typo3ListTitle" value="{mappingListItem.typo3ListTitle}" /></td>
 			</tr>
 		</table>
 
@@ -34,13 +34,13 @@
 				<td><f:translate id="column.header.sharepointFieldType" /></td>
 				<td><f:translate id="column.header.typo3FieldName" /></td>
 			</tr>
-			<f:for each="{listMapping.attributes}" as="attribute" iteration="attributeIterator">
+			<f:for each="{mappingListItem.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
 					    <f:if condition="{0: attribute.status} == {0: 2}">
 							<f:be.buttons.icon uri="" icon="status-dialog-error" title="{f:translate(key:'description.deprecatedAttribute')}" />
 						</f:if>
-						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{listMapping : listMapping, listMappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
+						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{mappingListItem : mappingListItem, mappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
 					</td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>

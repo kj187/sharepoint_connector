@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *
  *  All rights reserved
  *
@@ -28,30 +28,31 @@ namespace Aijko\SharepointConnector\Utility;
 use \Aijko\SharepointConnector\Utility\Logger;
 
 /**
- * Mapping class
+ * Mapping
  *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class Mapping {
 
 	/**
-	 * Convert data from array to correct sharepoint data array
+	 * Convert users post-data-array to correct sharepoint data array
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem
 	 * @param array $data
 	 * @return array
 	 */
-	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\ListMapping $listMapping, array $data) {
+	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem, array $data) {
 		$returnData = array();
-		foreach ($listMapping->getAttributes() as $key => $attribute) {
+		foreach ($listItem->getAttributes() as $key => $attribute) {
 			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
 				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
 			}
 		}
 
 		if (!count($returnData)) {
-			Logger::error('Could not map user data with mapping (list: ' . $listMapping->getTypo3ListTitle() . ':Uid:' . $listMapping->getUid() . '). Cant find matched attributes.', $data);
+			Logger::error('Could not map user data with mapping (list: ' . $listItem->getTypo3ListTitle() . ':Uid:' . $listItem->getUid() . '). Cant find matched attributes.', $data);
 		}
 
 		return $returnData;

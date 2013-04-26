@@ -1,0 +1,26 @@
+<f:section name="content">
+	<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
+		<tr class="t3-row-header">
+			<td><f:translate id="header.typo3ListTitle" /></td>
+			<td><f:translate id="header.sharepointListIdentifier" /></td>
+			<td> </td>
+		</tr>
+
+		<f:for each="{mappingListItems}" as="mappingListItem">
+			<tr class="db_list_normal">
+				<td>{mappingListItem.typo3ListTitle}</td>
+				<td>{mappingListItem.sharepointListIdentifier}</td>
+				<td>
+					<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:'{mappingListItem : mappingListItem}')}" icon="actions-document-open" title="{f:translate(key:'description.edit.mapping')}" />
+					<f:be.buttons.icon uri="{f:uri.action(action:'deleteList', arguments:'{mappingListItem : mappingListItem}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.mapping')}" />
+					<f:render partial="DocHeader" section="sync" arguments="{mappingListItem: mappingListItem}" />
+				</td>
+			</tr>
+		</f:for>
+		<tr>
+			<td colspan="3">
+				<f:count subject="{mappingListItems}" /> <f:translate id="mappings" />
+			</td>
+		</tr>
+	</table>
+</f:section>

@@ -1,10 +1,35 @@
 <?php
+
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2013 aijko GmbH <info@aijko.de>
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
-	'ctrl' => $TCA['tx_sharepointconnector_domain_model_listmappingattribute']['ctrl'],
+$TCA['tx_sharepointconnector_domain_model_mapping_attribute'] = array(
+	'ctrl' => $TCA['tx_sharepointconnector_domain_model_mapping_attribute']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sharepoint_field_name, typo3_field_name, attribute_type',
 	),
@@ -37,8 +62,8 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sharepointconnector_domain_model_listmappingattribute',
-				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_listmappingattribute.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_listmappingattribute.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_sharepointconnector_domain_model_mapping_attribute',
+				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_mapping_attribute.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_mapping_attribute.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -95,7 +120,7 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 		),
 		'sharepoint_field_name' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.sharepoint_field_name',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_field_name',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -105,7 +130,7 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 		),
 		'typo3_field_name' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.typo3_field_name',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -114,7 +139,7 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 		),
 		'attribute_type' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmappingattribute.attribute_type',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_attribute.attribute_type',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -122,7 +147,7 @@ $TCA['tx_sharepointconnector_domain_model_listmappingattribute'] = array(
 				'readOnly' => 1
 			),
 		),
-		'listmapping' => array(
+		'list_item' => array(
 			'config' => array(
 				'type' => 'passthrough',
 			),
