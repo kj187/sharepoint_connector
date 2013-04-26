@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Tests;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *  			Erik Frister <ef@aijko.de>, aijko GmbH
  *  			
  *  All rights reserved
@@ -29,15 +29,9 @@ namespace Aijko\SharepointConnector\Tests;
 /**
  * Test case for class \Aijko\SharepointConnector\Domain\Model\ListMapping.
  *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- * @package TYPO3
- * @subpackage Sharepoint Connector
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
- * @author Erik Frister <ef@aijko.de>
+ * @copyright Copyright belongs to the respective authors
+ * @package sharepoint_connector
  */
 class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**

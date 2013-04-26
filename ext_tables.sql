@@ -1,7 +1,7 @@
 #
-# Table structure for table 'tx_sharepointconnector_domain_model_listmapping'
+# Table structure for table 'tx_sharepointconnector_domain_model_mapping_listitem'
 #
-CREATE TABLE tx_sharepointconnector_domain_model_listmapping (
+CREATE TABLE tx_sharepointconnector_domain_model_mapping_listitem (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -41,14 +41,14 @@ CREATE TABLE tx_sharepointconnector_domain_model_listmapping (
 );
 
 #
-# Table structure for table 'tx_sharepointconnector_domain_model_listmappingattribute'
+# Table structure for table 'tx_sharepointconnector_domain_model_mapping_attribute'
 #
-CREATE TABLE tx_sharepointconnector_domain_model_listmappingattribute (
+CREATE TABLE tx_sharepointconnector_domain_model_mapping_attribute (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	listmapping int(11) unsigned DEFAULT '0' NOT NULL,
+	list_item int(11) unsigned DEFAULT '0' NOT NULL,
 
 	sharepoint_field_name varchar(255) DEFAULT '' NOT NULL,
 	typo3_field_name varchar(255) DEFAULT '' NOT NULL,
@@ -82,14 +82,5 @@ CREATE TABLE tx_sharepointconnector_domain_model_listmappingattribute (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
-
-);
-
-#
-# Table structure for table 'tx_sharepointconnector_domain_model_listmappingattribute'
-#
-CREATE TABLE tx_sharepointconnector_domain_model_listmappingattribute (
-
-	listmapping  int(11) unsigned DEFAULT '0' NOT NULL,
 
 );

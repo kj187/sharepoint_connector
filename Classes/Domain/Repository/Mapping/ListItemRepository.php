@@ -1,11 +1,10 @@
 <?php
-namespace Aijko\SharepointConnector\Domain\Repository;
+namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *  
  *  All rights reserved
  *
@@ -27,13 +26,14 @@ namespace Aijko\SharepointConnector\Domain\Repository;
  ***************************************************************/
 
 /**
+ * ListItem mapping repository
  *
- *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class ListMappingRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class ListItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
+
 ?>

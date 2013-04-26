@@ -1,11 +1,10 @@
 <?php
-namespace Aijko\SharepointConnector\Domain\Model;
+namespace Aijko\SharepointConnector\Domain\Model\Mapping;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *  
  *  All rights reserved
  *
@@ -27,13 +26,13 @@ namespace Aijko\SharepointConnector\Domain\Model;
  ***************************************************************/
 
 /**
+ * ListItem model
  *
- *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
-class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class ListItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Internal Sharepoint list identifier
@@ -54,14 +53,12 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Attributes
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\ListMappingAttribute>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute>
 	 */
 	protected $attributes;
 
 	/**
-	 * __construct
 	 *
-	 * @return ListMapping
 	 */
 	public function __construct() {
 		//Do not remove the next line: It would break the functionality
@@ -123,27 +120,27 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Adds a ListMappingAttribute
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute $attribute
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $attribute
 	 * @return void
 	 */
-	public function addAttribute(\Aijko\SharepointConnector\Domain\Model\ListMappingAttribute $attribute) {
+	public function addAttribute(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $attribute) {
 		$this->attributes->attach($attribute);
 	}
 
 	/**
 	 * Removes a ListMappingAttribute
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute $attributeToRemove The ListMappingAttribute to be removed
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $attributeToRemove The ListMappingAttribute to be removed
 	 * @return void
 	 */
-	public function removeAttribute(\Aijko\SharepointConnector\Domain\Model\ListMappingAttribute $attributeToRemove) {
+	public function removeAttribute(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $attributeToRemove) {
 		$this->attributes->detach($attributeToRemove);
 	}
 
 	/**
 	 * Returns the attributes
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\ListMappingAttribute> $attributes
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute> $attributes
 	 */
 	public function getAttributes() {
 		return $this->attributes;
@@ -152,7 +149,7 @@ class ListMapping extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the attributes
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\ListMappingAttribute> $attributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute> $attributes
 	 * @return void
 	 */
 	public function setAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $attributes) {

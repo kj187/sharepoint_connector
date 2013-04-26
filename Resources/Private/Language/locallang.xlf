@@ -10,33 +10,33 @@
 
 
 			<!-- ListMapping -->
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem">
 				<source>ListMapping</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list">
 				<source>Sharepoint list</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.typo3_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
 				<source>TYPO3 list title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmapping.attributes">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.attributes">
 				<source>Attributes</source>
 			</trans-unit>
 			
 			<!-- ListMappingAttribute -->
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute">
 				<source>ListMappingAttribute</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.sharepoint_field_name">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_field_name">
 				<source>Internal Sharepoint field name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.typo3_field_name">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name">
 				<source>TYPO3 field name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_listmappingattribute.attribute_type">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.attribute_type">
 				<source>Attribute type</source>
 			</trans-unit>
 

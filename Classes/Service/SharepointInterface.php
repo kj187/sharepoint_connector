@@ -1,11 +1,10 @@
 <?php
-namespace Aijko\SharepointConnector\Sharepoint;
+namespace Aijko\SharepointConnector\Service;
 
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 Julian Kleinhans <julian.kleinhans@aijko.de>, aijko GmbH
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2013 aijko GmbH <info@aijko.de
  *
  *  All rights reserved
  *
@@ -27,32 +26,59 @@ namespace Aijko\SharepointConnector\Sharepoint;
  ***************************************************************/
 
 /**
- * Sharepoint interface
+ * Sharepoint API Service Interface
  *
+ * @author Julian Kleinhans <julian.kleinhans@aijko.de>
+ * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
 interface SharepointInterface {
 
 	/**
+	 * @param bool $json
+	 * @return mixed
+	 */
+	public function execute($json = TRUE);
+
+	/**
+	 * Get all available sharepoint lists
+	 *
+	 * return array(
+	 * 		'listTitle' => 'listTitle',
+	 * 		[...],
+	 * )
+	 *
 	 * @return array
-	 * @api
 	 */
 	public function getAllLists();
 
 	/**
-	* @param $listTitle
-	* @return array
-	* @api
-	*/
+	 * Get all available attributes from a specific sharepoint list
+	 *
+	 * return array(
+	 * 		'listTitle' => array(
+	 *			'0' => array(
+	 * 				'sharepointFieldName' => 'xxx',
+	 * 				'attributeType' => 'xxx',
+	 * 				'typo3FieldName' => '',
+	 * 			),
+	 * 			[...]
+	 * 		),
+	 * 		[...]
+	 * )
+	 *
+	 * @param string $listTitle
+	 * @return array
+	 */
 	public function getListAttributes($listTitle);
 
 	/**
-	 * @param $listTitle
+	 * @param string $listTitle
 	 * @param array $data
-	 * @return FALSE|xml
-	 * @api
+	 * @return mixed
 	 */
-	public function addToList($listTitle, array $data);
+	public function addRecordToList($listTitle, array $data);
+
 
 }
 

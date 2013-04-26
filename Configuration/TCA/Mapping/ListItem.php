@@ -1,10 +1,35 @@
 <?php
+
+/***************************************************************
+ *  Copyright notice
+ *
+ *  (c) 2013 aijko GmbH <info@aijko.de>
+ *
+ *  All rights reserved
+ *
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
+
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
-	'ctrl' => $TCA['tx_sharepointconnector_domain_model_listmapping']['ctrl'],
+$TCA['tx_sharepointconnector_domain_model_mapping_listitem'] = array(
+	'ctrl' => $TCA['tx_sharepointconnector_domain_model_mapping_listitem']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, sharepoint_list_identifier, typo3_list_title, attributes',
 	),
@@ -37,8 +62,8 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sharepointconnector_domain_model_listmapping',
-				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_listmapping.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_listmapping.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_sharepointconnector_domain_model_mapping_listitem',
+				'foreign_table_where' => 'AND tx_sharepointconnector_domain_model_mapping_listitem.pid=###CURRENT_PID### AND tx_sharepointconnector_domain_model_mapping_listitem.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -95,7 +120,7 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 		),
 		'sharepoint_list_identifier' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping.sharepoint_list_identifier',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -105,7 +130,7 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 		),
 		'typo3_list_title' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping.typo3_list_title',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -114,11 +139,11 @@ $TCA['tx_sharepointconnector_domain_model_listmapping'] = array(
 		),
 		'attributes' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_listmapping.attributes',
+			'label' => 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_listitem.attributes',
 			'config' => array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_sharepointconnector_domain_model_listmappingattribute',
-				'foreign_field' => 'listmapping',
+				'foreign_table' => 'tx_sharepointconnector_domain_model_mapping_attribute',
+				'foreign_field' => 'list_item',
 				'maxitems'      => 9999,
 				'appearance' => array(
 					'collapseAll' => 1,

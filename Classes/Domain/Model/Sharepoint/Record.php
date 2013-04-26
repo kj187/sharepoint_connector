@@ -1,17 +1,17 @@
 <?php
-namespace Aijko\SharepointConnector\Tests;
+namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2013 aijko GmbH <info@aijko.de
- *  			Erik Frister <ef@aijko.de>, aijko GmbH
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
+ *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -26,32 +26,52 @@ namespace Aijko\SharepointConnector\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Sharepoint_connector_Controller_ListMappingController.
+ * Record model
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class ListMappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
-	/**
-	 * @var 
-	 */
-	protected $fixture;
-
-	public function setUp() {
-		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\ListMapping();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
-	}
+class Record {
 
 	/**
-	 * @test
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
+	protected $listItem;
+
+	/**
+	 * @var array
+	 */
+	protected $data;
+
+	/**
+	 * @param array $data
+	 */
+	public function setData($data) {
+		$this->data = $data;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getData() {
+		return $this->data;
+	}
+
+	/**
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem
+	 */
+	public function setListItem($listItem) {
+		$this->listItem = $listItem;
+	}
+
+	/**
+	 * @return \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
+	 */
+	public function getListItem() {
+		return $this->listItem;
 	}
 
 }
+
 ?>
