@@ -34,7 +34,7 @@ use \Aijko\SharepointConnector\Utility\Logger;
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class RestService implements \Aijko\SharepointConnector\Service\SharepointInterface {
+class RestService extends \Aijko\SharepointConnector\Service\AbstractService implements \Aijko\SharepointConnector\Service\SharepointInterface {
 
 	/**
 	 * @var resource a cURL handle on success, false on errors.
@@ -47,47 +47,15 @@ class RestService implements \Aijko\SharepointConnector\Service\SharepointInterf
 	protected $httpHeader = array();
 
 	/**
-	 * @var array
-	 */
-	protected $settings = array();
-
-	/**
 	 * @var string
 	 */
 	protected $prependUrl = '';
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
-	 */
-	protected $objectManager;
-
-	/**
-	 * @var array
-	 */
-	protected $configuration;
-
-	/**
-	 * The new, completely rewritten property mapper since Extbase 1.4.
-	 *
-	 * @var \TYPO3\CMS\Extbase\Property\PropertyMapper
-	 */
-	protected $propertyMapper;
-
-	/**
-	 * @param \TYPO3\CMS\Extbase\Property\PropertyMapper $propertyMapper
-	 * @return void
-	 */
-	public function injectPropertyMapper(\TYPO3\CMS\Extbase\Property\PropertyMapper $propertyMapper) {
-		$this->propertyMapper = $propertyMapper;
-	}
-
-	/**
 	 *
 	 */
 	public function __construct() {
-		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$configuration = $this->objectManager->get('Aijko\\SharepointConnector\\Configuration\\ConfigurationManager')->getConfiguration();
-		$this->configuration = $configuration['settings']['sharepointServer'];
+		parent::__construct();
 
 		$this->curlHandler = curl_init();
 		curl_setopt($this->curlHandler, CURLOPT_HEADER, FALSE);
