@@ -9,14 +9,14 @@
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
 				<td><f:translate id="header.typo3ListTitle" /></td>
-				<td><f:translate id="header.sharepointListIdentifier" /></td>
+				<td><f:translate id="header.sharepointListTitle" /></td>
 			</tr>
 			<tr class="db_list_normal">
+				<td><f:form.textfield property="typo3ListTitle" value="{mappingListItem.typo3ListTitle}" /></td>
 				<td>
-					{mappingListItem.sharepointListIdentifier}
+					<a title="{mappingListItem.sharepointListIdentifier}">{mappingListItem.sharepointListTitle}</a>
 					<f:form.hidden property="sharepointListIdentifier" value="{mappingListItem.sharepointListIdentifier}" />
 				</td>
-				<td><f:form.textfield property="typo3ListTitle" value="{mappingListItem.typo3ListTitle}" /></td>
 			</tr>
 		</table>
 

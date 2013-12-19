@@ -19,6 +19,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_title">
+				<source>Sharepoint list title</source>
+			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
 				<source>TYPO3 list title</source>
 			</trans-unit>
@@ -55,6 +58,9 @@
 			</trans-unit>
 			<trans-unit id="header.sharepointListIdentifier">
 				<source>Internal Sharepoint list identifier</source>
+			</trans-unit>
+			<trans-unit id="header.sharepointListTitle">
+				<source>Sharepoint list title</source>
 			</trans-unit>
 			<trans-unit id="description.edit.mapping">
 				<source>Edit this mapping</source>

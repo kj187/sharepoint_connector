@@ -9,3 +9,6 @@ sharepointServer.password = demo
 
   # cat=basic; type=boolean; label=NT LAN Manager (NTLM): Use NTLM Authentication Protocol Specification
 sharepointServer.security.ntlm = 0
+
+  # cat=basic; type=string; label=WSDL File Path: WSDL file for this set of lists, without TopLevelDomain ( /_vti_bin/Lists.asmx?WSDL )
+sharepointServer.soap.wsdlpath = /_vti_bin/Lists.asmx?WSDL

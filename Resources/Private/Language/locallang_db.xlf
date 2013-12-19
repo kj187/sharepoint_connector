@@ -10,6 +10,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
 				<source>Sharepoint List Identifier</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_title">
+				<source>Sharepoint List Title</source>
+			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
 				<source>Typo3 List Title</source>
 			</trans-unit>

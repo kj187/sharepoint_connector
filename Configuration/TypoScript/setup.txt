@@ -33,39 +33,16 @@ module.tx_sharepointconnector {
 	}
 
 	settings {
-
 		sharepointServer {
 
-			#
-			# REST Service settings
-			#
-
-			rest {
-				serviceUrl = /_vti_bin/ListData.svc
-				httpHeader {
-					default {
-						0 = content-type:application/xml
-					}
-					json {
-						0 = content-type:application/json
-						1 = accept: application/json
-					}
-				}
-
-				oData {
-					metadata = /$metadata
-				}
-			}
-
 		}
-
 	}
 }
 
 config.tx_extbase {
 	objects {
 		Aijko\SharepointConnector\Service\SharepointInterface {
-			className = Aijko\SharepointConnector\Service\RestService
+			className = Aijko\SharepointConnector\Service\SoapService
 		}
 	}
 }
