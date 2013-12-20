@@ -60,10 +60,19 @@ class ListItemRepository {
 
 	/**
 	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAllListItems
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	 * @return object
 	 */
 	public function findAllListItems() {
 		return $this->sharepointHandle->findAllListItems();
+	}
+
+	/**
+	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findListByIdentifier
+	 * @param string $identifier
+	 * @return array
+	 */
+	public function findListByIdentifier($identifier) {
+		return $this->sharepointHandle->findListByIdentifier($identifier);
 	}
 
 	/**
@@ -84,23 +93,24 @@ class ListItemRepository {
 	 * @return array
 	 */
 	public function addToMultipleLists(array $data) {
+		$result = array();
 		if (is_array($data) && count($data)>0) {
 			foreach ($data as $listItemUid => $postData) {
 				$record = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\Record');
 				$record->setListItem($this->mappingListItemRepository->findByUid($listItemUid));
 				$record->setData($postData);
-				$void[$listItemUid] = $this->addRecordToList($record);
+				$result[$listItemUid] = $this->addRecordToList($record);
 			}
 		}
 
-		return $void;
+		return $result;
 	}
 
 	/**
 	 * Add a new entry to a specific list
 	 *
 	 * @param \Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record
-	 * @return void
+	 * @return array | object
 	 */
 	public function addRecordToList(\Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record) {
 		$mapping = $this->objectManager->get('Aijko\\SharepointConnector\\Utility\\Mapping');

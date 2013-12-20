@@ -94,7 +94,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		if (count($availableMappingListItems) > 0) {
 			foreach ($availableMappingListItems as $key => $item) {
 				foreach ($listItems as $listItem) {
-					if ($listItem->getSharepointListIdentifier() == $item->getSharepointListIdentifier()) {
+					if ($listItem->id == $item->getSharepointListIdentifier()) {
 						$listItems->detach($listItem);
 					}
 				}
@@ -125,6 +125,9 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			}
 		}
 
+		$sharepointList = $this->sharepointListItemRepository->findListByIdentifier($mappingListItem->getSharepointListIdentifier());
+		$mappingListItem->setSharepointListTitle($sharepointList->title);
+
 		$this->view->assign('mappingListItem', $mappingListItem);
 	}
 
@@ -151,11 +154,12 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$this->mappingListItemRepository->add($mappingListItem);
-		$this->flashMessageContainer->add('Your ListMapping "' . $mappingListItem->getSharepointListIdentifier() . '" was added.');
+		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was added.');
 
-		Logger::info('ListMapping: createAction', array(
+		Logger::info('MappingController:createAction', array(
 			'listMappingUid' => $mappingListItem->getUid(),
 			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
+			'sharepointListTitle' => $mappingListItem->getSharepointListTitle(),
 			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
 			'attributes' => json_encode($attributesArray),
 		));
@@ -203,9 +207,9 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 
 		$this->mappingListItemRepository->update($mappingListItem);
-		$this->flashMessageContainer->add('Your ListMapping "' . $mappingListItem->getSharepointListIdentifier() . '" was updated.');
+		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was updated.');
 
-		Logger::info('ListMapping: updateAction', array(
+		Logger::info('MappingController:updateAction', array(
 			'listMappingUid' => $mappingListItem->getUid(),
 			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
 			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
@@ -223,9 +227,9 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function deleteListAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem) {
 		$this->mappingListItemRepository->remove($mappingListItem);
-		$this->flashMessageContainer->add('Your ListMapping "' . $mappingListItem->getSharepointListIdentifier() . '" was deleted.');
+		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was deleted.');
 
-		Logger::info('ListMapping: deleteAction', array(
+		Logger::info('MappingController:deleteAction', array(
 			'listMappingUid' => $mappingListItem->getUid(),
 			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
 			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
@@ -245,7 +249,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$this->mappingAttributeRepository->remove($mappingAttribute);
 		$this->flashMessageContainer->add('Your attribute "' . $mappingAttribute->getTypo3FieldName() . '" was deleted.');
 
-		Logger::info('ListMapping: deleteAttributeAction', array(
+		Logger::info('MappingController:deleteAttributeAction', array(
 			'listMappingUid' => $mappingListItem->getUid(),
 			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
 			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),

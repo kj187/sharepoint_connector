@@ -43,6 +43,13 @@ class ListItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sharepointListIdentifier;
 
 	/**
+	 * Sharepoint list title
+	 *
+	 * @var \string
+	 */
+	protected $sharepointListTitle;
+
+	/**
 	 * TYPO3 list title
 	 *
 	 * @var \string
@@ -96,6 +103,20 @@ class ListItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSharepointListIdentifier($sharepointListIdentifier) {
 		$this->sharepointListIdentifier = $sharepointListIdentifier;
+	}
+
+	/**
+	 * @param string $sharepointListTitle
+	 */
+	public function setSharepointListTitle($sharepointListTitle) {
+		$this->sharepointListTitle = $sharepointListTitle;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSharepointListTitle() {
+		return $this->sharepointListTitle;
 	}
 
 	/**

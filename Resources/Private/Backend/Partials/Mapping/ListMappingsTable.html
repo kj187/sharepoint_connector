@@ -2,14 +2,14 @@
 	<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 		<tr class="t3-row-header">
 			<td><f:translate id="header.typo3ListTitle" /></td>
-			<td><f:translate id="header.sharepointListIdentifier" /></td>
+			<td><f:translate id="header.sharepointListTitle" /></td>
 			<td> </td>
 		</tr>
 
 		<f:for each="{mappingListItems}" as="mappingListItem">
 			<tr class="db_list_normal">
 				<td>{mappingListItem.typo3ListTitle}</td>
-				<td>{mappingListItem.sharepointListIdentifier}</td>
+				<td><a title="{mappingListItem.sharepointListIdentifier}">{mappingListItem.sharepointListTitle}</a></td>
 				<td>
 					<f:be.buttons.icon uri="{f:uri.action(action:'edit', arguments:'{mappingListItem : mappingListItem}')}" icon="actions-document-open" title="{f:translate(key:'description.edit.mapping')}" />
 					<f:be.buttons.icon uri="{f:uri.action(action:'deleteList', arguments:'{mappingListItem : mappingListItem}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.mapping')}" />

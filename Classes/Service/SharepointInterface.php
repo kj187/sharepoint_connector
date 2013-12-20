@@ -35,17 +35,19 @@ namespace Aijko\SharepointConnector\Service;
 interface SharepointInterface {
 
 	/**
-	 * @param bool $json
-	 * @return mixed
-	 */
-	public function execute($json = TRUE);
-
-	/**
 	 * Get all available sharepoint lists
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function findAllListItems();
+
+	/**
+	 * Get a list by a specific sharepoint identifier
+	 *
+	 * @param string $identifier
+	 * @return array
+	 */
+	public function findListByIdentifier($identifier);
 
 	/**
 	 * Get all available attributes from a specific sharepoint list

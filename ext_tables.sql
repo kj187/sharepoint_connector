@@ -7,6 +7,7 @@ CREATE TABLE tx_sharepointconnector_domain_model_mapping_listitem (
 	pid int(11) DEFAULT '0' NOT NULL,
 
 	sharepoint_list_identifier varchar(255) DEFAULT '' NOT NULL,
+	sharepoint_list_title varchar(255) DEFAULT '' NOT NULL,
 	typo3_list_title varchar(255) DEFAULT '' NOT NULL,
 	attributes int(11) unsigned DEFAULT '0' NOT NULL,
 
