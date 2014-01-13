@@ -1,8 +1,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2013 aijko GmbH <info@aijko.de
- *  Erik Frister <ef@aijko.de>, aijko GmbH
+ *  (c) 2014 AIJKO GmbH <info@aijko.de
  *
  *  All rights reserved
  *
