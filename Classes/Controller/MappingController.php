@@ -272,59 +272,16 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		if ($sharepointAttributes) {
 			// Sync sharepoint attributes with TYPO3 attributes
-			$newAttributes = $this->getNewAttributes($sharepointAttributes, $typo3ListAttributes);
+			$newAttributes = $this->mappingAttributeRepository->findAllNewAttributes($sharepointAttributes, $typo3ListAttributes);
 			$this->view->assign('newAttributes', $newAttributes);
 
 			// Sync TYPO3 attributes with sharepoint attributes to find out all deprecated attributes
-			$this->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
+			$this->mappingAttributeRepository->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
 		}
 
 		$this->view->assign('mappingListItem', $mappingListItem);
 	}
 
-	/**
-	 * Sync attributes to find new attributes
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
-	 * @return array
-	 */
-	protected function getNewAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
-		$newAttributes = array();
-		foreach ($sharepointListAttributes as $sharepointListAttribute) {
-
-			// check if sharepoint attribute exist in typo3 list mapping
-			foreach ($typo3ListAttributes as $typo3Attribute) {
-				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
-					continue 2; // if attribute exist, continue with next sharepoint attribute
-				}
-			}
-
-			$newAttributes[] = $sharepointListAttribute;
-		}
-
-		return $newAttributes;
-	}
-
-	/**
-	 * Sync attributes to find deprecated attributes
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
-	 * @return void
-	 */
-	protected function syncAttributesToFindDeprecatedAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
-		foreach ($typo3ListAttributes as $typo3Attribute) {
-			foreach ($sharepointListAttributes as $sharepointListAttribute) {
-				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
-					continue 2; // if attribute exist, continue with next typo3 attribute
-				}
-			}
-
-			$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_DEPRECATED);
-			$this->mappingAttributeRepository->update($typo3Attribute);
-		}
-	}
-
 }
+
 ?>

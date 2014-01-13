@@ -34,6 +34,50 @@ namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
  */
 class AttributeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
+	/**
+	 * Sync attributes to find new attributes
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
+	 * @return array
+	 */
+	public function findAllNewAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
+		$newAttributes = array();
+		foreach ($sharepointListAttributes as $sharepointListAttribute) {
+
+			// check if sharepoint attribute exist in typo3 list mapping
+			foreach ($typo3ListAttributes as $typo3Attribute) {
+				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
+					continue 2; // if attribute exist, continue with next sharepoint attribute
+				}
+			}
+
+			$newAttributes[] = $sharepointListAttribute;
+		}
+
+		return $newAttributes;
+	}
+
+	/**
+	 * Sync attributes to find deprecated attributes
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
+	 * @return void
+	 */
+	public function syncAttributesToFindDeprecatedAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
+		foreach ($typo3ListAttributes as $typo3Attribute) {
+			foreach ($sharepointListAttributes as $sharepointListAttribute) {
+				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
+					continue 2; // if attribute exist, continue with next typo3 attribute
+				}
+			}
+
+			$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_DEPRECATED);
+			$this->update($typo3Attribute);
+		}
+	}
+
 }
 
 ?>
