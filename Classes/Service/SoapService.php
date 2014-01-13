@@ -37,7 +37,7 @@ use \Aijko\SharepointConnector\Utility\Logger;
 class SoapService extends \Aijko\SharepointConnector\Service\AbstractService implements \Aijko\SharepointConnector\Service\SharepointInterface {
 
 	/**
-	 * @var \SharePointAPI
+	 * @var \Thybag\SharepointApi
 	 */
 	protected $sharepointHandler = NULL;
 
