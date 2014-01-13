@@ -26,7 +26,6 @@ namespace Aijko\SharepointConnector\Service;
  ***************************************************************/
 
 use \Aijko\SharepointConnector\Utility\Logger;
-require_once \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sharepoint_connector') . 'Resources/Private/Php/PHP-SharePoint-Lists-API/SharePointAPI.php';
 
 /**
  * Sharepoint API SOAP Service
@@ -47,7 +46,7 @@ class SoapService extends \Aijko\SharepointConnector\Service\AbstractService imp
 	 */
 	public function __construct() {
 		parent::__construct();
-		$this->sharepointHandler = new \SharePointAPI($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
+		$this->sharepointHandler = new \Thybag\SharepointApi($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
 	}
 
 	/**

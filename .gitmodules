@@ -1,0 +1,3 @@
+[submodule "Resources/Private/Php/PHP-SharePoint-Lists-API"]
+	path = Resources/Private/Php/PHP-SharePoint-Lists-API
+	url = git@github.com:kj187/PHP-SharePoint-Lists-API.git
