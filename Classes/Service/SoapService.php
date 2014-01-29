@@ -54,15 +54,15 @@ class SoapService extends \Aijko\SharepointConnector\Service\AbstractService imp
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function findAllListItems() {
-		$listItems = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+	public function findAllLists() {
+		$lists = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->sharepointHandler->setReturnType('object');
-		$originalListItems = $this->sharepointHandler->getLists();
-		foreach ($originalListItems as $item) {
-			$listItems->attach($item);
+		$originalLists = $this->sharepointHandler->getLists();
+		foreach ($originalLists as $item) {
+			$lists->attach($item);
 		}
 
-		return $listItems;
+		return $lists;
 	}
 
 	/**
@@ -72,7 +72,7 @@ class SoapService extends \Aijko\SharepointConnector\Service\AbstractService imp
 	 * @return object | FALSE
 	 */
 	public function findListByIdentifier($identifier) {
-		$allLists = $this->findAllListItems();
+		$allLists = $this->findAllLists();
 		foreach ($allLists as $list) {
 			if ($list->id == $identifier) {
 				return $list;

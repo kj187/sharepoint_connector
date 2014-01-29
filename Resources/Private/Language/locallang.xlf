@@ -10,22 +10,22 @@
 
 
 			<!-- ListMapping -->
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists">
 				<source>ListMapping</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list">
 				<source>Sharepoint list</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list_identifier">
 				<source>Internal Sharepoint list identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list_title">
 				<source>Sharepoint list title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.typo3_list_title">
 				<source>TYPO3 list title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.attributes">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.attributes">
 				<source>Attributes</source>
 			</trans-unit>
 			

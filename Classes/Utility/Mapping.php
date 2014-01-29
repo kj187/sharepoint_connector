@@ -39,20 +39,20 @@ class Mapping {
 	/**
 	 * Convert users post-data-array to correct sharepoint data array
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @param array $data
 	 * @return array
 	 */
-	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem, array $data) {
+	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, array $data) {
 		$returnData = array();
-		foreach ($listItem->getAttributes() as $key => $attribute) {
+		foreach ($list->getAttributes() as $key => $attribute) {
 			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
 				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
 			}
 		}
 
 		if (!count($returnData)) {
-			Logger::error('Could not map user data with mapping (list: ' . $listItem->getTypo3ListTitle() . ':Uid:' . $listItem->getUid() . '). Cant find matched attributes.', $data);
+			Logger::error('Could not map user data with mapping (list: ' . $list->getTypo3ListTitle() . ':Uid:' . $list->getUid() . '). Cant find matched attributes.', $data);
 		}
 
 		return $returnData;

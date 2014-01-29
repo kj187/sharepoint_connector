@@ -1,7 +1,7 @@
 #
-# Table structure for table 'tx_sharepointconnector_domain_model_mapping_listitem'
+# Table structure for table 'tx_sharepointconnector_domain_model_mapping_lists'
 #
-CREATE TABLE tx_sharepointconnector_domain_model_mapping_listitem (
+CREATE TABLE tx_sharepointconnector_domain_model_mapping_lists (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -49,7 +49,7 @@ CREATE TABLE tx_sharepointconnector_domain_model_mapping_attribute (
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	list_item int(11) unsigned DEFAULT '0' NOT NULL,
+	list int(11) unsigned DEFAULT '0' NOT NULL,
 
 	sharepoint_field_name varchar(255) DEFAULT '' NOT NULL,
 	typo3_field_name varchar(255) DEFAULT '' NOT NULL,

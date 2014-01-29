@@ -35,9 +35,9 @@ namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
 class Record {
 
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
 	 */
-	protected $listItem;
+	protected $list;
 
 	/**
 	 * @var array
@@ -59,17 +59,17 @@ class Record {
 	}
 
 	/**
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $listItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 */
-	public function setListItem($listItem) {
-		$this->listItem = $listItem;
+	public function setList($list) {
+		$this->list = $list;
 	}
 
 	/**
-	 * @return \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem
+	 * @return \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
 	 */
-	public function getListItem() {
-		return $this->listItem;
+	public function getList() {
+		return $this->list;
 	}
 
 }

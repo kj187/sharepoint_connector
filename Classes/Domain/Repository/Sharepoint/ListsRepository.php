@@ -26,13 +26,13 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
  ***************************************************************/
 
 /**
- * ListItem sharepoint repository
+ * Lists sharepoint repository
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class ListItemRepository {
+class ListsRepository {
 
 	/**
 	 * @var \Aijko\SharepointConnector\Service\SharepointInterface
@@ -45,10 +45,10 @@ class ListItemRepository {
 	protected $objectManager;
 
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Repository\Mapping\ListItemRepository
+	 * @var \Aijko\SharepointConnector\Domain\Repository\Mapping\ListsRepository
 	 * @inject
 	 */
-	protected $mappingListItemRepository;
+	protected $mappingListsRepository;
 
 	/**
 	 *
@@ -59,11 +59,11 @@ class ListItemRepository {
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAllListItems
+	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAllLists
 	 * @return object
 	 */
-	public function findAllListItems() {
-		return $this->sharepointHandle->findAllListItems();
+	public function findAllLists() {
+		return $this->sharepointHandle->findAllLists();
 	}
 
 	/**
@@ -95,11 +95,11 @@ class ListItemRepository {
 	public function addToMultipleLists(array $data) {
 		$result = array();
 		if (is_array($data) && count($data)>0) {
-			foreach ($data as $listItemUid => $postData) {
+			foreach ($data as $listUid => $postData) {
 				$record = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\Record');
-				$record->setListItem($this->mappingListItemRepository->findByUid($listItemUid));
+				$record->setList($this->mappingListsRepository->findByUid($listUid));
 				$record->setData($postData);
-				$result[$listItemUid] = $this->addRecordToList($record);
+				$result[$listUid] = $this->addRecordToList($record);
 			}
 		}
 
@@ -114,13 +114,13 @@ class ListItemRepository {
 	 */
 	public function addRecordToList(\Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record) {
 		$mapping = $this->objectManager->get('Aijko\\SharepointConnector\\Utility\\Mapping');
-		$listItem = $record->getListItem();
-		$data = $mapping->convertToSharepointData($listItem, $record->getData());
+		$list = $record->getList();
+		$data = $mapping->convertToSharepointData($list, $record->getData());
 		if (!count($data)) {
 			return FALSE;
 		}
 
-		return $this->sharepointHandle->addRecordToList($listItem->getSharepointListIdentifier(), $data);
+		return $this->sharepointHandle->addRecordToList($list->getSharepointListIdentifier(), $data);
 	}
 
 }

@@ -9,14 +9,14 @@
 
 	<h3><f:translate id="list.header" /></h3>
 
-	<f:if condition="<f:count subject='{mappingListItems}' /> > 20">
+	<f:if condition="<f:count subject='{mappingLists}' /> > 20">
 		<f:then>
-			<f:be.widget.paginate objects="{mappingListItems}" as="paginatedListMappings" configuration="{itemsPerPage: 20, insertAbove: 1, insertBelow: 1}">
-				<f:render partial="Mapping/ListMappingsTable" section="content" arguments="{mappingListItems: paginatedListMappings}" />
+			<f:be.widget.paginate objects="{mappingLists}" as="paginatedListMappings" configuration="{itemsPerPage: 20, insertAbove: 1, insertBelow: 1}">
+				<f:render partial="Mapping/ListMappingsTable" section="content" arguments="{mappingLists: paginatedListMappings}" />
 			</f:be.widget.paginate>
 		</f:then>
 		<f:else>
-			<f:render partial="Mapping/ListMappingsTable" section="content" arguments="{mappingListItems: mappingListItems}" />
+			<f:render partial="Mapping/ListMappingsTable" section="content" arguments="{mappingLists: mappingLists}" />
 		</f:else>
 	</f:if>
 

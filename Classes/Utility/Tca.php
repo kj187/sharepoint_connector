@@ -72,15 +72,15 @@ class Tca {
 	 * @param \TYPO3\CMS\Backend\Form\FormEngine $formObject
 	 * @return string
 	 */
-	public function getMappingListItems(array $PA, \TYPO3\CMS\Backend\Form\FormEngine $formObject) {
-		$mappingListItemRepository = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Repository\\Mapping\\ListItemRepository');
+	public function getMappingLists(array $PA, \TYPO3\CMS\Backend\Form\FormEngine $formObject) {
+		$mappingListsRepository = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Repository\\Mapping\\ListsRepository');
 		$variables = array(
-			'items' => $mappingListItemRepository->findAll(),
+			'items' => $mappingListsRepository->findAll(),
 			'data' => $PA,
 			'fieldChangeFunc' => implode('', $PA['fieldChangeFunc'])
 		);
 
-		return $this->viewUtility->getStandaloneView($variables, 'Tca/MappingListItemsSelect.html')->render();
+		return $this->viewUtility->getStandaloneView($variables, 'Tca/MappingListsSelect.html')->render();
 	}
 
 	/**
@@ -90,15 +90,15 @@ class Tca {
 	 * @param \TYPO3\CMS\Backend\Form\FormEngine $formObject
 	 * @return string
 	 */
-	public function getMappingAttributesFromListItem(array $PA, \TYPO3\CMS\Backend\Form\FormEngine $formObject) {
+	public function getMappingAttributesFromLists(array $PA, \TYPO3\CMS\Backend\Form\FormEngine $formObject) {
 		$mappingAttributeRepository = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Repository\\Mapping\\AttributeRepository');
 		$variables = array(
-			'items' => $mappingAttributeRepository->findByListItem($PA['row']['sharepoint_list']),
+			'items' => $mappingAttributeRepository->findByList($PA['row']['sharepoint_list']),
 			'data' => $PA,
 			'fieldChangeFunc' => implode('', $PA['fieldChangeFunc'])
 		);
 
-		return $this->viewUtility->getStandaloneView($variables, 'Tca/MappingAttributesFromListItemSelect.html')->render();
+		return $this->viewUtility->getStandaloneView($variables, 'Tca/MappingAttributesFromListsSelect.html')->render();
 	}
 
 }

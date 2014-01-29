@@ -147,7 +147,7 @@ $TCA['tx_sharepointconnector_domain_model_mapping_attribute'] = array(
 				'readOnly' => 1
 			),
 		),
-		'list_item' => array(
+		'list' => array(
 			'config' => array(
 				'type' => 'passthrough',
 			),

@@ -37,10 +37,10 @@ use \Aijko\SharepointConnector\Utility\Logger;
 class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Repository\Mapping\ListItemRepository
+	 * @var \Aijko\SharepointConnector\Domain\Repository\Mapping\ListsRepository
 	 * @inject
 	 */
-	protected $mappingListItemRepository;
+	protected $mappingListsRepository;
 
 	/**
 	 * @var \Aijko\SharepointConnector\Domain\Repository\Mapping\AttributeRepository
@@ -49,10 +49,10 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	protected $mappingAttributeRepository;
 
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Repository\Sharepoint\ListItemRepository
+	 * @var \Aijko\SharepointConnector\Domain\Repository\Sharepoint\ListsRepository
 	 * @inject
 	 */
-	protected $sharepointListItemRepository;
+	protected $sharepointListsRepository;
 
 	/**
 	 * The new, completely rewritten property mapper since Extbase 1.4.
@@ -75,72 +75,72 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function listAction() {
-		$mappingListItems = $this->mappingListItemRepository->findAll();
-		$this->view->assign('mappingListItems', $mappingListItems);
+		$mappingLists = $this->mappingListsRepository->findAll();
+		$this->view->assign('mappingLists', $mappingLists);
 	}
 
 	/**
 	 * Add new list mapping - Step 1, choose a list
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
-	 * @dontvalidate $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
+	 * @dontvalidate $list
 	 * @return void
 	 */
-	public function newStep1Action(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem = NULL) {
-		$listItems = $this->sharepointListItemRepository->findAllListItems();
+	public function newStep1Action(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list = NULL) {
+		$availableSharepointLists = $this->sharepointListsRepository->findAllLists();
 
 		// remove lists that are still available
-		$availableMappingListItems = $this->mappingListItemRepository->findAll();
-		if (count($availableMappingListItems) > 0) {
-			foreach ($availableMappingListItems as $key => $item) {
-				foreach ($listItems as $listItem) {
-					if ($listItem->id == $item->getSharepointListIdentifier()) {
-						$listItems->detach($listItem);
+		$availableMappingLists = $this->mappingListsRepository->findAll();
+		if (count($availableMappingLists) > 0) {
+			foreach ($availableMappingLists as $key => $item) {
+				foreach ($availableSharepointLists as $sharepointList) {
+					if ($sharepointList->id == $item->getSharepointListIdentifier()) {
+						$availableSharepointLists->detach($sharepointList);
 					}
 				}
 			}
 		}
 
-		$this->view->assign('listItems', $listItems);
-		$this->view->assign('mappingListItem', $mappingListItem);
+		$this->view->assign('availableSharepointLists', $availableSharepointLists);
+		$this->view->assign('list', $list);
 	}
 
 	/**
 	 * Add new list mapping - Step 2, mapping
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
-	 * @dontvalidate $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
+	 * @dontvalidate $list
 	 * @return void
 	 */
-	public function newStep2Action(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem) {
-		if ('' === $mappingListItem->getTypo3ListTitle()) {
+	public function newStep2Action(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		if ('' === $list->getTypo3ListTitle()) {
 			$this->flashMessageContainer->add('Please add a TYPO3 list title', 'ERROR', \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR);
 			$this->redirect('newStep1');
 		}
 
-		$sharepointAttributes = $this->sharepointListItemRepository->findAttributesByIdentifier($mappingListItem->getSharepointListIdentifier());
+		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
 		if ($sharepointAttributes) {
 			foreach ($sharepointAttributes as $sharepointAttribute) {
-				$mappingListItem->addAttribute($sharepointAttribute);
+				$list->addAttribute($sharepointAttribute);
 			}
 		}
 
-		$sharepointList = $this->sharepointListItemRepository->findListByIdentifier($mappingListItem->getSharepointListIdentifier());
-		$mappingListItem->setSharepointListTitle($sharepointList->title);
+		$sharepointList = $this->sharepointListsRepository->findListByIdentifier($list->getSharepointListIdentifier());
+		$list->setSharepointListTitle($sharepointList->title);
 
-		$this->view->assign('mappingListItem', $mappingListItem);
+		$this->view->assign('list', $list);
 	}
 
 	/**
 	 * Create new list mapping
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @param array $attributeData
-	 * @dontvalidate $mappingListItem
+	 * @dontvalidate $list
 	 * @dontvalidate $attributeData
 	 * @return void
 	 */
-	public function createAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem, array $attributeData) {
+	public function createAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, array $attributeData) {
 		$attributesArray = array();
 		if (count($attributeData) > 0) {
 			foreach ($attributeData as $attributes) {
@@ -148,19 +148,19 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					unset($attributes['activated']);
 					$attributesArray[] = $attributes;
 					$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-					$mappingListItem->addAttribute($mappingAttribute);
+					$list->addAttribute($mappingAttribute);
 				}
 			}
 		}
 
-		$this->mappingListItemRepository->add($mappingListItem);
-		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was added.');
+		$this->mappingListsRepository->add($list);
+		$this->flashMessageContainer->add('ListMapping "' . $list->getSharepointListTitle() . '" was added.');
 
 		Logger::info('MappingController:createAction', array(
-			'listMappingUid' => $mappingListItem->getUid(),
-			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
-			'sharepointListTitle' => $mappingListItem->getSharepointListTitle(),
-			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
+			'listMappingUid' => $list->getUid(),
+			'sharepointListIdentifier' => $list->getSharepointListIdentifier(),
+			'sharepointListTitle' => $list->getSharepointListTitle(),
+			'typo3ListTitle' => $list->getTypo3ListTitle(),
 			'attributes' => json_encode($attributesArray),
 		));
 
@@ -170,23 +170,23 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * action edit
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @return void
 	 */
-	public function editAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem) {
-		$this->view->assign('mappingListItem', $mappingListItem);
+	public function editAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		$this->view->assign('list', $list);
 	}
 
 	/**
 	 * action update
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @param array $attributeData
-	 * @dontvalidate $mappingListItem
+	 * @dontvalidate $mappingLists
 	 * @dontvalidate $attributeData
 	 * @return void
 	 */
-	public function updateAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem, array $attributeData) {
+	public function updateAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, array $attributeData) {
 		$attributesArray = array();
 		if (count($attributeData['available']) > 0) {
 			foreach ($attributeData['available'] as $key => $attributes) {
@@ -201,38 +201,38 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 					unset($attributes['activated']);
 					$attributesArray[] = $attributes;
 					$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-					$mappingListItem->addAttribute($mappingAttribute);
+					$list->addAttribute($mappingAttribute);
 				}
 			}
 		}
 
-		$this->mappingListItemRepository->update($mappingListItem);
-		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was updated.');
+		$this->mappingListsRepository->update($list);
+		$this->flashMessageContainer->add('ListMapping "' . $list->getSharepointListTitle() . '" was updated.');
 
 		Logger::info('MappingController:updateAction', array(
-			'listMappingUid' => $mappingListItem->getUid(),
-			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
-			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
+			'listMappingUid' => $list->getUid(),
+			'sharepointListIdentifier' => $list->getSharepointListIdentifier(),
+			'typo3ListTitle' => $list->getTypo3ListTitle(),
 			'attributes' => json_encode($attributesArray),
 		));
 
-		$this->redirect('edit', NULL, NULL, array('mappingListItem' => $mappingListItem));
+		$this->redirect('edit', NULL, NULL, array('list' => $list));
 	}
 
 	/**
 	 * Delete listmapping
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @return void
 	 */
-	public function deleteListAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem) {
-		$this->mappingListItemRepository->remove($mappingListItem);
-		$this->flashMessageContainer->add('ListMapping "' . $mappingListItem->getSharepointListTitle() . '" was deleted.');
+	public function deleteListAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		$this->mappingListsRepository->remove($list);
+		$this->flashMessageContainer->add('ListMapping "' . $list->getSharepointListTitle() . '" was deleted.');
 
 		Logger::info('MappingController:deleteAction', array(
-			'listMappingUid' => $mappingListItem->getUid(),
-			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
-			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
+			'listMappingUid' => $list->getUid(),
+			'sharepointListIdentifier' => $list->getSharepointListIdentifier(),
+			'typo3ListTitle' => $list->getTypo3ListTitle(),
 		));
 
 		$this->redirect('list');
@@ -241,34 +241,34 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	/**
 	 * Delete single attribute
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $mappingAttribute
 	 * @return void
 	 */
-	public function deleteAttributeAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem, \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $mappingAttribute) {
+	public function deleteAttributeAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute $mappingAttribute) {
 		$this->mappingAttributeRepository->remove($mappingAttribute);
 		$this->flashMessageContainer->add('Your attribute "' . $mappingAttribute->getTypo3FieldName() . '" was deleted.');
 
 		Logger::info('MappingController:deleteAttributeAction', array(
-			'listMappingUid' => $mappingListItem->getUid(),
-			'sharepointListIdentifier' => $mappingListItem->getSharepointListIdentifier(),
-			'typo3ListTitle' => $mappingListItem->getTypo3ListTitle(),
-			'attributeUid' => $mappingAttribute->getUid(),
+			'listMappingUid' => $list->getUid(),
+			'sharepointListIdentifier' => $list->getSharepointListIdentifier(),
+			'typo3ListTitle' => $list->getTypo3ListTitle(),
+			'attributeUid' => $list->getUid(),
 			'attribute' => $mappingAttribute->getTypo3FieldName()
 		));
 
-		$this->redirect('edit', NULL, NULL, array('mappingListItem' => $mappingListItem));
+		$this->redirect('edit', NULL, NULL, array('list' => $list));
 	}
 
 	/**
 	 * action sync
 	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem
+	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 * @return void
 	 */
-	public function syncAction(\Aijko\SharepointConnector\Domain\Model\Mapping\ListItem $mappingListItem) {
-		$sharepointAttributes = $this->sharepointListItemRepository->findAttributesByIdentifier($mappingListItem->getSharepointListIdentifier());
-		$typo3ListAttributes = $mappingListItem->getAttributes();
+	public function syncAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
+		$typo3ListAttributes = $list->getAttributes();
 
 		if ($sharepointAttributes) {
 			// Sync sharepoint attributes with TYPO3 attributes
@@ -279,7 +279,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$this->mappingAttributeRepository->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
 		}
 
-		$this->view->assign('mappingListItem', $mappingListItem);
+		$this->view->assign('list', $list);
 	}
 
 }

@@ -4,19 +4,19 @@
 		<header/>
 		<body>
 
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists">
 				<source>List Mapping</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_identifier">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list_identifier">
 				<source>Sharepoint List Identifier</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list_title">
 				<source>Sharepoint List Title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.typo3_list_title">
 				<source>Typo3 List Title</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_listitem.attributes">
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_lists.attributes">
 				<source>Attributes</source>
 			</trans-unit>
 

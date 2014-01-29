@@ -39,7 +39,7 @@ interface SharepointInterface {
 	 *
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function findAllListItems();
+	public function findAllLists();
 
 	/**
 	 * Get a list by a specific sharepoint identifier

@@ -90,11 +90,11 @@ if (TYPO3_MODE === 'BE') {
 //
 //
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_mapping_listitem', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_mapping_listitem.xlf');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_mapping_listitem');
-$TCA['tx_sharepointconnector_domain_model_mapping_listitem'] = array(
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_mapping_lists', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_mapping_lists.xlf');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_mapping_lists');
+$TCA['tx_sharepointconnector_domain_model_mapping_lists'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_listitem',
+		'title'	=> 'LLL:EXT:sharepoint_connector/Resources/Private/Language/locallang_db.xlf:tx_sharepointconnector_domain_model_mapping_lists',
 		'label' => 'typo3_list_title',
 		'label_alt' => 'sharepoint_list_identifier',
 		'label_alt_force' => TRUE,
@@ -116,8 +116,8 @@ $TCA['tx_sharepointconnector_domain_model_mapping_listitem'] = array(
 			'endtime' => 'endtime',
 		),
 		'searchFields' => 'sharepoint_list_identifier,typo3_list_title,attributes,',
-		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Mapping/ListItem.php',
-		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_mapping_listitem.gif'
+		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Mapping/Lists.php',
+		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_mapping_list.gif'
 	),
 );
 

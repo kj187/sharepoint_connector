@@ -7,23 +7,23 @@
 	<f:flashMessages />
 	<f:render partial="FormErrors" />
 
-	<f:form action="create" name="mappingListItem" object="{mappingListItem}" >
+	<f:form action="create" name="list" object="{list}" >
 
 		<h3><f:translate id="new.step2.header" /></h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
-				<td><f:translate key="tx_sharepointconnector_domain_model_mapping_listitem.sharepoint_list"/></td>
-				<td><f:translate key="tx_sharepointconnector_domain_model_mapping_listitem.typo3_list_title"/></td>
+				<td><f:translate key="tx_sharepointconnector_domain_model_mapping_lists.sharepoint_list"/></td>
+				<td><f:translate key="tx_sharepointconnector_domain_model_mapping_lists.typo3_list_title"/></td>
 			</tr>
 			<tr class="db_list_normal">
 				<td>
-					{mappingListItem.sharepointListTitle}
-					<f:form.hidden property="sharepointListIdentifier" value="{mappingListItem.sharepointListIdentifier}" />
-					<f:form.hidden property="sharepointListTitle" value="{mappingListItem.sharepointListTitle}" />
+					{list.sharepointListTitle}
+					<f:form.hidden property="sharepointListIdentifier" value="{list.sharepointListIdentifier}" />
+					<f:form.hidden property="sharepointListTitle" value="{list.sharepointListTitle}" />
 				</td>
 				<td>
-					{mappingListItem.typo3ListTitle}
-					<f:form.hidden property="typo3ListTitle" value="{mappingListItem.typo3ListTitle}" />
+					{list.typo3ListTitle}
+					<f:form.hidden property="typo3ListTitle" value="{list.typo3ListTitle}" />
 				</td>
 			</tr>
 		</table>
@@ -38,7 +38,7 @@
 				<td><f:translate id="column.header.sharepointFieldType" /></td>
 				<td><f:translate id="column.header.typo3FieldName" /></td>
 			</tr>
-			<f:for each="{mappingListItem.attributes}" as="attribute" iteration="attributeIterator">
+			<f:for each="{list.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
 					<td><f:form.checkbox value="1" name="attributeData[{attributeIterator.index}][activated]" />  </td>
 					<td>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>

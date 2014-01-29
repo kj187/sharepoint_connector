@@ -26,13 +26,13 @@ namespace Aijko\SharepointConnector\Domain\Model\Mapping;
  ***************************************************************/
 
 /**
- * ListItem model
+ * Lists model
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class ListItem extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 	/**
 	 * Internal Sharepoint list identifier

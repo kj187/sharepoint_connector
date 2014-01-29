@@ -26,13 +26,13 @@ namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
  ***************************************************************/
 
 /**
- * ListItem mapping repository
+ * Lists mapping repository
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class ListItemRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
+class ListsRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
 
