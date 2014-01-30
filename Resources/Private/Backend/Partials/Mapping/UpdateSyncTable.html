@@ -36,15 +36,22 @@
 			</tr>
 			<f:for each="{list.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
-					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
-					    <f:if condition="{0: attribute.status} == {0: 2}">
+					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
+						<f:if condition="{0: attribute.status} == {0: 3}">
+							<f:be.buttons.icon uri="" icon="status-dialog-warning" title="{f:translate(key:'description.renamedAttribute')}" />
+						</f:if>
+						<f:if condition="{0: attribute.status} == {0: 2}">
 							<f:be.buttons.icon uri="" icon="status-dialog-error" title="{f:translate(key:'description.deprecatedAttribute')}" />
 						</f:if>
 						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{list : list, mappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
 					</td>
-					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointDisplayName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
-					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>
-					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
+					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
+						{attribute.sharepointDisplayName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
+					</td>
+					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
+						{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" />
+					</td>
+					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
 						<f:form.textfield name="attributeData[available][{attribute.uid}][typo3FieldName]" value="{attribute.typo3FieldName}" />
 						<f:form.hidden name="attributeData[available][{attribute.uid}][__identity]" value="{attribute.uid}"/>
 					</td>

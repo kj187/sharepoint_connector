@@ -120,6 +120,9 @@
 			<trans-unit id="description.deprecatedAttribute">
 				<source>Error: this attribute is no longer available on sharepoint site</source>
 			</trans-unit>
+			<trans-unit id="description.renamedAttribute">
+				<source>Warning: this attribute has a new displayname on sharepoint site, it would be updated after next reload. Update the TYPO3 field name by yourself.</source>
+			</trans-unit>
 
 
 

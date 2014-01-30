@@ -73,8 +73,31 @@ class AttributeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 				}
 			}
 
-			$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_DEPRECATED);
+			$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_SYNC_DEPRECATED);
 			$this->update($typo3Attribute);
+		}
+	}
+
+	/**
+	 * Sync attributes to find renamed attributes
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes
+	 * @return void
+	 */
+	public function syncAttributesToFindRenamedAttributes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $sharepointListAttributes, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $typo3ListAttributes) {
+		foreach ($typo3ListAttributes as $typo3Attribute) {
+			foreach ($sharepointListAttributes as $sharepointListAttribute) {
+				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
+					if ($typo3Attribute->getSharepointDisplayName() != $sharepointListAttribute->getSharepointDisplayName()) {
+						$typo3Attribute->setSharepointDisplayName($sharepointListAttribute->getSharepointDisplayName());
+						$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_SYNC_RENAMED);
+						$this->update($typo3Attribute);
+					}
+
+					continue 2; // if equals, continue with next typo3 attribute
+				}
+			}
 		}
 	}
 

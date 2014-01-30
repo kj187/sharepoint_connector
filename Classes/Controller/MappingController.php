@@ -267,7 +267,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function syncAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
-		$GLOBALS['typo3CacheManager']->flushCachesByTag('spc_attribute');
+		$GLOBALS['typo3CacheManager']->flushCachesByTag('spc_list_attributes');
 		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
 		$typo3ListAttributes = $list->getAttributes();
 
@@ -278,6 +278,9 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 			// Sync TYPO3 attributes with sharepoint attributes to find out all deprecated attributes
 			$this->mappingAttributeRepository->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
+
+			// Sync TYPO3 attributes with sharepoint attributes to find out all renamed attributes
+			$this->mappingAttributeRepository->syncAttributesToFindRenamedAttributes($sharepointAttributes, $typo3ListAttributes);
 		}
 
 		$this->view->assign('list', $list);

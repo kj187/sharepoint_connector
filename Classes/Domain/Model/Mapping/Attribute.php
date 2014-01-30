@@ -34,7 +34,8 @@ namespace Aijko\SharepointConnector\Domain\Model\Mapping;
  */
 class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
-	const STATUS_DEPRECATED 	= 2;
+	const STATUS_SYNC_DEPRECATED 	= 2;
+	const STATUS_SYNC_RENAMED 		= 3;
 
 	/**
 	 * Internal Sharepoint field name
