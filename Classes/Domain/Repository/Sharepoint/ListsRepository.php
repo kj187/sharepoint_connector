@@ -34,7 +34,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
  */
 class ListsRepository {
 
-	const GLOBAL_CACHE_TAG = 'sharepoint_connector';
+	const GLOBAL_CACHE_TAG = 'spc';
 
 	/**
 	 * @var \TYPO3\CMS\Core\Cache\Frontend\AbstractFrontend
@@ -100,7 +100,7 @@ class ListsRepository {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findAllLists');
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
 			$entry = $this->sharepointHandle->findAllLists();
-			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('allLists', self::GLOBAL_CACHE_TAG));
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_allLists', self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
 	}
@@ -114,7 +114,7 @@ class ListsRepository {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findListByIdentifier' . $identifier);
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
 			$entry = $this->sharepointHandle->findListByIdentifier($identifier);
-			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('list', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_list', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
 	}
@@ -128,7 +128,7 @@ class ListsRepository {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findAttributesByIdentifier' . $identifier);
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
 			$entry = $this->sharepointHandle->findAttributesByIdentifier($identifier);
-			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('attribute', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_list_attributes', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
 	}

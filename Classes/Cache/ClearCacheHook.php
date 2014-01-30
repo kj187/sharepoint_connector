@@ -62,7 +62,7 @@ class ClearCacheHook implements \TYPO3\CMS\Backend\Toolbar\ClearCacheActionsHook
 	public static function clear(array $_params, \TYPO3\CMS\Core\DataHandling\DataHandler $dataHandler) {
 		if (in_array($_params['cacheCmd'], array('all', 'sharepoint_connector')) && $GLOBALS['BE_USER']->isAdmin()) {
 			$GLOBALS['BE_USER']->writelog(3, 1, 0, 0, 'User %s has cleared the cache (cacheCmd=%s)', array($GLOBALS['BE_USER']->user['username'], $_params['cacheCmd']));
-			$GLOBALS['typo3CacheManager']->flushCachesByTag('sharepoint_connector');
+			$GLOBALS['typo3CacheManager']->flushCachesByTag('spc');
 		}
 	}
 

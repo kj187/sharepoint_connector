@@ -267,6 +267,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 * @return void
 	 */
 	public function syncAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		$GLOBALS['typo3CacheManager']->flushCachesByTag('spc_attribute');
 		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
 		$typo3ListAttributes = $list->getAttributes();
 
