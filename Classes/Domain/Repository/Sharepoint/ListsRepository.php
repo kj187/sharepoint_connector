@@ -34,6 +34,13 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
  */
 class ListsRepository {
 
+	const GLOBAL_CACHE_TAG = 'sharepoint_connector';
+
+	/**
+	 * @var \TYPO3\CMS\Core\Cache\Frontend\AbstractFrontend
+	 */
+	protected $cacheInstance;
+
 	/**
 	 * @var \Aijko\SharepointConnector\Service\SharepointDriverInterface
 	 */
@@ -54,8 +61,35 @@ class ListsRepository {
 	 *
 	 */
 	public function __construct() {
+		$this->initializeCache();
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 		$this->sharepointHandle = $this->objectManager->get('Aijko\\SharepointConnector\\Service\\SharepointDriverInterface');
+	}
+
+	/**
+	 * Initialize cache instance to be ready to use
+	 *
+	 * @return void
+	 */
+	protected function initializeCache() {
+		\TYPO3\CMS\Core\Cache\Cache::initializeCachingFramework();
+		try {
+			$this->cacheInstance = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists');
+		} catch (\TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException $e) {
+			$this->cacheInstance = $GLOBALS['typo3CacheFactory']->create(
+				'sharepointconnector_lists',
+				$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sharepointconnector_lists']['frontend'],
+				$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sharepointconnector_lists']['backend'],
+				$GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations']['sharepointconnector_lists']['options']
+			);
+		}
+	}
+
+	/**
+	 *
+	 */
+	public function calculateCacheIdentifier($value) {
+		return sha1($value);
 	}
 
 	/**
@@ -63,7 +97,12 @@ class ListsRepository {
 	 * @return object
 	 */
 	public function findAllLists() {
-		return $this->sharepointHandle->findAllLists();
+		$cacheIdentifier = $this->calculateCacheIdentifier('findAllLists');
+		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
+			$entry = $this->sharepointHandle->findAllLists();
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('allLists', self::GLOBAL_CACHE_TAG));
+		}
+		return $entry;
 	}
 
 	/**
@@ -72,7 +111,12 @@ class ListsRepository {
 	 * @return array
 	 */
 	public function findListByIdentifier($identifier) {
-		return $this->sharepointHandle->findListByIdentifier($identifier);
+		$cacheIdentifier = $this->calculateCacheIdentifier('findListByIdentifier' . $identifier);
+		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
+			$entry = $this->sharepointHandle->findListByIdentifier($identifier);
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('list', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
+		}
+		return $entry;
 	}
 
 	/**
@@ -81,7 +125,12 @@ class ListsRepository {
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function findAttributesByIdentifier($identifier) {
-		return $this->sharepointHandle->findAttributesByIdentifier($identifier);
+		$cacheIdentifier = $this->calculateCacheIdentifier('findAttributesByIdentifier' . $identifier);
+		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
+			$entry = $this->sharepointHandle->findAttributesByIdentifier($identifier);
+			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('attribute', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
+		}
+		return $entry;
 	}
 
 	/**
