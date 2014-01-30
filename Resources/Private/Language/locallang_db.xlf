@@ -26,6 +26,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_field_name">
 				<source>Sharepoint Field Name</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_display_name">
+				<source>Sharepoint Display Name</source>
+			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name">
 				<source>Typo3 Field Name</source>
 			</trans-unit>

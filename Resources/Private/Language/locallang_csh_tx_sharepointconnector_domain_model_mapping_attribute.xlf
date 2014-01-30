@@ -7,6 +7,9 @@
 			<trans-unit id="sharepoint_field_name.description">
 				<source>Internal Sharepoint field name</source>
 			</trans-unit>
+			<trans-unit id="sharepoint_display_name.description">
+				<source>Internal Sharepoint display name</source>
+			</trans-unit>
 			<trans-unit id="typo3_field_name.description">
 				<source>TYPO3 field name</source>
 			</trans-unit>

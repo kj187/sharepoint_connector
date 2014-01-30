@@ -94,6 +94,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 		foreach ($properties as $propertyNode) {
 			$attribute = array();
 			$attribute['sharepointFieldName'] = $propertyNode['name'];
+			$attribute['sharepointDisplayName'] = $propertyNode['displayname'];
 			$attribute['attributeType'] = $propertyNode['type'];
 			$attribute['typo3FieldName'] = '';
 			$attributes->attach($this->propertyMapper->convert($attribute, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute'));

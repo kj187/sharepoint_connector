@@ -36,6 +36,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_field_name">
 				<source>Internal Sharepoint field name</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sharepoint_display_name">
+				<source>Internal Sharepoint display name</source>
+			</trans-unit>
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name">
 				<source>TYPO3 field name</source>
 			</trans-unit>
@@ -100,6 +103,9 @@
 			</trans-unit>
 			<trans-unit id="column.header.sharepointFieldName">
 				<source>Sharepoint field name</source>
+			</trans-unit>
+			<trans-unit id="column.header.sharepointDisplayName">
+				<source>Sharepoint display name</source>
 			</trans-unit>
 			<trans-unit id="column.header.typo3FieldName">
 				<source>TYPO3 field name</source>

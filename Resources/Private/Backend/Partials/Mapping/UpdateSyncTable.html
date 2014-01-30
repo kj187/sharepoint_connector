@@ -30,7 +30,7 @@
 						<f:form.checkbox id="activateAll" name="" value="0" />
 					</f:if>
 				</td>
-				<td><f:translate id="column.header.sharepointFieldName" /></td>
+				<td><f:translate id="column.header.sharepointDisplayName" /></td>
 				<td><f:translate id="column.header.sharepointFieldType" /></td>
 				<td><f:translate id="column.header.typo3FieldName" /></td>
 			</tr>
@@ -42,7 +42,7 @@
 						</f:if>
 						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{list : list, mappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
 					</td>
-					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.sharepointDisplayName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" /></td>
 					<td {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'style="background-color:#f98b8b !important;"')}>
 						<f:form.textfield name="attributeData[available][{attribute.uid}][typo3FieldName]" value="{attribute.typo3FieldName}" />
@@ -55,9 +55,13 @@
 				<f:for each="{newAttributes}" as="attribute" iteration="attributeIterator">
 					<tr class="db_list_normal">
 						<td style="background-color:#b6e6b6!important;"><f:form.checkbox value="1" name="attributeData[new][{attributeIterator.index}][activated]" /></td>
-						<td style="background-color:#b6e6b6!important;">{attribute.sharepointFieldName}<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+						<td style="background-color:#b6e6b6!important;">
+							<a title="{attribute.sharepointFieldName}">{attribute.sharepointDisplayName}</a>
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointDisplayName]" value="{attribute.sharepointDisplayName}" />
+						</td>
 						<td style="background-color:#b6e6b6!important;">{attribute.attributeType}<f:form.hidden name="attributeData[new][{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
-						<td style="background-color:#b6e6b6!important;"><f:form.textfield name="attributeData[new][{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointFieldName}" /></td>
+						<td style="background-color:#b6e6b6!important;"><f:form.textfield name="attributeData[new][{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointDisplayName}" /></td>
 					</tr>
 				</f:for>
 			</f:if>

@@ -44,6 +44,13 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $sharepointFieldName;
 
 	/**
+	 * Internal Sharepoint display name
+	 *
+	 * @var \string
+	 */
+	protected $sharepointDisplayName;
+
+	/**
 	 * TYPO3 field name
 	 *
 	 * @var \string
@@ -84,6 +91,25 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setSharepointFieldName($sharepointFieldName) {
 		$this->sharepointFieldName = $sharepointFieldName;
+	}
+
+	/**
+	 * Returns the sharepointDisplayName
+	 *
+	 * @return \string $sharepointDisplayName
+	 */
+	public function getSharepointDisplayName() {
+		return $this->sharepointDisplayName;
+	}
+
+	/**
+	 * Sets the sharepointDisplayName
+	 *
+	 * @param \string $sharepointDisplayName
+	 * @return void
+	 */
+	public function setSharepointDisplayName($sharepointDisplayName) {
+		$this->sharepointDisplayName = $sharepointDisplayName;
 	}
 
 	/**

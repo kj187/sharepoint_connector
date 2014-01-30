@@ -34,16 +34,20 @@
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
 				<td><f:form.checkbox id="activateAll" name="" value="0" /></td>
-				<td><f:translate id="column.header.sharepointFieldName" /></td>
+				<td><f:translate id="column.header.sharepointDisplayName" /></td>
 				<td><f:translate id="column.header.sharepointFieldType" /></td>
 				<td><f:translate id="column.header.typo3FieldName" /></td>
 			</tr>
 			<f:for each="{list.attributes}" as="attribute" iteration="attributeIterator">
 				<tr class="db_list_normal">
 					<td><f:form.checkbox value="1" name="attributeData[{attributeIterator.index}][activated]" />  </td>
-					<td>{attribute.sharepointFieldName}<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td>
+						<a title="{attribute.sharepointFieldName}">{attribute.sharepointDisplayName}</a>
+						<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
+						<f:form.hidden name="attributeData[{attributeIterator.index}][sharepointDisplayName]" value="{attribute.sharepointDisplayName}" />
+					</td>
 					<td>{attribute.attributeType}<f:form.hidden name="attributeData[{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
-					<td><f:form.textfield name="attributeData[{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointFieldName}" /></td>
+					<td><f:form.textfield name="attributeData[{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointDisplayName}" /></td>
 				</tr>
 			</f:for>
 		</table>
