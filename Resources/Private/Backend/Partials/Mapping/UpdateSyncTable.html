@@ -8,15 +8,15 @@
 		<h3><f:translate id="header.list" /></h3>
 		<table border="0" cellpadding="0" cellspacing="0" class="typo3-dblist">
 			<tr class="t3-row-header">
-				<td><f:translate id="header.typo3ListTitle" /></td>
 				<td><f:translate id="header.sharepointListTitle" /></td>
+				<td><f:translate id="header.typo3ListTitle" /></td>
 			</tr>
 			<tr class="db_list_normal">
-				<td><f:form.textfield property="typo3ListTitle" value="{list.typo3ListTitle}" /></td>
 				<td>
 					<a title="{list.sharepointListIdentifier}">{list.sharepointListTitle}</a>
 					<f:form.hidden property="sharepointListIdentifier" value="{list.sharepointListIdentifier}" />
 				</td>
+				<td><f:form.textfield property="typo3ListTitle" value="{list.typo3ListTitle}" /></td>
 			</tr>
 		</table>
 
