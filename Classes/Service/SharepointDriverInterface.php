@@ -32,7 +32,7 @@ namespace Aijko\SharepointConnector\Service;
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-interface SharepointInterface {
+interface SharepointDriverInterface {
 
 	/**
 	 * Get all available sharepoint lists

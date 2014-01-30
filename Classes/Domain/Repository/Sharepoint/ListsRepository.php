@@ -35,7 +35,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
 class ListsRepository {
 
 	/**
-	 * @var \Aijko\SharepointConnector\Service\SharepointInterface
+	 * @var \Aijko\SharepointConnector\Service\SharepointDriverInterface
 	 */
 	protected $sharepointHandle;
 
@@ -55,11 +55,11 @@ class ListsRepository {
 	 */
 	public function __construct() {
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->sharepointHandle = $this->objectManager->get('Aijko\\SharepointConnector\\Service\\SharepointInterface');
+		$this->sharepointHandle = $this->objectManager->get('Aijko\\SharepointConnector\\Service\\SharepointDriverInterface');
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAllLists
+	 * @see \Aijko\SharepointConnector\Service\SharepointDriverInterface::findAllLists
 	 * @return object
 	 */
 	public function findAllLists() {
@@ -67,7 +67,7 @@ class ListsRepository {
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findListByIdentifier
+	 * @see \Aijko\SharepointConnector\Service\SharepointDriverInterface::findListByIdentifier
 	 * @param string $identifier
 	 * @return array
 	 */
@@ -76,7 +76,7 @@ class ListsRepository {
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointInterface::findAttributesByIdentifier
+	 * @see \Aijko\SharepointConnector\Service\SharepointDriverInterface::findAttributesByIdentifier
 	 * @param string $identifier
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */

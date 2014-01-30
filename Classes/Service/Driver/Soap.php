@@ -1,5 +1,5 @@
 <?php
-namespace Aijko\SharepointConnector\Service;
+namespace Aijko\SharepointConnector\Service\Driver;
 
 /***************************************************************
  *  Copyright notice
@@ -28,13 +28,13 @@ namespace Aijko\SharepointConnector\Service;
 use \Aijko\SharepointConnector\Utility\Logger;
 
 /**
- * Sharepoint API SOAP Service
+ * Sharepoint SOAP Driver
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class SoapService extends \Aijko\SharepointConnector\Service\AbstractService implements \Aijko\SharepointConnector\Service\SharepointInterface {
+class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements \Aijko\SharepointConnector\Service\SharepointDriverInterface {
 
 	/**
 	 * @var \Thybag\SharepointApi

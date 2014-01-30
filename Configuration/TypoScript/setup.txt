@@ -41,8 +41,8 @@ module.tx_sharepointconnector {
 
 config.tx_extbase {
 	objects {
-		Aijko\SharepointConnector\Service\SharepointInterface {
-			className = Aijko\SharepointConnector\Service\SoapService
+		Aijko\SharepointConnector\Service\SharepointDriverInterface {
+			className = Aijko\SharepointConnector\Service\Driver\Soap
 		}
 	}
 }

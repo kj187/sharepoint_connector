@@ -28,13 +28,13 @@ namespace Aijko\SharepointConnector\Service;
 use \Aijko\SharepointConnector\Utility\Logger;
 
 /**
- * Sharepoint API Abstract Service
+ * Sharepoint API Abstract Driver
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class AbstractService {
+class AbstractDriver {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
