@@ -1,6 +1,6 @@
 <?php
+namespace Aijko\SharepointConnector\Tests\Unit\Domain\Model\Mapping;
 
-namespace Aijko\SharepointConnector\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,22 +26,27 @@ namespace Aijko\SharepointConnector\Tests;
  ***************************************************************/
 
 /**
- * Test case for class \Aijko\SharepointConnector\Domain\Model\ListMapping.
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
 class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Model\ListMapping
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
 	 */
 	protected $fixture;
 
+	/**
+	 * Setup
+	 */
 	public function setUp() {
-		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\ListMapping();
+		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\Mapping\Lists();
 	}
 
+	/**
+	 * Teardown
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
@@ -49,42 +54,32 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getSharepointListIdentifierReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setSharepointListIdentifierForStringSetsSharepointListIdentifier() { 
-		$this->fixture->setSharepointListIdentifier('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getSharepointListIdentifier()
-		);
+	public function isSetterGetterWorkingForSharepointListIdentifer() {
+		$this->fixture->setSharepointListIdentifier($this->dummyString);
+		$this->assertSame($this->dummyString, $this->fixture->getSharepointListIdentifier());
 	}
-	
-	/**
-	 * @test
-	 */
-	public function getTypo3ListTitleReturnsInitialValueForString() { }
 
 	/**
 	 * @test
 	 */
-	public function setTypo3ListTitleForStringSetsTypo3ListTitle() { 
-		$this->fixture->setTypo3ListTitle('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTypo3ListTitle()
-		);
+	public function isSetterGetterWorkingForSharepointListTitle() {
+		$this->fixture->setSharepointListTitle($this->dummyString);
+		$this->assertSame($this->dummyString, $this->fixture->getSharepointListTitle());
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getAttributesReturnsInitialValueForListMappingAttribute() { 
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+	public function isSetterGetterWorkingForTypo3ListTitle() {
+		$this->fixture->setTypo3ListTitle($this->dummyString);
+		$this->assertSame($this->dummyString, $this->fixture->getTypo3ListTitle());
+	}
+
+	/**
+	 * @test
+	 */
+	public function getAttributesReturnsInitialValueForListMappingAttribute() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getAttributes()
@@ -95,8 +90,8 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @test
 	 */
 	public function setAttributesForObjectStorageContainingListMappingAttributeSetsAttributes() { 
-		$attribute = new \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute();
-		$objectStorageHoldingExactlyOneAttributes = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+		$attribute = new \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute();
+		$objectStorageHoldingExactlyOneAttributes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneAttributes->attach($attribute);
 		$this->fixture->setAttributes($objectStorageHoldingExactlyOneAttributes);
 
@@ -110,8 +105,8 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @test
 	 */
 	public function addAttributeToObjectStorageHoldingAttributes() {
-		$attribute = new \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute();
-		$objectStorageHoldingExactlyOneAttribute = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+		$attribute = new \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute();
+		$objectStorageHoldingExactlyOneAttribute = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneAttribute->attach($attribute);
 		$this->fixture->addAttribute($attribute);
 
@@ -125,8 +120,8 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @test
 	 */
 	public function removeAttributeFromObjectStorageHoldingAttributes() {
-		$attribute = new \Aijko\SharepointConnector\Domain\Model\ListMappingAttribute();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\Generic\ObjectStorage();
+		$attribute = new \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($attribute);
 		$localObjectStorage->detach($attribute);
 		$this->fixture->addAttribute($attribute);
@@ -139,4 +134,5 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 	
 }
+
 ?>

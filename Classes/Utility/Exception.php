@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -25,39 +25,12 @@ namespace Aijko\SharepointConnector\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use \Aijko\SharepointConnector\Utility\Logger;
-
 /**
- * Mapping
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class Mapping {
-
-	/**
-	 * Convert users post-data-array to correct sharepoint data array
-	 *
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
-	 * @param array $data
-	 * @return array
-	 * @throws \Aijko\SharepointConnector\Utility\Exception
-	 */
-	public function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, array $data) {
-		$returnData = array();
-		foreach ($list->getAttributes() as $key => $attribute) {
-			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
-				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
-			}
-		}
-
-		if (!count($returnData)) {
-			throw new \Aijko\SharepointConnector\Utility\Exception('Could not map user data with mapping (list: ' . $list->getTypo3ListTitle() . ':Uid:' . $list->getUid() . '). Cant find matched attributes.', 1391164526);
-		}
-
-		return $returnData;
-	}
+class Exception extends \Aijko\SharepointConnector\Exception {
 
 }
 

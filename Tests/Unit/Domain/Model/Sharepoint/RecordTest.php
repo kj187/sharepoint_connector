@@ -1,5 +1,6 @@
 <?php
-namespace Aijko\SharepointConnector\Tests;
+namespace Aijko\SharepointConnector\Tests\Unit\Domain\Model\Sharepoint;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,22 +26,41 @@ namespace Aijko\SharepointConnector\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Tx_Sharepoint_connector_Controller_ListMappingController.
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class ListMappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class RecordTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+
 	/**
-	 * @var 
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Lists | PHPUnit_Framework_MockObject_MockObject
+	 */
+	protected $lists;
+
+	/**
+	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Attribute
 	 */
 	protected $fixture;
 
+	/**
+	 * @var array
+	 */
+	protected $dummyArray = array(
+		'ArrayKeyOne' => 'ArrayValueOne',
+		'ArrayKeyTwo' => 'ArrayValueTwo'
+	);
+
+	/**
+	 * Setup
+	 */
 	public function setUp() {
-		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\ListMapping();
+		parent::setUp();
+		$this->fixture = new \Aijko\SharepointConnector\Domain\Model\Sharepoint\Record();
 	}
 
+	/**
+	 * Teardown
+	 */
 	public function tearDown() {
 		unset($this->fixture);
 	}
@@ -48,9 +68,20 @@ class ListMappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCa
 	/**
 	 * @test
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
+	public function isSetterGetterWorkingForData() {
+		$this->fixture->setData($this->dummyArray);
+		$this->assertSame($this->dummyArray, $this->fixture->getData());
+	}
+
+	/**
+	 * @test
+	 */
+	public function isSetterGetterWorkingForList() {
+		$list = new \Aijko\SharepointConnector\Domain\Model\Mapping\Lists();
+		$this->fixture->setList($list);
+		$this->assertSame($list, $this->fixture->getList());
 	}
 
 }
+
 ?>

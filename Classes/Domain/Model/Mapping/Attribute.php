@@ -99,7 +99,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the sharepointFieldName
 	 *
-	 * @return \string $sharepointFieldName
+	 * @return string $sharepointFieldName
 	 */
 	public function getSharepointFieldName() {
 		return $this->sharepointFieldName;
@@ -108,7 +108,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the sharepointFieldName
 	 *
-	 * @param \string $sharepointFieldName
+	 * @param string $sharepointFieldName
 	 * @return void
 	 */
 	public function setSharepointFieldName($sharepointFieldName) {
@@ -118,7 +118,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the sharepointDisplayName
 	 *
-	 * @return \string $sharepointDisplayName
+	 * @return string $sharepointDisplayName
 	 */
 	public function getSharepointDisplayName() {
 		return $this->sharepointDisplayName;
@@ -127,7 +127,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the sharepointDisplayName
 	 *
-	 * @param \string $sharepointDisplayName
+	 * @param string $sharepointDisplayName
 	 * @return void
 	 */
 	public function setSharepointDisplayName($sharepointDisplayName) {
@@ -137,7 +137,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the typo3FieldName
 	 *
-	 * @return \string $typo3FieldName
+	 * @return string $typo3FieldName
 	 */
 	public function getTypo3FieldName() {
 		return $this->typo3FieldName;
@@ -146,7 +146,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the typo3FieldName
 	 *
-	 * @param \string $typo3FieldName
+	 * @param string $typo3FieldName
 	 * @return void
 	 */
 	public function setTypo3FieldName($typo3FieldName) {
@@ -156,7 +156,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the type
 	 *
-	 * @return \string $type
+	 * @return string $type
 	 */
 	public function getType() {
 		return $this->type;
@@ -165,7 +165,7 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the type
 	 *
-	 * @param \string $type
+	 * @param string $type
 	 * @return void
 	 */
 	public function setType($type) {
@@ -189,8 +189,8 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
 	 */
-	public function setList($list) {
-		$this->$list = $list;
+	public function setList(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
+		$this->list = $list;
 	}
 
 	/**
@@ -243,4 +243,5 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 }
+
 ?>

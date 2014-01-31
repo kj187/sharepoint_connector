@@ -1,17 +1,17 @@
 <?php
-namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
+namespace Aijko\SharepointConnector\Tests\Unit;
 
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2014 AIJKO GmbH <info@aijko.de
- *
+ *  			
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
+ *  the Free Software Foundation; either version 2 of the License, or
  *  (at your option) any later version.
  *
  *  The GNU General Public License can be found at
@@ -26,50 +26,30 @@ namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
  ***************************************************************/
 
 /**
- * Record model
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-class Record {
+class MappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	/**
-	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
+	 * @var 
 	 */
-	protected $list;
+	protected $fixture;
 
-	/**
-	 * @var array
-	 */
-	protected $data;
+	public function setUp() {
+		#$this->fixture = new \Aijko\SharepointConnector\Domain\Model\ListMapping();
+	}
 
-	/**
-	 * @param array $data
-	 */
-	public function setData(array $data) {
-		$this->data = $data;
+	public function tearDown() {
+		#unset($this->fixture);
 	}
 
 	/**
-	 * @return array
+	 * @test
 	 */
-	public function getData() {
-		return $this->data;
-	}
-
-	/**
-	 * @param \Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list
-	 */
-	public function setList(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
-		$this->list = $list;
-	}
-
-	/**
-	 * @return \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
-	 */
-	public function getList() {
-		return $this->list;
+	public function dummy() {
+		$this->assertEquals(1, 1);
 	}
 
 }

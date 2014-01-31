@@ -68,7 +68,6 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 *
 	 */
 	public function __construct() {
-		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
 	}
 
@@ -78,18 +77,13 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
 		$this->attributes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
 	 * Returns the sharepointListIdentifier
 	 *
-	 * @return \string $sharepointListIdentifier
+	 * @return string $sharepointListIdentifier
 	 */
 	public function getSharepointListIdentifier() {
 		return $this->sharepointListIdentifier;
@@ -98,7 +92,7 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the sharepointListIdentifier
 	 *
-	 * @param \string $sharepointListIdentifier
+	 * @param string $sharepointListIdentifier
 	 * @return void
 	 */
 	public function setSharepointListIdentifier($sharepointListIdentifier) {
@@ -122,7 +116,7 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Returns the typo3ListTitle
 	 *
-	 * @return \string $typo3ListTitle
+	 * @return string $typo3ListTitle
 	 */
 	public function getTypo3ListTitle() {
 		return $this->typo3ListTitle;
@@ -131,7 +125,7 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	/**
 	 * Sets the typo3ListTitle
 	 *
-	 * @param \string $typo3ListTitle
+	 * @param string $typo3ListTitle
 	 * @return void
 	 */
 	public function setTypo3ListTitle($typo3ListTitle) {
@@ -178,4 +172,5 @@ class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 }
+
 ?>
