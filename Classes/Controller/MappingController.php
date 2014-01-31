@@ -118,7 +118,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 			$this->redirect('newStep1');
 		}
 
-		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
+		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByListIdentifier($list->getSharepointListIdentifier());
 		if ($sharepointAttributes) {
 			foreach ($sharepointAttributes as $sharepointAttribute) {
 				$list->addAttribute($sharepointAttribute);
@@ -268,7 +268,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	 */
 	public function syncAction(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list) {
 		$GLOBALS['typo3CacheManager']->flushCachesByTag('spc_list_attributes');
-		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByIdentifier($list->getSharepointListIdentifier());
+		$sharepointAttributes = $this->sharepointListsRepository->findAttributesByListIdentifier($list->getSharepointListIdentifier());
 		$typo3ListAttributes = $list->getAttributes();
 
 		if ($sharepointAttributes) {

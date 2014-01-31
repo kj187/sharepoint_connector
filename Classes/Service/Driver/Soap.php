@@ -87,7 +87,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	 * @param string $identifier
 	 * @return array
 	 */
-	public function findAttributesByIdentifier($identifier) {
+	public function findAttributesByListIdentifier($identifier) {
 		$properties = $this->sharepointHandler->readListMeta($identifier);
 		$attributes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 
@@ -113,7 +113,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	/**
 	 * Add a new record to a specific sharepoint list
 	 *
-	 * @param string $identifier
+	 * @param string $identifier List identifier
 	 * @param array $data
 	 * @return array | object
 	 */

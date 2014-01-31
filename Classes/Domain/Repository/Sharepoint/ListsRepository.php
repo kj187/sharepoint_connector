@@ -120,14 +120,14 @@ class ListsRepository {
 	}
 
 	/**
-	 * @see \Aijko\SharepointConnector\Service\SharepointDriverInterface::findAttributesByIdentifier
+	 * @see \Aijko\SharepointConnector\Service\SharepointDriverInterface::findAttributesByListIdentifier
 	 * @param string $identifier
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function findAttributesByIdentifier($identifier) {
-		$cacheIdentifier = $this->calculateCacheIdentifier('findAttributesByIdentifier' . $identifier);
+	public function findAttributesByListIdentifier($identifier) {
+		$cacheIdentifier = $this->calculateCacheIdentifier('findAttributesByListIdentifier' . $identifier);
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
-			$entry = $this->sharepointHandle->findAttributesByIdentifier($identifier);
+			$entry = $this->sharepointHandle->findAttributesByListIdentifier($identifier);
 			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_list_attributes', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;

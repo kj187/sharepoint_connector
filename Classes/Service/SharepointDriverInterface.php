@@ -44,7 +44,7 @@ interface SharepointDriverInterface {
 	/**
 	 * Get a list by a specific sharepoint identifier
 	 *
-	 * @param string $identifier
+	 * @param string $identifier List identifier
 	 * @return array
 	 */
 	public function findListByIdentifier($identifier);
@@ -52,17 +52,17 @@ interface SharepointDriverInterface {
 	/**
 	 * Get all available attributes from a specific sharepoint list
 	 *
-	 * @param string $identifier
+	 * @param string $identifier List identifier
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
-	public function findAttributesByIdentifier($identifier);
+	public function findAttributesByListIdentifier($identifier);
 
 	/**
-	 * @param string $listTitle
+	 * @param string $identifier List identifier
 	 * @param array $data
 	 * @return mixed
 	 */
-	public function addRecordToList($listTitle, array $data);
+	public function addRecordToList($identifier, array $data);
 
 }
 
