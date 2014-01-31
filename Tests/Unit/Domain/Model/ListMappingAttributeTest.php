@@ -83,17 +83,17 @@ class ListMappingAttributeTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCas
 	/**
 	 * @test
 	 */
-	public function getAttributeTypeReturnsInitialValueForString() { }
+	public function getTypeReturnsInitialValueForString() { }
 
 	/**
 	 * @test
 	 */
-	public function setAttributeTypeForStringSetsAttributeType() { 
-		$this->fixture->setAttributeType('Conceived at T3CON10');
+	public function setTypeForStringSetsAttributeType() {
+		$this->fixture->setType('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getAttributeType()
+			$this->fixture->getType()
 		);
 	}
 	

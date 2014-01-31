@@ -59,11 +59,32 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $typo3FieldName;
 
 	/**
-	 * Attribute type
+	 * Type
 	 *
 	 * @var \string
 	 */
-	protected $attributeType;
+	protected $type;
+
+	/**
+	 * Required
+	 *
+	 * @var \boolean
+	 */
+	protected $required;
+
+	/**
+	 * lookuplist
+	 *
+	 * @var \string
+	 */
+	protected $lookuplist;
+
+	/**
+	 * sourceid
+	 *
+	 * @var \string
+	 */
+	protected $sourceid;
 
 	/**
 	 * @var string
@@ -133,22 +154,22 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the attributeType
+	 * Returns the type
 	 *
-	 * @return \string $attributeType
+	 * @return \string $type
 	 */
-	public function getAttributeType() {
-		return $this->attributeType;
+	public function getType() {
+		return $this->type;
 	}
 
 	/**
-	 * Sets the attributeType
+	 * Sets the type
 	 *
-	 * @param \string $attributeType
+	 * @param \string $type
 	 * @return void
 	 */
-	public function setAttributeType($attributeType) {
-		$this->attributeType = $attributeType;
+	public function setType($type) {
+		$this->type = $type;
 	}
 
 	/**
@@ -177,6 +198,48 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function getList() {
 		return $this->list;
+	}
+
+	/**
+	 * @param string $lookuplist
+	 */
+	public function setLookuplist($lookuplist) {
+		$this->lookuplist = $lookuplist;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLookuplist() {
+		return $this->lookuplist;
+	}
+
+	/**
+	 * @param boolean $required
+	 */
+	public function setRequired($required) {
+		$this->required = $required;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function getRequired() {
+		return $this->required;
+	}
+
+	/**
+	 * @param string $sourceid
+	 */
+	public function setSourceid($sourceid) {
+		$this->sourceid = $sourceid;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getSourceid() {
+		return $this->sourceid;
 	}
 
 }

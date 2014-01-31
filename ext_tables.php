@@ -146,7 +146,7 @@ $TCA['tx_sharepointconnector_domain_model_mapping_attribute'] = array(
 			'starttime' => 'starttime',
 			'endtime' => 'endtime',
 		),
-		'searchFields' => 'sharepoint_display_name,sharepoint_field_name,typo3_field_name,attribute_type,',
+		'searchFields' => 'sharepoint_display_name,sharepoint_field_name,typo3_field_name, type,',
 		'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/Mapping/Attribute.php',
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_mapping_attribute.gif'
 	),

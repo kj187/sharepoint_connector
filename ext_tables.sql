@@ -54,7 +54,10 @@ CREATE TABLE tx_sharepointconnector_domain_model_mapping_attribute (
 	sharepoint_field_name varchar(255) DEFAULT '' NOT NULL,
 	sharepoint_display_name varchar(255) DEFAULT '' NOT NULL,
 	typo3_field_name varchar(255) DEFAULT '' NOT NULL,
-	attribute_type varchar(255) DEFAULT '' NOT NULL,
+	type varchar(255) DEFAULT '' NOT NULL,
+	required tinyint(4) unsigned DEFAULT '0' NOT NULL,
+	lookuplist varchar(255) DEFAULT '' NOT NULL,
+	sourceid varchar(255) DEFAULT '' NOT NULL,
 	status varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,

@@ -46,10 +46,15 @@
 						<f:be.buttons.icon uri="{f:uri.action(action:'deleteAttribute', arguments:'{list : list, mappingAttribute: attribute}')}" icon="actions-edit-delete" title="{f:translate(key:'description.delete.attribute')}" />
 					</td>
 					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
-						{attribute.sharepointDisplayName}<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
+						<a title="{attribute.sharepointFieldName}">{attribute.sharepointDisplayName}</a>
+						<f:form.hidden name="attributeData[available][{attribute.uid}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
 					</td>
 					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
-						{attribute.attributeType}<f:form.hidden name="attributeData[available][{attribute.uid}][attributeType]" value="{attribute.attributeType}" />
+						{attribute.type}
+						<f:form.hidden name="attributeData[available][{attribute.uid}][type]" value="{attribute.type}" />
+						<f:form.hidden name="attributeData[available][{attribute.uid}][required]" value="{attribute.required}" />
+						<f:form.hidden name="attributeData[available][{attribute.uid}][lookuplist]" value="{attribute.lookuplist}" />
+						<f:form.hidden name="attributeData[available][{attribute.uid}][sourceid]" value="{attribute.sourceid}" />
 					</td>
 					<td class="{f:if(condition: '{0: attribute.status} == {0: 3}', then: 'status-sync-renamed')} {f:if(condition: '{0: attribute.status} == {0: 2}', then: 'status-sync-deprecated')}">
 						<f:form.textfield name="attributeData[available][{attribute.uid}][typo3FieldName]" value="{attribute.typo3FieldName}" />
@@ -67,7 +72,13 @@
 							<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointFieldName]" value="{attribute.sharepointFieldName}" />
 							<f:form.hidden name="attributeData[new][{attributeIterator.index}][sharepointDisplayName]" value="{attribute.sharepointDisplayName}" />
 						</td>
-						<td style="background-color:#b6e6b6!important;">{attribute.attributeType}<f:form.hidden name="attributeData[new][{attributeIterator.index}][attributeType]" value="{attribute.attributeType}" /></td>
+						<td style="background-color:#b6e6b6!important;">
+							{attribute.type}
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][type]" value="{attribute.type}" />
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][required]" value="{attribute.required}" />
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][lookuplist]" value="{attribute.lookuplist}" />
+							<f:form.hidden name="attributeData[new][{attributeIterator.index}][sourceid]" value="{attribute.sourceid}" />
+						</td>
 						<td style="background-color:#b6e6b6!important;"><f:form.textfield name="attributeData[new][{attributeIterator.index}][typo3FieldName]" value="{attribute.sharepointDisplayName}" /></td>
 					</tr>
 				</f:for>

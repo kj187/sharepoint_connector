@@ -95,7 +95,14 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 			$attribute = array();
 			$attribute['sharepointFieldName'] = $propertyNode['name'];
 			$attribute['sharepointDisplayName'] = $propertyNode['displayname'];
-			$attribute['attributeType'] = $propertyNode['type'];
+			$attribute['type'] = $propertyNode['type'];
+
+			$attribute['required'] = (bool)$propertyNode['required'];
+			if ('Lookup' == $propertyNode['type']) {
+				$attribute['lookuplist'] = $propertyNode['list'];
+				$attribute['sourceid'] = $propertyNode['sourceid'];
+			}
+
 			$attribute['typo3FieldName'] = '';
 			$attributes->attach($this->propertyMapper->convert($attribute, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute'));
 		}

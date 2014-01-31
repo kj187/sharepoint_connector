@@ -13,8 +13,17 @@
 			<trans-unit id="typo3_field_name.description">
 				<source>TYPO3 field name</source>
 			</trans-unit>
-			<trans-unit id="attribute_type.description">
-				<source>Attribute type</source>
+			<trans-unit id="type.description">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="required.description">
+				<source>Required</source>
+			</trans-unit>
+			<trans-unit id="lookuplist.description">
+				<source>Lookup list</source>
+			</trans-unit>
+			<trans-unit id="sourceid.description">
+				<source>Source id</source>
 			</trans-unit>
 		</body>
 	</file>

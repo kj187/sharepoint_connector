@@ -42,8 +42,17 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.typo3_field_name">
 				<source>TYPO3 field name</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.attribute_type">
-				<source>Attribute type</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.type">
+				<source>Type</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.required">
+				<source>Required</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.lookuplist">
+				<source>Lookup list</source>
+			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sourceid">
+				<source>Source id</source>
 			</trans-unit>
 
 
