@@ -83,8 +83,7 @@ class MappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			->method('getAttributes')
 			->will($this->returnValue($attributes));
 
-		$fixture = new \Aijko\SharepointConnector\Utility\Mapping();
-		$result = $fixture->convertToSharepointData($this->lists, array('Vorname' => 'Julian', 'Nachname' => 'Kleinhans'));
+		$result = \Aijko\SharepointConnector\Utility\Mapping::convertToSharepointData($this->lists, array('Vorname' => 'Julian', 'Nachname' => 'Kleinhans'));
 		$this->assertEquals(array('FirstName' => 'Julian', 'LastName' => 'Kleinhans'), $result);
 	}
 
@@ -98,8 +97,7 @@ class MappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			->method('getAttributes')
 			->will($this->returnValue(array()));
 
-		$fixture = new \Aijko\SharepointConnector\Utility\Mapping();
-		$fixture->convertToSharepointData($this->lists, array());
+		\Aijko\SharepointConnector\Utility\Mapping::convertToSharepointData($this->lists, array());
 	}
 
 }

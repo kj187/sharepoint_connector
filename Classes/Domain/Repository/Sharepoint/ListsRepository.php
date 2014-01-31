@@ -162,9 +162,8 @@ class ListsRepository {
 	 * @return array | object
 	 */
 	public function addRecordToList(\Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record) {
-		$mapping = $this->objectManager->get('Aijko\\SharepointConnector\\Utility\\Mapping');
 		$list = $record->getList();
-		$data = $mapping->convertToSharepointData($list, $record->getData());
+		$data = \Aijko\SharepointConnector\Utility\Mapping::convertToSharepointData($list, $record->getData());
 		if (!count($data)) {
 			return FALSE;
 		}

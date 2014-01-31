@@ -273,14 +273,24 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 
 		if ($sharepointAttributes) {
 			// Sync sharepoint attributes with TYPO3 attributes
-			$newAttributes = $this->mappingAttributeRepository->findAllNewAttributes($sharepointAttributes, $typo3ListAttributes);
+			$newAttributes = \Aijko\SharepointConnector\Utility\Attribute::syncAttributesAndFindAllNewOnes($sharepointAttributes, $typo3ListAttributes);
 			$this->view->assign('newAttributes', $newAttributes);
 
 			// Sync TYPO3 attributes with sharepoint attributes to find out all deprecated attributes
-			$this->mappingAttributeRepository->syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
+			$deprecatedAttributes = \Aijko\SharepointConnector\Utility\Attribute::syncAttributesToFindDeprecatedAttributes($sharepointAttributes, $typo3ListAttributes);
+			if (count($deprecatedAttributes) > 0) {
+				foreach ($deprecatedAttributes as $deprecatedAttribute) {
+					$this->mappingAttributeRepository->update($deprecatedAttribute);
+				}
+			}
 
 			// Sync TYPO3 attributes with sharepoint attributes to find out all renamed attributes
-			$this->mappingAttributeRepository->syncAttributesToFindRenamedAttributes($sharepointAttributes, $typo3ListAttributes);
+			$renamedAttributes = \Aijko\SharepointConnector\Utility\Attribute::syncAttributesToFindRenamedAttributes($sharepointAttributes, $typo3ListAttributes, $this->mappingAttributeRepository);
+			if (count($renamedAttributes) > 0) {
+				foreach ($renamedAttributes as $renamedAttribute) {
+					$this->mappingAttributeRepository->update($renamedAttribute);
+				}
+			}
 		}
 
 		$this->view->assign('list', $list);
