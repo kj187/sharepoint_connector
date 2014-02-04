@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Service;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -26,53 +26,11 @@ namespace Aijko\SharepointConnector\Service;
  ***************************************************************/
 
 /**
- * Sharepoint API Service Interface
- *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-interface SharepointDriverInterface {
-
-	/**
-	 * Get all available sharepoint lists
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-	 */
-	public function findAllLists();
-
-	/**
-	 * Get a list by a specific sharepoint identifier
-	 *
-	 * @param string $identifier List identifier
-	 * @return array
-	 */
-	public function findListByIdentifier($identifier);
-
-	/**
-	 * Get all available attributes from a specific sharepoint list
-	 *
-	 * @param string $identifier List identifier
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-	 */
-	public function findAttributesByListIdentifier($identifier);
-
-	/**
-	 * @param string $identifier List identifier
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function addRecordToList($identifier, array $data);
-
-	/**
-	 * Update a specific record
-	 *
-	 * @param string $listIdentifier List identifier
-	 * @param string $recordIdentifier Record identifier
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function updateRecord($listIdentifier, $recordIdentifier, array $data);
+class Exception extends \Aijko\SharepointConnector\Exception {
 
 }
 

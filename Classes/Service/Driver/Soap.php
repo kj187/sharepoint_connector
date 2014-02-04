@@ -55,7 +55,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function findAllLists() {
-		$lists = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$lists = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->sharepointHandler->setReturnType('object');
 		$originalLists = $this->sharepointHandler->getLists();
 		foreach ($originalLists as $item) {
@@ -85,11 +85,11 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	 * Get all available attributes from a specific sharepoint list
 	 *
 	 * @param string $identifier
-	 * @return array
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
 	 */
 	public function findAttributesByListIdentifier($identifier) {
 		$properties = $this->sharepointHandler->readListMeta($identifier);
-		$attributes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$attributes = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 
 		foreach ($properties as $propertyNode) {
 			$attribute = array();
@@ -119,6 +119,18 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	 */
 	public function addRecordToList($identifier, array $data) {
 		return $this->sharepointHandler->write($identifier, $data);
+	}
+
+	/**
+	 * Update a specific record
+	 *
+	 * @param string $listIdentifier List identifier
+	 * @param string $recordIdentifier Record identifier
+	 * @param array $data
+	 * @return mixed
+	 */
+	public function updateRecord($listIdentifier, $recordIdentifier, array $data) {
+		return $this->sharepointHandler->update($listIdentifier, $recordIdentifier, $data);
 	}
 
 }

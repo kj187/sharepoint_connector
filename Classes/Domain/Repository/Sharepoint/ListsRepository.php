@@ -58,6 +58,12 @@ class ListsRepository {
 	protected $mappingListsRepository;
 
 	/**
+	 * @var \TYPO3\CMS\Extbase\SignalSlot\Dispatcher
+	 * @inject
+	 */
+	protected $signalSlotDispatcher;
+
+	/**
 	 *
 	 */
 	public function __construct() {
@@ -139,36 +145,57 @@ class ListsRepository {
 	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
 	 *
 	 * @param array $data
-	 * @return array
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\Sharepoint\RecordResult>
 	 */
 	public function addToMultipleLists(array $data) {
-		$result = array();
+		$objectStorage = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		if (is_array($data) && count($data)>0) {
 			foreach ($data as $listUid => $postData) {
 				$record = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\Record');
-				$record->setList($this->mappingListsRepository->findByUid($listUid));
+				$list = $this->mappingListsRepository->findByUid($listUid);
+				$record->setList($list);
 				$record->setData($postData);
-				$result[$listUid] = $this->addRecordToList($record);
+				$objectStorage->attach($this->addRecordToList($record));
 			}
 		}
 
-		return $result;
+		return $objectStorage;
 	}
 
 	/**
 	 * Add a new entry to a specific list
 	 *
 	 * @param \Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record
-	 * @return array | object
+	 * @return \Aijko\SharepointConnector\Domain\Model\Sharepoint\RecordResult
+	 * @throws \Aijko\SharepointConnector\Domain\Repository\Sharepoint\Exception
 	 */
 	public function addRecordToList(\Aijko\SharepointConnector\Domain\Model\Sharepoint\Record $record) {
+		$recordResult = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\RecordResult');
 		$list = $record->getList();
 		$data = \Aijko\SharepointConnector\Utility\Mapping::convertToSharepointData($list, $record->getData());
+
 		if (!count($data)) {
-			return FALSE;
+			throw new \Aijko\SharepointConnector\Domain\Repository\Sharepoint\Exception('Cant convert user data to sharepoint data', 1391434470);
 		}
 
-		return $this->sharepointHandle->addRecordToList($list->getSharepointListIdentifier(), $data);
+		$resultFromSharepoint = $this->sharepointHandle->addRecordToList($list->getSharepointListIdentifier(), $data);
+		$recordResult->setList($list);
+		$recordResult->setId($resultFromSharepoint[0]['id']);
+		$recordResult->setData($resultFromSharepoint[0]);
+
+		return $recordResult;
+	}
+
+	/**
+	 * Update a specific record
+	 *
+	 * @param string $listIdentifier List identifier
+	 * @param string $recordIdentifier Record identifier
+	 * @param array $data
+	 * @return mixed
+	 */
+	public function updateRecord($listIdentifier, $recordIdentifier, array $data) {
+		return $this->sharepointHandle->updateRecord($listIdentifier, $recordIdentifier, $data);
 	}
 
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Aijko\SharepointConnector\Service;
+namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
 
 /***************************************************************
  *  Copyright notice
@@ -26,53 +26,32 @@ namespace Aijko\SharepointConnector\Service;
  ***************************************************************/
 
 /**
- * Sharepoint API Service Interface
+ * Record result model
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
  * @package sharepoint_connector
  */
-interface SharepointDriverInterface {
+class RecordResult extends \Aijko\SharepointConnector\Domain\Model\Sharepoint\Record {
 
 	/**
-	 * Get all available sharepoint lists
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	 * @var integer
 	 */
-	public function findAllLists();
+	protected $id;
 
 	/**
-	 * Get a list by a specific sharepoint identifier
-	 *
-	 * @param string $identifier List identifier
-	 * @return array
+	 * @param integer $id
 	 */
-	public function findListByIdentifier($identifier);
+	public function setId($id) {
+		$this->id = $id;
+	}
 
 	/**
-	 * Get all available attributes from a specific sharepoint list
-	 *
-	 * @param string $identifier List identifier
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+	 * @return integer
 	 */
-	public function findAttributesByListIdentifier($identifier);
-
-	/**
-	 * @param string $identifier List identifier
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function addRecordToList($identifier, array $data);
-
-	/**
-	 * Update a specific record
-	 *
-	 * @param string $listIdentifier List identifier
-	 * @param string $recordIdentifier Record identifier
-	 * @param array $data
-	 * @return mixed
-	 */
-	public function updateRecord($listIdentifier, $recordIdentifier, array $data);
+	public function getId() {
+		return $this->id;
+	}
 
 }
 
