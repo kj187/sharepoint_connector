@@ -39,14 +39,18 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	/**
 	 * @var \Thybag\SharepointApi
 	 */
-	protected $sharepointHandler = NULL;
+	protected $sharepointHandler;
 
 	/**
-	 *
+	 * @param NULL $sharepointHandler
 	 */
-	public function __construct() {
+	public function __construct($sharepointHandler = NULL) {
 		parent::__construct();
-		$this->sharepointHandler = new \Thybag\SharepointApi($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
+		$this->sharepointHandler = $sharepointHandler;
+
+		if (NULL == $this->sharepointHandler) {
+			$this->sharepointHandler = new \Thybag\SharepointApi($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
+		}
 	}
 
 	/**
