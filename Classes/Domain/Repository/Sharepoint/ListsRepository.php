@@ -44,7 +44,7 @@ class ListsRepository {
 	/**
 	 * @var \Aijko\SharepointConnector\Service\SharepointDriverInterface
 	 */
-	protected $sharepointHandle;
+	protected $sharepointHandler;
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Object\ObjectManagerInterface
@@ -69,7 +69,7 @@ class ListsRepository {
 	public function __construct() {
 		$this->initializeCache();
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-		$this->sharepointHandle = $this->objectManager->get('Aijko\\SharepointConnector\\Service\\SharepointDriverInterface');
+		$this->sharepointHandler = $this->objectManager->get('Aijko\\SharepointConnector\\Service\\SharepointDriverInterface');
 	}
 
 	/**
@@ -105,7 +105,7 @@ class ListsRepository {
 	public function findAllLists() {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findAllLists');
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
-			$entry = $this->sharepointHandle->findAllLists();
+			$entry = $this->sharepointHandler->findAllLists();
 			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_allLists', self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
@@ -119,7 +119,7 @@ class ListsRepository {
 	public function findListByIdentifier($identifier) {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findListByIdentifier' . $identifier);
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
-			$entry = $this->sharepointHandle->findListByIdentifier($identifier);
+			$entry = $this->sharepointHandler->findListByIdentifier($identifier);
 			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_list', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
@@ -133,7 +133,7 @@ class ListsRepository {
 	public function findAttributesByListIdentifier($identifier) {
 		$cacheIdentifier = $this->calculateCacheIdentifier('findAttributesByListIdentifier' . $identifier);
 		if (($entry = $GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->get($cacheIdentifier)) === FALSE) {
-			$entry = $this->sharepointHandle->findAttributesByListIdentifier($identifier);
+			$entry = $this->sharepointHandler->findAttributesByListIdentifier($identifier);
 			$GLOBALS['typo3CacheManager']->getCache('sharepointconnector_lists')->set($cacheIdentifier, $entry, array('spc_list_attributes', str_replace(array('{', '}'), array('', ''), $identifier), self::GLOBAL_CACHE_TAG));
 		}
 		return $entry;
@@ -178,7 +178,7 @@ class ListsRepository {
 			throw new \Aijko\SharepointConnector\Domain\Repository\Sharepoint\Exception('Cant convert user data to sharepoint data', 1391434470);
 		}
 
-		$resultFromSharepoint = $this->sharepointHandle->addRecordToList($list->getSharepointListIdentifier(), $data);
+		$resultFromSharepoint = $this->sharepointHandler->addRecordToList($list->getSharepointListIdentifier(), $data);
 		$recordResult->setList($list);
 		$recordResult->setId($resultFromSharepoint[0]['id']);
 		$recordResult->setData($resultFromSharepoint[0]);
@@ -195,7 +195,22 @@ class ListsRepository {
 	 * @return mixed
 	 */
 	public function updateRecord($listIdentifier, $recordIdentifier, array $data) {
-		return $this->sharepointHandle->updateRecord($listIdentifier, $recordIdentifier, $data);
+		return $this->sharepointHandler->updateRecord($listIdentifier, $recordIdentifier, $data);
+	}
+
+	/**
+	 * Use's raw CAML to query sharepoint data
+	 *
+	 * @param string $listIdentifier
+	 * @param int $limit
+	 * @param array $query
+	 * @param string (GUID) $view "View to display results with."
+	 * @param array $sort
+	 * @param string $options "XML string of query options."
+	 * @return array
+	 */
+	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL) {
+		return $this->sharepointHandler->findRecords($listIdentifier, $limit, $query, $view, $sort, $options);
 	}
 
 }

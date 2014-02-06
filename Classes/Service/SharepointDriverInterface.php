@@ -74,6 +74,19 @@ interface SharepointDriverInterface {
 	 */
 	public function updateRecord($listIdentifier, $recordIdentifier, array $data);
 
+	/**
+	 * Use's raw CAML to query sharepoint data
+	 *
+	 * @param string $listIdentifier
+	 * @param int $limit
+	 * @param array $query
+	 * @param string (GUID) $view "View to display results with."
+	 * @param array $sort
+	 * @param string $options "XML string of query options."
+	 * @return array
+	 */
+	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL);
+
 }
 
 ?>
