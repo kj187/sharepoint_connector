@@ -59,6 +59,7 @@ CREATE TABLE tx_sharepointconnector_domain_model_mapping_attribute (
 	lookuplist varchar(255) DEFAULT '' NOT NULL,
 	sourceid varchar(255) DEFAULT '' NOT NULL,
 	status varchar(255) DEFAULT '' NOT NULL,
+	child_content varchar(255) DEFAULT '' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

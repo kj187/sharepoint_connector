@@ -41,8 +41,8 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.lookuplist">
 				<source>Lookup list</source>
 			</trans-unit>
-			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sourceid">
-				<source>Source id</source>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.value">
+				<source>Value</source>
 			</trans-unit>
 
 		</body>

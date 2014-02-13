@@ -272,6 +272,7 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$typo3ListAttributes = $list->getAttributes();
 
 		if ($sharepointAttributes) {
+
 			// Sync sharepoint attributes with TYPO3 attributes
 			$newAttributes = \Aijko\SharepointConnector\Utility\Attribute::syncAttributesAndFindAllNewOnes($sharepointAttributes, $typo3ListAttributes);
 			$this->view->assign('newAttributes', $newAttributes);

@@ -100,6 +100,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 			$attribute['sharepointFieldName'] = $propertyNode['name'];
 			$attribute['sharepointDisplayName'] = $propertyNode['displayname'];
 			$attribute['type'] = $propertyNode['type'];
+			$attribute['childContent'] = $propertyNode['value'];
 
 			$attribute['required'] = (bool)$propertyNode['required'];
 			if ('Lookup' == $propertyNode['type']) {

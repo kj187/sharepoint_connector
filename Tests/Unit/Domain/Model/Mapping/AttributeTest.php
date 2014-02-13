@@ -129,6 +129,14 @@ class AttributeTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
+	public function isSetterGetterWorkingForChildContent() {
+		$this->fixture->setChildContent($this->dummyString);
+		$this->assertSame($this->dummyString, $this->fixture->getChildContent());
+	}
+
+	/**
+	 * @test
+	 */
 	public function isSetterGetterWorkingForList() {
 		$list = new \Aijko\SharepointConnector\Domain\Model\Mapping\Lists();
 		$this->fixture->setList($list);

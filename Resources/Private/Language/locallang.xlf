@@ -54,6 +54,9 @@
 			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.sourceid">
 				<source>Source id</source>
 			</trans-unit>
+			<trans-unit id="tx_sharepointconnector_domain_model_mapping_attribute.childContent">
+				<source>childContent</source>
+			</trans-unit>
 
 
 			<!-- Sharepoint Mapping Module -->

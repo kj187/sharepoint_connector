@@ -25,6 +25,9 @@
 			<trans-unit id="sourceid.description">
 				<source>Source id</source>
 			</trans-unit>
+			<trans-unit id="childContent.description">
+				<source>childContent</source>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

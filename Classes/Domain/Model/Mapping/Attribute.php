@@ -92,6 +92,11 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $status;
 
 	/**
+	 * @var string
+	 */
+	protected $childContent;
+
+	/**
 	 * @var \Aijko\SharepointConnector\Domain\Model\Mapping\Lists
 	 */
 	protected $list;
@@ -241,6 +246,21 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function getSourceid() {
 		return $this->sourceid;
 	}
+
+	/**
+	 * @param string $childContent
+	 */
+	public function setChildContent($childContent) {
+		$this->childContent = $childContent;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getChildContent() {
+		return $this->childContent;
+	}
+
 
 }
 
