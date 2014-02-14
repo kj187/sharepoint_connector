@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Domain\Model\Mapping;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class Lists extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 

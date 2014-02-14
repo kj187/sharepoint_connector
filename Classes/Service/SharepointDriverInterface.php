@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Service;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 interface SharepointDriverInterface {
 
@@ -58,6 +58,19 @@ interface SharepointDriverInterface {
 	public function findAttributesByListIdentifier($identifier);
 
 	/**
+	 * Use's raw CAML to query sharepoint data
+	 *
+	 * @param string $listIdentifier
+	 * @param int $limit
+	 * @param array $query
+	 * @param string (GUID) $view "View to display results with."
+	 * @param array $sort
+	 * @param string $options "XML string of query options."
+	 * @return array
+	 */
+	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL);
+
+	/**
 	 * @param string $identifier List identifier
 	 * @param array $data
 	 * @return mixed
@@ -73,19 +86,6 @@ interface SharepointDriverInterface {
 	 * @return mixed
 	 */
 	public function updateRecord($listIdentifier, $recordIdentifier, array $data);
-
-	/**
-	 * Use's raw CAML to query sharepoint data
-	 *
-	 * @param string $listIdentifier
-	 * @param int $limit
-	 * @param array $query
-	 * @param string (GUID) $view "View to display results with."
-	 * @param array $sort
-	 * @param string $options "XML string of query options."
-	 * @return array
-	 */
-	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL);
 
 }
 

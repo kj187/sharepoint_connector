@@ -28,7 +28,7 @@ namespace Aijko\SharepointConnector\Tests\Unit;
 /**
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class MappingControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 

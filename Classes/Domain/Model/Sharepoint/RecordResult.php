@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Domain\Model\Sharepoint;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class RecordResult extends \Aijko\SharepointConnector\Domain\Model\Sharepoint\Record {
 

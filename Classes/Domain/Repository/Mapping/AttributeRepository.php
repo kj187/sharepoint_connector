@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class AttributeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 

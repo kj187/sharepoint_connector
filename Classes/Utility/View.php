@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Utility;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class View {
 
@@ -50,13 +50,27 @@ class View {
 	protected $configuration;
 
 	/**
+	 * @var string
+	 */
+	protected $templateRootPath;
+
+	/**
 	 *
 	 */
 	public function __construct() {
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
 		$this->configurationManager = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
 		$this->configuration = $this->objectManager->get('Aijko\\SharepointConnector\\Configuration\\ConfigurationManager')->getConfiguration();
+		$this->setTemplateRootPath($this->configuration['view']['templateRootPath']);
 	}
+
+	/**
+	 * @param string $path
+	 */
+	public function setTemplateRootPath($path) {
+		$this->templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($path);
+	}
+
 	/**
 	 * @param array $variables
 	 * @param string $template
@@ -66,8 +80,7 @@ class View {
 	public function getStandaloneView(array $variables, $template) {
 		$viewObject = $this->objectManager->create('TYPO3\\CMS\\Fluid\\View\\StandaloneView');
 		$viewObject->setFormat('html');
-		$templateRootPath = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($this->configuration['view']['templateRootPath']);
-		$templatePathAndFilename = $templateRootPath . $template;
+		$templatePathAndFilename = $this->templateRootPath . $template;
 		$viewObject->setTemplatePathAndFilename($templatePathAndFilename);
 		$viewObject->assignMultiple($variables);
 		return $viewObject;

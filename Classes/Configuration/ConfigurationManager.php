@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Configuration;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class ConfigurationManager implements \TYPO3\CMS\Core\SingletonInterface {
 

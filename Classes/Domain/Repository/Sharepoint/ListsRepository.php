@@ -30,7 +30,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class ListsRepository {
 
@@ -140,6 +140,21 @@ class ListsRepository {
 	}
 
 	/**
+	 * Use's raw CAML to query sharepoint data
+	 *
+	 * @param string $listIdentifier
+	 * @param int $limit
+	 * @param array $query
+	 * @param string (GUID) $view "View to display results with."
+	 * @param array $sort
+	 * @param string $options "XML string of query options."
+	 * @return array
+	 */
+	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL) {
+		return $this->sharepointHandler->findRecords($listIdentifier, $limit, $query, $view, $sort, $options);
+	}
+
+	/**
 	 * Add to multiple lists
 	 *
 	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
@@ -196,21 +211,6 @@ class ListsRepository {
 	 */
 	public function updateRecord($listIdentifier, $recordIdentifier, array $data) {
 		return $this->sharepointHandler->updateRecord($listIdentifier, $recordIdentifier, $data);
-	}
-
-	/**
-	 * Use's raw CAML to query sharepoint data
-	 *
-	 * @param string $listIdentifier
-	 * @param int $limit
-	 * @param array $query
-	 * @param string (GUID) $view "View to display results with."
-	 * @param array $sort
-	 * @param string $options "XML string of query options."
-	 * @return array
-	 */
-	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL) {
-		return $this->sharepointHandler->findRecords($listIdentifier, $limit, $query, $view, $sort, $options);
 	}
 
 }

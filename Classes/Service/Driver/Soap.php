@@ -32,7 +32,7 @@ use \Aijko\SharepointConnector\Utility\Logger;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements \Aijko\SharepointConnector\Service\SharepointDriverInterface {
 
@@ -86,6 +86,21 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	}
 
 	/**
+	 * Use's raw CAML to query sharepoint data
+	 *
+	 * @param string $listIdentifier
+	 * @param int $limit
+	 * @param array $query
+	 * @param string (GUID) $view "View to display results with."
+	 * @param array $sort
+	 * @param string $options "XML string of query options."
+	 * @return array
+	 */
+	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL) {
+		return $this->sharepointHandler->read($listIdentifier, $limit, $query, $view, $sort, $options);
+	}
+
+	/**
 	 * Get all available attributes from a specific sharepoint list
 	 *
 	 * @param string $identifier
@@ -136,21 +151,6 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	 */
 	public function updateRecord($listIdentifier, $recordIdentifier, array $data) {
 		return $this->sharepointHandler->update($listIdentifier, $recordIdentifier, $data);
-	}
-
-	/**
-	 * Use's raw CAML to query sharepoint data
-	 *
-	 * @param string $listIdentifier
-	 * @param int $limit
-	 * @param array $query
-	 * @param string (GUID) $view "View to display results with."
-	 * @param array $sort
-	 * @param string $options "XML string of query options."
-	 * @return array
-	 */
-	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL) {
-		return $this->sharepointHandler->read($listIdentifier, $limit, $query, $view, $sort, $options);
 	}
 
 }

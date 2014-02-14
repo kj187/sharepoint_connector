@@ -32,7 +32,7 @@ use \Aijko\SharepointConnector\Utility\Logger;
  *
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 

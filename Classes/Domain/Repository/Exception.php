@@ -28,7 +28,7 @@ namespace Aijko\SharepointConnector\Domain\Repository;
 /**
  * @author Julian Kleinhans <julian.kleinhans@aijko.de>
  * @copyright Copyright belongs to the respective authors
- * @package sharepoint_connector
+ * @package Aijko\SharepointConnector
  */
 class Exception extends \Aijko\SharepointConnector\Exception {
 
