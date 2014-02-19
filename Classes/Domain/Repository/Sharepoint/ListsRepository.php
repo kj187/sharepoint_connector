@@ -194,6 +194,10 @@ class ListsRepository {
 		}
 
 		$resultFromSharepoint = $this->sharepointHandler->addRecordToList($list->getSharepointListIdentifier(), $data);
+		if ($resultFromSharepoint['warning']) {
+			throw new \Aijko\SharepointConnector\Domain\Repository\Sharepoint\Exception($resultFromSharepoint['warning'] . "\n\n" . $resultFromSharepoint['raw_xml'], 1391434275);
+		}
+
 		$recordResult->setList($list);
 		$recordResult->setId($resultFromSharepoint[0]['id']);
 		$recordResult->setData($resultFromSharepoint[0]);
