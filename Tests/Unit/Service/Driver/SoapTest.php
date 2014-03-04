@@ -43,7 +43,7 @@ class SoapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	protected $fixtureList = array();
 
 	/**
-	 * @var \Thybag\SharepointApi
+	 * @var \Thybag\SharePointAPI
 	 */
 	protected $sharepointHandler = NULL;
 
@@ -74,7 +74,7 @@ class SoapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$dummyList->title = 'Artikel';
 		$this->fixtureList[] = $dummyList;
 
-		$this->sharepointHandler = $this->getMockBuilder('Thybag\SharepointApi')->disableOriginalConstructor()->getMock();
+		$this->sharepointHandler = $this->getMockBuilder('Thybag\SharePointAPI')->disableOriginalConstructor()->getMock();
 		$this->sharepointHandler
 			->expects($this->any())
 			->method('setReturnType')

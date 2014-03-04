@@ -37,7 +37,7 @@ use \Aijko\SharepointConnector\Utility\Logger;
 class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements \Aijko\SharepointConnector\Service\SharepointDriverInterface {
 
 	/**
-	 * @var \Thybag\SharepointApi
+	 * @var \Thybag\SharePointAPI
 	 */
 	protected $sharepointHandler;
 
@@ -49,7 +49,7 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 		$this->sharepointHandler = $sharepointHandler;
 
 		if (NULL == $this->sharepointHandler) {
-			$this->sharepointHandler = new \Thybag\SharepointApi($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
+			$this->sharepointHandler = new \Thybag\SharePointAPI($this->configuration['username'], $this->configuration['password'], $this->configuration['url'] . $this->configuration['soap']['wsdlpath'], (bool)$this->configuration['security']['ntlm']);
 		}
 	}
 
