@@ -1,5 +1,5 @@
 <?php
-$extensionClassesPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sharepoint_connector') . '/';
+$extensionClassesPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('sharepoint_connector');
 
 return array(
 	'Thybag\SharepointApi' => $extensionClassesPath . 'Resources/Private/Php/PHP-SharePoint-Lists-API/lib/Thybag/SharepointApi.php',
