@@ -36,7 +36,7 @@ if (TYPO3_MODE === 'BE') {
 
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'Aijko.' . $_EXTKEY,
-		'sharepoint',	 // Make module a master module
+		'spmodul',	 // Make module a master module
 		'',	// Submodule key
 		'',						// Position
 		array(),
@@ -54,7 +54,7 @@ if (TYPO3_MODE === 'BE') {
 
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'Aijko.' . $_EXTKEY,
-		'sharepoint',	 // Make module a submodule of 'web'
+		'spmodul',	 // Make module a submodule of 'web'
 		'mapping',	// Submodule key
 		'',						// Position
 		array(
