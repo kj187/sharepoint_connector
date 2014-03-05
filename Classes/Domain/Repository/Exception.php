@@ -33,5 +33,3 @@ namespace Aijko\SharepointConnector\Domain\Repository;
 class Exception extends \Aijko\SharepointConnector\Exception {
 
 }
-
-?>

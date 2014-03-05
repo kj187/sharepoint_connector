@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -29,11 +29,7 @@ if (!defined('TYPO3_MODE')) die ('Access denied.');
 
 if (TYPO3_MODE === 'BE') {
 
-
-	//
 	// Main Module
-	//
-
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'Aijko.' . $_EXTKEY,
 		'spmodul',	 // Make module a master module
@@ -47,11 +43,7 @@ if (TYPO3_MODE === 'BE') {
 		)
 	);
 
-
-	//
 	// Mapping Module
-	//
-
 	\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerModule(
 		'Aijko.' . $_EXTKEY,
 		'spmodul',	 // Make module a submodule of 'web'
@@ -67,28 +59,15 @@ if (TYPO3_MODE === 'BE') {
 			'labels' => 'LLL:EXT:' . $_EXTKEY . '/Resources/Private/Language/locallang_mapping.xlf',
 		)
 	);
-
 }
 
-//
 // Add static typoscript file
-//
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Sharepoint Connector');
 
 
-
-//
 // Add pageTSConfig
-//
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPageTSConfig('mod.web_list.hideTables := addToList(tx_sharepointconnector_domain_model_mapping_attribute)');
 
-
-
-//
-//
-//
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_sharepointconnector_domain_model_mapping_lists', 'EXT:sharepoint_connector/Resources/Private/Language/locallang_csh_tx_sharepointconnector_domain_model_mapping_lists.xlf');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_sharepointconnector_domain_model_mapping_lists');
@@ -151,5 +130,3 @@ $TCA['tx_sharepointconnector_domain_model_mapping_attribute'] = array(
 		'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sharepointconnector_domain_model_mapping_attribute.gif'
 	),
 );
-
-?>

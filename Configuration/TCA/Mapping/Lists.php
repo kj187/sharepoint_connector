@@ -24,9 +24,7 @@
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-if (!defined ('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+if (!defined ('TYPO3_MODE')) die ('Access denied.');
 
 $TCA['tx_sharepointconnector_domain_model_mapping_lists'] = array(
 	'ctrl' => $TCA['tx_sharepointconnector_domain_model_mapping_lists']['ctrl'],
@@ -166,5 +164,3 @@ $TCA['tx_sharepointconnector_domain_model_mapping_lists'] = array(
 		),
 	),
 );
-
-?>

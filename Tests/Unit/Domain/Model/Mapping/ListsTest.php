@@ -134,5 +134,3 @@ class ListMappingTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 	
 }
-
-?>

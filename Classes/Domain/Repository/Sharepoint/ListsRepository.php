@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Sharepoint;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -164,14 +164,16 @@ class ListsRepository {
 	 */
 	public function addToMultipleLists(array $data) {
 		$objectStorage = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
-		if (is_array($data) && count($data)>0) {
-			foreach ($data as $listUid => $postData) {
-				$record = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\Record');
-				$list = $this->mappingListsRepository->findByUid($listUid);
-				$record->setList($list);
-				$record->setData($postData);
-				$objectStorage->attach($this->addRecordToList($record));
-			}
+		if (!is_array($data) || empty($data)) {
+			return $objectStorage;
+		}
+
+		foreach ($data as $listUid => $postData) {
+			$record = $this->objectManager->get('Aijko\\SharepointConnector\\Domain\\Model\\Sharepoint\\Record');
+			$list = $this->mappingListsRepository->findByUid($listUid);
+			$record->setList($list);
+			$record->setData($postData);
+			$objectStorage->attach($this->addRecordToList($record));
 		}
 
 		return $objectStorage;
@@ -218,5 +220,3 @@ class ListsRepository {
 	}
 
 }
-
-?>

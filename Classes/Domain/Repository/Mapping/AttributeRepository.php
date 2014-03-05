@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -35,5 +35,3 @@ namespace Aijko\SharepointConnector\Domain\Repository\Mapping;
 class AttributeRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
 }
-
-?>

@@ -54,5 +54,3 @@ class RecordResult extends \Aijko\SharepointConnector\Domain\Model\Sharepoint\Re
 	}
 
 }
-
-?>

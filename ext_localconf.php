@@ -3,7 +3,7 @@
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -37,5 +37,3 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['additionalBackendItems']['cacheAction
 
 // The AjaxCall to clear the cache
 $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][] = 'EXT:sharepoint_connector/Classes/Cache/ClearCacheHook.php:&Aijko\\SharepointConnector\\Cache\\ClearCacheHook->clear';
-
-?>

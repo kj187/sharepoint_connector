@@ -94,9 +94,11 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		if (count($availableMappingLists) > 0) {
 			foreach ($availableMappingLists as $key => $item) {
 				foreach ($availableSharepointLists as $sharepointList) {
-					if ($sharepointList->id == $item->getSharepointListIdentifier()) {
-						$availableSharepointLists->detach($sharepointList);
+					if ($sharepointList->id != $item->getSharepointListIdentifier()) {
+						continue;
 					}
+
+					$availableSharepointLists->detach($sharepointList);
 				}
 			}
 		}
@@ -144,12 +146,14 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		$attributesArray = array();
 		if (count($attributeData) > 0) {
 			foreach ($attributeData as $attributes) {
-				if ($attributes['activated']) {
-					unset($attributes['activated']);
-					$attributesArray[] = $attributes;
-					$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-					$list->addAttribute($mappingAttribute);
+				if (!$attributes['activated']) {
+					continue;
 				}
+
+				unset($attributes['activated']);
+				$attributesArray[] = $attributes;
+				$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
+				$list->addAttribute($mappingAttribute);
 			}
 		}
 
@@ -197,12 +201,13 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 		}
 		if (count($attributeData['new']) > 0) {
 			foreach ($attributeData['new'] as $key => $attributes) {
-				if ($attributes['activated']) {
-					unset($attributes['activated']);
-					$attributesArray[] = $attributes;
-					$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
-					$list->addAttribute($mappingAttribute);
+				if (!$attributes['activated']) {
+					continue;
 				}
+				unset($attributes['activated']);
+				$attributesArray[] = $attributes;
+				$mappingAttribute = $this->propertyMapper->convert($attributes, 'Aijko\\SharepointConnector\\Domain\\Model\\Mapping\\Attribute');
+				$list->addAttribute($mappingAttribute);
 			}
 		}
 
@@ -298,5 +303,3 @@ class MappingController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControll
 	}
 
 }
-
-?>

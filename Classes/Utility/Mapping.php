@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Utility;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -43,9 +43,11 @@ class Mapping {
 	public static function convertToSharepointData(\Aijko\SharepointConnector\Domain\Model\Mapping\Lists $list, array $data) {
 		$returnData = array();
 		foreach ($list->getAttributes() as $key => $attribute) {
-			if (array_key_exists($attribute->getTypo3FieldName(), $data)) {
-				$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
+			if (!array_key_exists($attribute->getTypo3FieldName(), $data)) {
+				continue;
 			}
+
+			$returnData[$attribute->getSharepointFieldName()] = $data[$attribute->getTypo3FieldName()];
 		}
 
 		if (!count($returnData)) {
@@ -56,5 +58,3 @@ class Mapping {
 	}
 
 }
-
-?>

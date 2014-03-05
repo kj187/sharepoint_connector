@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Service;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -61,11 +61,16 @@ class LookupUpdater {
 			$list = $recordResult->getList();
 			$listMapping = $this->mappingListsRepository->findByUid($list->getUid());
 			foreach ($listMapping->getAttributes() as $attribute) {
-				if ('Lookup' == $attribute->getType()) {
-					if ($targetUidFromLookup = $this->getTargetUidFromLookup($attribute->getLookuplist(), clone $resultObject)) {
-						$updateResults[] = $this->sharepointListsRepository->updateRecord($list->getSharepointListIdentifier(), $recordResult->getId(), array($attribute->getSharepointFieldName() => $targetUidFromLookup));
-					}
+				if ('Lookup' != $attribute->getType()) {
+					continue;
 				}
+
+				$targetUidFromLookup = $this->getTargetUidFromLookup($attribute->getLookuplist(), clone $resultObject);
+				if (!$targetUidFromLookup) {
+					continue;
+				}
+
+				$updateResults[] = $this->sharepointListsRepository->updateRecord($list->getSharepointListIdentifier(), $recordResult->getId(), array($attribute->getSharepointFieldName() => $targetUidFromLookup));
 			}
 		}
 
@@ -74,7 +79,7 @@ class LookupUpdater {
 
 	/**
 	 * @param string $lookupList
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Aijko\SharepointConnector\Domain\Model\Sharepoint\RecordResult> $resultObject
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $resultObject <\Aijko\SharepointConnector\Domain\Model\Sharepoint\RecordResult>
 	 * @return integer | FALSE
 	 */
 	protected function getTargetUidFromLookup($lookupList, \TYPO3\CMS\Extbase\Persistence\ObjectStorage $resultObject) {
@@ -89,5 +94,3 @@ class LookupUpdater {
 	}
 
 }
-
-?>

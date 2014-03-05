@@ -148,5 +148,3 @@ class AttributeTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 }
-
-?>

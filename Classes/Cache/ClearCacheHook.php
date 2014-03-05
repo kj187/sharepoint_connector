@@ -4,7 +4,7 @@ namespace Aijko\SharepointConnector\Cache;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2014 AIJKO GmbH <info@aijko.de
+ *  (c) 2014 AIJKO GmbH <info@aijko.de>
  *
  *  All rights reserved
  *
@@ -67,5 +67,3 @@ class ClearCacheHook implements \TYPO3\CMS\Backend\Toolbar\ClearCacheActionsHook
 	}
 
 }
-
-?>

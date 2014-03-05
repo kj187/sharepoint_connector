@@ -28,5 +28,3 @@ namespace Aijko\SharepointConnector;
 class Exception extends \Exception {
 
 }
-
-?>

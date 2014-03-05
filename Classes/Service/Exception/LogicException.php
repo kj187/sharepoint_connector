@@ -33,5 +33,3 @@ namespace Aijko\SharepointConnector\Service\Exception;
 class LogicException extends \Aijko\SharepointConnector\Service\Exception {
 
 }
-
-?>

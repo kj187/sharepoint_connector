@@ -45,7 +45,7 @@ class ConfigurationManager implements \TYPO3\CMS\Core\SingletonInterface {
 	protected $objectManager;
 
 	/**
-	 * @return void
+	 * Constructor
 	 */
 	public function __construct() {
 		$this->objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
@@ -77,5 +77,3 @@ class ConfigurationManager implements \TYPO3\CMS\Core\SingletonInterface {
 	}
 
 }
-
-?>

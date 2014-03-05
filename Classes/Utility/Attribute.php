@@ -90,15 +90,17 @@ class Attribute {
 		$renamedAttributes = array();
 		foreach ($typo3ListAttributes as $typo3Attribute) {
 			foreach ($sharepointListAttributes as $sharepointListAttribute) {
-				if ($typo3Attribute->getSharepointFieldName() == $sharepointListAttribute->getSharepointFieldName()) {
-					if ($typo3Attribute->getSharepointDisplayName() != $sharepointListAttribute->getSharepointDisplayName()) {
-						$typo3Attribute->setSharepointDisplayName($sharepointListAttribute->getSharepointDisplayName());
-						$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_SYNC_RENAMED);
-						$renamedAttributes[] = $typo3Attribute;
-					}
+				if ($typo3Attribute->getSharepointFieldName() != $sharepointListAttribute->getSharepointFieldName()) {
+					continue;
+				}
 
+				if ($typo3Attribute->getSharepointDisplayName() == $sharepointListAttribute->getSharepointDisplayName()) {
 					continue 2; // if equals, continue with next typo3 attribute
 				}
+
+				$typo3Attribute->setSharepointDisplayName($sharepointListAttribute->getSharepointDisplayName());
+				$typo3Attribute->setStatus(\Aijko\SharepointConnector\Domain\Model\Mapping\Attribute::STATUS_SYNC_RENAMED);
+				$renamedAttributes[] = $typo3Attribute;
 			}
 		}
 
@@ -106,5 +108,3 @@ class Attribute {
 	}
 
 }
-
-?>

@@ -8,5 +8,3 @@ return array(
 	'Thybag\Auth\SoapClientAuth' => $extensionClassesPath . 'Resources/Private/Php/PHP-SharePoint-Lists-API/lib/Thybag/Auth/SoapClientAuth.php',
 	'Thybag\Auth\StreamWrapperHttpAuth' => $extensionClassesPath . 'Resources/Private/Php/PHP-SharePoint-Lists-API/lib/Thybag/Auth/StreamWrapperHttpAuth.php',
 );
-
-?>

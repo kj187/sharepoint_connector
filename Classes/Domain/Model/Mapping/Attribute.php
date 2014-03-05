@@ -263,5 +263,3 @@ class Attribute extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 
 
 }
-
-?>
