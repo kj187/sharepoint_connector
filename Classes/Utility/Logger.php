@@ -41,16 +41,23 @@ class Logger {
 	 * @static
 	 */
 	static protected function initializeConfiguration() {
+		$extensionConfiguration = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sharepoint_connector']);
+		$extensionConfiguration = \TYPO3\CMS\Core\Utility\GeneralUtility::removeDotsFromTS($extensionConfiguration);
+		$logFilePath = $extensionConfiguration['path']['logs'];
+		if ('/' != substr($logFilePath, -1)) {
+			$logFilePath .= '/';
+		}
+
 		$GLOBALS['TYPO3_CONF_VARS']['LOG']['Aijko']['SharepointConnector']['Utility']['Logger'] = array(
 			'writerConfiguration' => array(
 				\TYPO3\CMS\Core\Log\LogLevel::ERROR => array(
 					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
-						'logFile' => 'typo3temp/logs/sharepoint_connector/error.log',
+						'logFile' => $logFilePath . 'error.log',
 					),
 				),
 				\TYPO3\CMS\Core\Log\LogLevel::INFO => array(
 					'\\TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
-						'logFile' => 'typo3temp/logs/sharepoint_connector/info.log',
+						'logFile' => $logFilePath . 'info.log',
 					),
 				)
 			)

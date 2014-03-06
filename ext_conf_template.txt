@@ -12,3 +12,6 @@ sharepointServer.security.ntlm = 0
 
   # cat=basic; type=string; label=WSDL File Path: WSDL file for this set of lists, without TopLevelDomain ( /_vti_bin/Lists.asmx?WSDL )
 sharepointServer.soap.wsdlpath = /_vti_bin/Lists.asmx?WSDL
+
+  # cat=basic; type=string; label=Path for logfiles: path to the log file directory, relative to PATH_site
+path.logs = typo3temp/logs/sharepoint_connector/
