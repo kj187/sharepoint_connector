@@ -101,6 +101,14 @@ class Soap extends \Aijko\SharepointConnector\Service\AbstractDriver implements 
 	}
 
 	/**
+	 * @param string $listIdentifier
+	 * @return \Thybag\Service\QueryObjectService
+	 */
+	public function advancedQuery($listIdentifier) {
+		return $this->sharepointHandler->query($listIdentifier);
+	}
+
+	/**
 	 * Get all available attributes from a specific sharepoint list
 	 *
 	 * @param string $identifier

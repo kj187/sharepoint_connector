@@ -71,6 +71,12 @@ interface SharepointDriverInterface {
 	public function findRecords($listIdentifier, $limit = NULL, $query = NULL, $view = NULL, $sort = NULL, $options = NULL);
 
 	/**
+	 * @param string $listIdentifier
+	 * @return \Thybag\Service\QueryObjectService
+	 */
+	public function advancedQuery($listIdentifier);
+
+	/**
 	 * @param string $identifier List identifier
 	 * @param array $data
 	 * @return mixed

@@ -155,6 +155,14 @@ class ListsRepository {
 	}
 
 	/**
+	 * @param string $listIdentifier
+	 * @return \Thybag\Service\QueryObjectService
+	 */
+	public function advancedQuery($listIdentifier) {
+		return $this->sharepointHandler->advancedQuery($listIdentifier);
+	}
+
+	/**
 	 * Add to multiple lists
 	 *
 	 * 		$data[LIST_UID][ATTRIBUTE_NAME]
